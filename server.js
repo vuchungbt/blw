@@ -54,10 +54,12 @@ app.use(flash());
 
 //------------ Global variables ------------//
 
-const home = require("./routes/index");
+const index = require("./routes/index");
 const auth = require("./routes/auth");
-app.use("/", home);
+const home = require("./routes/home");
+app.use("/home", home);
 app.use("/auth", auth);
+app.use("/", index);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

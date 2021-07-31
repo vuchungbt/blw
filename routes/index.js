@@ -6,16 +6,11 @@ const { ensureAuthenticated } = require('../middleware/checkAuth');
 router.get('/', (req, res) => {
     res.render('welcome');
 });
-
-//------------ blog list ------------//
-router.get('/bloglist', (req, res) => {
-    res.render('bloglist');
+//------------ public ------------//
+router.get('/public', (req, res) => {
+    res.render('public');
 });
 
-//------------ stories list ------------//
-router.get('/stories', (req, res) => {
-    res.render('stories');
-});
 //------------ about me ------------//
 router.get('/about', (req, res) => {
     res.render('about');
@@ -23,6 +18,6 @@ router.get('/about', (req, res) => {
 
 
 
-router.get('/dashboard', ensureAuthenticated, (req,res) => res.render('home',{name: req.user.name}));
+//router.get('/dashboard', ensureAuthenticated, (req,res) => res.render('home',{name: req.user.name}));
 
 module.exports = router;
