@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>View file</title>
+        <%- include ('include/header') %>
+    </head>
+    <body class="masthead">
+        <div id="layoutAuthentication">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <%- include ('include/nav') %>
+                    <div class="container p-5">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-7">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5 bg-transparent">
+                                    <div class="card-header">
+                                        <h3 class="text-center font-weight-light my-4 text-white" >View file</h3></div>
+                                    <div class="card-body">
+                                            <p class="text-info">File name:</p>
+                                            <p class="text-info">Size:</p>
+                                            <p class="text-info">Description:</p>
+                                            <div class="mt-4 mb-0">
+                                                <div class="d-grid"><a class="btn btn-primary btn-block" href="/login">Download</a></div>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <%- include ('include/footer') %>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="/js/scripts.js"></script>
+    </body>
+</html>

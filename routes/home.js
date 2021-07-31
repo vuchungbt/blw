@@ -11,13 +11,23 @@ router.get('/', (req, res) => {
 router.get('/member', (req, res) => {
     res.render('d_member');
 });
-//------------ member ------------//
+//------------ document ------------//
 router.get('/document', (req, res) => {
     res.render('d_documents');
 });
-//------------ member ------------//
+//------------ project ------------//
 router.get('/project', (req, res) => {
     res.render('d_project');
+});
+
+//------------ file ------------//
+router.get('/file', (req, res) => {
+    res.render('d_file');
+});
+//------------ file ------------//
+router.get('/file/id', (req, res) => {
+    console.log('file/id');
+    res.render('d_filedownload');
 });
 
 
