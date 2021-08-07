@@ -11,11 +11,11 @@ const User = require('../models/User');
 
 //------------ Register Handle ------------//
 exports.registerHandle = (req, res) => {
-    const { name, email, password, password2 } = req.body;
+    const { name,phone, email, password, password2 } = req.body;
     let errors = [];
 
     //------------ Checking required fields ------------//
-    if (!name || !email || !password || !password2) {
+    if (!name || !phone || !email || !password || !password2) {
         errors.push({ msg: 'Please enter all fields' });
     }
 
@@ -33,6 +33,7 @@ exports.registerHandle = (req, res) => {
         res.render('register', {
             errors,
             name,
+            phone,
             email,
             password,
             password2
@@ -46,6 +47,7 @@ exports.registerHandle = (req, res) => {
                 res.render('register', {
                     errors,
                     name,
+                    phone,
                     email,
                     password,
                     password2
@@ -377,7 +379,7 @@ exports.resetPassword = (req, res) => {
 //------------ Login Handle ------------//
 exports.loginHandle = (req, res, next) => {
     passport.authenticate('local', {
-        successRedirect: '/dashboard',
+        successRedirect: '/home',
         failureRedirect: '/auth/login',
         failureFlash: true
     })(req, res, next);
