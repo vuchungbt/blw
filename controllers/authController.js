@@ -11,7 +11,7 @@ const User = require('../models/User');
 
 //------------ Register Handle ------------//
 exports.registerHandle = (req, res) => {
-    const { name,phone, email, password, password2 } = req.body;
+    const { name, phone, email, password, password2 } = req.body;
     let errors = [];
 
     //------------ Checking required fields ------------//
@@ -65,7 +65,9 @@ exports.registerHandle = (req, res) => {
                 });
                 const accessToken = oauth2Client.getAccessToken()
 
-                const token = jwt.sign({ name, email, password }, config.get('jwtSecret'), { expiresIn: '30m' });
+                console.log('Secret' , config.get('jwtSecret'));
+
+                const token = jwt.sign({ name, phone, email, password }, config.get('jwtSecret'), { expiresIn: '30m' });
                 const CLIENT_URL = 'http://' + req.headers.host;
 
                 const output = `
@@ -123,6 +125,7 @@ exports.registerHandle = (req, res) => {
 exports.activateHandle = (req, res) => {
     const token = req.params.token;
     let errors = [];
+    console.log('TK:',token);
     if (token) {
         jwt.verify(token, config.get('jwtSecret'), (err, decodedToken) => {
             if (err) {
@@ -133,7 +136,7 @@ exports.activateHandle = (req, res) => {
                 res.redirect('/auth/register');
             }
             else {
-                const { name, email, password } = decodedToken;
+                const { name, phone, email, password } = decodedToken;
                 User.findOne({ email: email }).then(user => {
                     if (user) {
                         //------------ User already exists ------------//
@@ -145,6 +148,7 @@ exports.activateHandle = (req, res) => {
                     } else {
                         const newUser = new User({
                             name,
+                            phone,
                             email,
                             password
                         });

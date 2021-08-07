@@ -4,9 +4,9 @@ const { ensureAuthenticated } = require('../middleware/checkAuth');
 
 
 //------------ dashboard me ------------//
-router.get('/', (req, res) => {
-    res.render('dashboard');
-});
+//router.get('/', (req, res) => {
+//    res.render('dashboard');
+//});
 //------------ member ------------//
 router.get('/member', (req, res) => {
     res.render('d_member');
@@ -31,6 +31,6 @@ router.get('/file/id', (req, res) => {
 });
 
 
-//router.get('/dashboard', ensureAuthenticated, (req,res) => res.render('home',{name: req.user.name}));
+router.get('/', ensureAuthenticated, (req,res) => res.render('dashboard',{name: req.user.name}));
 
 module.exports = router;
