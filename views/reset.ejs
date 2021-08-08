@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>Login Blackwolves - Blw</title>
+    <title>Blackwolves - Blw</title>
     <%- include ('include/header') %>
 </head>
 
@@ -17,20 +17,20 @@
                             <div class="col-lg-7">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5 bg-transparent">
                                     <div class="card-header">
-                                        <h3 class="text-center font-weight-light my-4 text-white">Sign in</h3>
+                                        <h3 class="text-center font-weight-light my-4 text-white">Reset</h3>
                                         <%- include ('implement/messages') %>
                                     </div>
                                     <div class="card-body">
                                         <form  action="/auth/reset/<%= id %>"  method="POST">
                                             <div class="form-floating mb-3">
-                                                <input class="form-control  bg-transparent text-white" id="password" name="password"
+                                                <input class="form-control  bg-transparent text-white" id="password" name="password" placeholder="password"
                                                     type="password" />
-                                                <label for="password" class="text-white">Email address</label>
+                                                <label for="password" class="text-white">Password</label>
                                             </div>
                                             <div class="form-floating mb-3">
                                                 <input class="form-control  bg-transparent text-white" name="password2"
                                                     id="password2" type="password" placeholder="password" />
-                                                <label for="password2" class="text-white">Password</label>
+                                                <label for="password2" class="text-white">Confirm Password</label>
                                             </div>
                                             <div class="mt-4 mb-0">
                                                 <div class="d-grid"><button class="btn btn-primary btn-block"
