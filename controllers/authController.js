@@ -222,7 +222,7 @@ exports.forgotPassword = (req, res) => {
                         const mailOptions = {
                             from: '"Blw Info" <blwinfo196@gmail.com>', // sender address
                             to: email, // list of receivers
-                            subject: "Account Password Reset: NodeJS Auth ✔", // Subject line
+                            subject: "Account Reset✔", // Subject line
                             html: output, // html body
                         };
 
