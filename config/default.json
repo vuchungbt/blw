@@ -2,10 +2,12 @@
     "mongoURI": "mongodb://localhost:27017/blackwolves",
     "jwtSecret": "secret blackwolves documentproject",
     "jwtKeyReset": "secret blackwolves documentproject reset keyyyy",
-    "gmail": "noreply.kaydateam@gmail.com",
-    "pass": "090512147963q!@#",
+    "gmail": "blwinfo196@gmail.com",
+    "pass": "090512147963qQ!@#",
     "text": "Code reset password: ",
-    "subject": "[CODE RESET Kaydateam]",
+    "subject": "[CODE RESET blw]",
     "key": "root123!@#$",
-    "env": "dev"
+    "env": "dev",
+    "gg-ClientID":"327616110679-65nmdl6096hig27ictvh8ahcg4mrae5c.apps.googleusercontent.com",
+    "gg-ClientSecret":"h0YmYixF2iHkaoWpojEQ0bdR"
 }
