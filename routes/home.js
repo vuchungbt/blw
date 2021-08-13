@@ -2,35 +2,32 @@ const express = require('express');
 const router = express.Router();
 const { ensureAuthenticated } = require('../middleware/checkAuth');
 
-
-//------------ dashboard me ------------//
-//router.get('/', (req, res) => {
-//    res.render('dashboard');
-//});
 //------------ member ------------//
-router.get('/member', (req, res) => {
-    res.render('d_member');
+router.get('/member',ensureAuthenticated, (req, res) => {
+    res.render('d_member',{name: req.user.name});
 });
 //------------ document ------------//
-router.get('/document', (req, res) => {
-    res.render('d_documents');
+router.get('/document',ensureAuthenticated, (req, res) => {
+    res.render('d_documents',{name: req.user.name});
 });
 //------------ project ------------//
-router.get('/project', (req, res) => {
-    res.render('d_project');
+router.get('/project',ensureAuthenticated, (req, res) => {
+    res.render('d_project',{name: req.user.name});
 });
 
 //------------ file ------------//
-router.get('/file', (req, res) => {
-    res.render('d_file');
+router.get('/file',ensureAuthenticated, (req, res) => {
+    res.render('d_file',{name: req.user.name});
 });
 //------------ file ------------//
-router.get('/file/id', (req, res) => {
+router.get('/file/id', ensureAuthenticated,(req, res) => {
     console.log('file/id');
-    res.render('d_filedownload');
+    res.render('d_filedownload',{name: req.user.name});
 });
 
 
-router.get('/', ensureAuthenticated, (req,res) => res.render('dashboard',{name: req.user.name}));
+router.get('/', ensureAuthenticated, (req,res) => {
+    res.render('dashboard',{name: req.user.name});
+});
 
 module.exports = router;
