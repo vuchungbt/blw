@@ -11,11 +11,11 @@ const User = require('../models/User');
 
 //------------ Register Handle ------------//
 exports.registerHandle = (req, res) => {
-    const { name, phone, email, password, password2 } = req.body;
+    const { name, phone, permission, active, email, password, password2 } = req.body;
     let errors = [];
 
     //------------ Checking required fields ------------//
-    if (!name || !phone || !email || !password || !password2) {
+    if (!name || !phone || !email || !permission || !active || !password || !password2) {
         errors.push({ msg: 'Please enter all fields' });
     }
 
@@ -35,6 +35,8 @@ exports.registerHandle = (req, res) => {
             name,
             phone,
             email,
+            permission,
+            active,
             password,
             password2
         });
@@ -49,11 +51,13 @@ exports.registerHandle = (req, res) => {
                     name,
                     phone,
                     email,
+                    permission,
+                    active,
                     password,
                     password2
                 });
             } else {
-                const token = jwt.sign({ name, phone, email, password }, config.get('jwtSecret'), { expiresIn: '30m' });
+                const token = jwt.sign({ name, phone, email,permission, active, password }, config.get('jwtSecret'), { expiresIn: '30m' });
                 const CLIENT_URL = 'http://' + req.headers.host;
 
                 const output = `
