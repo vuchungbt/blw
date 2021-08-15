@@ -15,7 +15,7 @@ const app = express();
 app.use(morgan("dev"));
 
 //------------ Passport Configuration ------------//
-require('./middleware/passport')(passport);
+require("./middleware/passport")(passport);
 
 let isDev = process.env.NODE_ENV !== "production";
 app.locals.env = process.env.NODE_ENV || "dev";
@@ -56,17 +56,19 @@ app.use(passport.session());
 app.use(flash());
 
 //------------ Global variables ------------//
-app.use(function(req, res, next) {
-  res.locals.success_msg = req.flash('success_msg');
-  res.locals.error_msg = req.flash('error_msg');
-  res.locals.error = req.flash('error');
+app.use(function (req, res, next) {
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  res.locals.error = req.flash("error");
   next();
 });
 
 const index = require("./routes/index");
 const auth = require("./routes/auth");
+const member = require("./routes/member");
 const home = require("./routes/home");
 app.use("/home", home);
+app.use("/member", member);
 app.use("/auth", auth);
 app.use("/", index);
 
@@ -74,7 +76,6 @@ app.use("/", index);
 app.use(function (req, res, next) {
   res.render("404");
 });
-
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, console.log(`Server running on PORT ${PORT}`));
