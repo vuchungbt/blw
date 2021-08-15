@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Member - kaydadocument</title>
+    <%- include ('include/d_header') %>
+
+</head>
+
+<body class="sb-nav-fixed">
+    <%- include ('include/d_hnav') %>
+        <div id="layoutSidenav">
+            <%- include ('include/d_leftnav') %>
+                <div id="layoutSidenav_content">
+                    <main>
+                        <div class="container-fluid px-4">
+                            <h1 class="mt-4">Member</h1>
+                            <div class="row">
+
+                                <div class="mem">
+                                    <form id="editmember" action="/home/edit-user" method="post">
+                                        <div class="row mb-3">
+                                            <div class="col-md-6 ">
+                                                <div class="form-group mb-3 mb-md-0 ">
+                                                    <label for="recipient-name" class="col-form-label">Name:</label>
+                                                    <input class="form-control " id="name" type="text" placeholder="Name" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="recipient-phone" class="col-form-label">Phone:</label>
+                                                    <input class="form-control  bg-transparent " id="inputTel" type="tel" placeholder="Phone number" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6 ">
+                                                <div class="form-group mb-3 mb-md-0 ">
+                                                    <label for="recipient-permission" class="col-form-label">Permission:</label>
+                                                    <select id="recipient-permission" class="form-control">
+                                                        <option value="Admin">Admin</option>
+                                                        <option value="Owner">Owner</option>
+                                                        <option value="Member" selected>Member</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="recipient-active" class="col-form-label">Active:</label>
+                                                    <select id="recipient-active" class="form-control">
+                                                        <option value="Disable">Disable</option>
+                                                        <option value="Enable" selected>Enable</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6 ">
+                                                <div class="form-group mb-3 mb-md-0 ">
+                                                    <label for="recipient-email" class="col-form-label">Email:</label>
+                                                    <input type="email" class="form-control" id="recipient-email">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="recipient-pass" class="col-form-label">Password:</label>
+                                                    <input type="password" class="form-control" id="recipient-pass">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="container-fluid px-4">
+                                                <div class="d-flex align-items-center justify-content-between small">
+                                                    <!--
+                                                        Handle delete with js code post to /home/edit-user/delete
+                                                    -->
+                                                    <div class="text-muted"><a href="/home/edit-user/id-user" class="btn btn-danger">Delete account</a></div>
+                                                    <div>
+                                                        <button type="submit" class="btn btn-primary">Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                    <%- include ('include/footer') %>
+                </div>
+        </div>
+        <%- include ('include/d_footer') %>
+</body>
+
+</html>

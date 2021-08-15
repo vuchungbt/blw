@@ -6,6 +6,10 @@ const { ensureAuthenticated } = require('../middleware/checkAuth');
 router.get('/member',ensureAuthenticated, (req, res) => {
     res.render('d_member',{name: req.user.name});
 });
+//------------edit member ------------//
+router.get('/edit-user',ensureAuthenticated, (req, res) => {
+    res.render('d_edit-user',{name: req.user.name});
+});
 //------------ document ------------//
 router.get('/document',ensureAuthenticated, (req, res) => {
     res.render('d_documents',{name: req.user.name});

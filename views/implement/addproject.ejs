@@ -1,0 +1,36 @@
+    <!-- Modal 1 My profile-->
+    <div class="modal fade" id="addprojectModal" tabindex="-1" role="dialog" aria-labelledby="addprojectModal"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addprojectLabel">Add Project</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addproject">
+                    <div class="form-group">
+                        <label for="project-name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="project-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="project-active" class="col-form-label">Active:</label>
+                        <select id="project-active" class="form-control" >
+                            <option value="Disable">Disable</option>
+                            <option value="Enable" selected>Enable</option>
+                          </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-description" class="col-form-label">Description:</label>
+                        <textarea id="description" name="description" class="form-control" rows="2" placeholder="Type..." ></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

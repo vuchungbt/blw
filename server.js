@@ -18,7 +18,7 @@ app.use(morgan("dev"));
 require('./middleware/passport')(passport);
 
 let isDev = process.env.NODE_ENV !== "production";
-app.locals.env = process.env.NODE_ENV || "dev";
+app.locals.env = process.env.NODE_ENV || config.get("env");
 
 //app.use(expressLayouts);
 app.use(bodyParser.urlencoded({ extended: true }));
