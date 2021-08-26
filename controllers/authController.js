@@ -124,7 +124,7 @@ exports.activateHandle = (req, res) => {
                 res.redirect('/auth/register');
             }
             else {
-                const { name, phone, email, password } = decodedToken;
+                const { name, phone,permission,active, email, password } = decodedToken;
                 User.findOne({ email: email }).then(user => {
                     if (user) {
                         //------------ User already exists ------------//
@@ -137,6 +137,8 @@ exports.activateHandle = (req, res) => {
                         const newUser = new User({
                             name,
                             phone,
+                            permission,
+                            active,
                             email,
                             password
                         });

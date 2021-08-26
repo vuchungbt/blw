@@ -4,6 +4,7 @@
 <head>
     <title>Project - kaydadocument</title>
     <%- include ('include/d_header') %>
+    <link rel="stylesheet" href="/html5-editor/bootstrap-wysihtml5.css" />
 </head>
 
 <body class="sb-nav-fixed">
@@ -86,5 +87,12 @@
         </div>
     </div>
     <%- include ('include/d_footer') %>
+    <script src="/html5-editor/wysihtml5-0.3.0.js"></script>
+    <script src="/html5-editor/bootstrap-wysihtml5.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.textarea_editor').wysihtml5();
+        });
+    </script>
 </body>
 </html>

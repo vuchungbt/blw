@@ -2,17 +2,17 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 //------------ Project Schema ------------//
 const ProjectSchema = new mongoose.Schema({
-  name: {
+  projectname: {
     type: String,
     required: true
   },
-  description: {
+  projectdescription: {
     type: String,
   },
-  status: {
+  projectactive: {
     type: String,
     required: true,
-    default: 'Not Started'
+    default: 'Enable'
   },
   owner: {
     type: Schema.Types.ObjectId,

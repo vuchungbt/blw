@@ -9,27 +9,34 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="addproject">
+                <form id="addproject" action="/home/project" method="POST">
                     <div class="form-group">
                         <label for="project-name" class="col-form-label">Name:</label>
-                        <input type="text" class="form-control" id="project-name">
+                        <input type="text" class="form-control" id="project-name" name="projectname">
                     </div>
                     <div class="form-group">
                         <label for="project-active" class="col-form-label">Active:</label>
-                        <select id="project-active" class="form-control" >
+                        <select id="project-active" name="projectactive" class="form-control" >
                             <option value="Disable">Disable</option>
                             <option value="Enable" selected>Enable</option>
                           </select>
                     </div>
                     <div class="form-group">
                         <label for="recipient-description" class="col-form-label">Description:</label>
-                        <textarea id="description" name="description" class="form-control" rows="2" placeholder="Type..." ></textarea>
+                        <textarea id="description" name="projectdescription" class="textarea_editor form-control" rows="5" placeholder="..." ></textarea>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted"><a href="/home/addproject" class="btn btn-secondary">Open popup</a></div>
+                        <div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

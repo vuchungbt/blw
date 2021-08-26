@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Member - kaydadocument</title>
+    <%- include ('include/d_header') %>
+    <link rel="stylesheet" href="/html5-editor/bootstrap-wysihtml5.css" />
+
+</head>
+
+<body class="sb-nav-fixed">
+    <%- include ('include/d_hnav') %>
+        <div id="layoutSidenav">
+            <%- include ('include/d_leftnav') %>
+                <div id="layoutSidenav_content">
+                    <main>
+                        <div class="container-fluid px-4">
+                            <h1 class="mt-4">Add Project</h1>
+                            <div class="row">
+                                <div class="project">
+                                    <div class="projectbody">
+                                        <form id="addproject" action="/home/project" method="POST">
+                                            <div class="row mb-3">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group mb-3 mb-md-0 ">
+                                                        <label for="project-name" class="col-form-label">Name:</label>
+                                                        <input type="text" class="form-control" id="project-name" name="projectname">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="project-active" class="col-form-label">Active:</label>
+                                                        <select id="project-active" name="projectactive" class="form-control">
+                                                            <option value="Disable">Disable</option>
+                                                            <option value="Enable" selected>Enable</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="recipient-description" class="col-form-label">Description:</label>
+                                                <textarea id="description" name="projectdescription" class="textarea_editor form-control" rows="5" placeholder="..." ></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="container-fluid px-4">
+                                            <div class="d-flex align-items-center justify-content-between small">
+                                                <div class="text-muted"><a href="/home/project" class="btn btn-secondary">Cancel</a></div>
+                                                <div>
+                                                <button type="submit" class="btn btn-primary">Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                    <%- include ('include/footer') %>
+                </div>
+        </div>
+        <%- include ('include/d_footer') %>
+        <script src="/html5-editor/wysihtml5-0.3.0.js"></script>
+        <script src="/html5-editor/bootstrap-wysihtml5.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.textarea_editor').wysihtml5();
+            });
+        </script>
+</body>
+
+</html>
