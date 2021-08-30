@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Member - kaydadocument</title>
+    <%- include ('include/d_header') %>
+        <link rel="stylesheet" href="/html5-editor/bootstrap-wysihtml5.css" />
+
+</head>
+
+<body class="sb-nav-fixed">
+    <%- include ('include/d_hnav') %>
+        <div id="layoutSidenav">
+            <%- include ('include/d_leftnav') %>
+                <div id="layoutSidenav_content">
+                    <main>
+                        <div class="container-fluid px-4">
+                            <h1 class="mt-4">Update static link</h1>
+                            <%- include ('implement/messages') %>
+                                <div class="row">
+                                    <div class="project">
+                                        <div class="projectbody">
+                                            <form id="addproject" action="/home/updatelink" method="POST">
+                                                <div class="row mb-3">
+                                                    <div class="col-md-6 ">
+                                                        <div class="form-group mb-3 mb-md-0 ">
+                                                            <label for="linkname" class="col-form-label">Name:</label>
+                                                            <input type="text" class="form-control" id="linkname"
+                                                                name="linkname"
+                                                                value="<%= typeof link != 'undefined' ? link.linkname : '' %>"
+                                                                placeholder="Term & policy for App 1">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group mb-3 mb-md-0 ">
+                                                            <label for="linkstatic" class="col-form-label">Link
+                                                                static:</label>
+                                                            <input type="text" class="form-control" id="linkstatic"
+                                                                name="linkstatic"
+                                                                value="<%= typeof link != 'undefined' ? link.linkstatic : '' %>"
+                                                                placeholder="policy">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="header" class="col-form-label">Header:</label>
+                                                    <input type="text" class="form-control" id="header" name="header"
+                                                        value="<%= typeof link != 'undefined' ? link.header : '' %>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="body" class="col-form-label">Body:</label>
+                                                    <textarea id="mymce" name="area"
+                                                        class="textarea_editor form-control" rows="5"
+                                                        placeholder="..."><%= typeof link != 'undefined' ? link.area : '' %></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="footer" class="col-form-label">Footer:</label>
+                                                    <input type="text" class="form-control" id="footer" name="footer"
+                                                        value="<%= typeof link != 'undefined' ? link.footer : '' %>">
+                                                    <input type="hidden" class="form-control" id="id" name="id"
+                                                        value="<%= typeof link != 'undefined' ? link._id : '' %>">
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <div class="container-fluid px-4">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-between small">
+                                                            <div class="text-muted">
+                                                                <a class="btn btn-danger" data-toggle="modal"
+                                                                    data-target="#deleteLinkModal" href="#!"><i
+                                                                        class="fas fa-minus-circle"></i> Delete</a>
+                                                                
+                                                            </div>
+                                                            <div>
+                                                                <a href="../document"
+                                                                    class="btn btn-secondary">Cancel</a>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">Save</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <%- include ('implement/delete-staticlink') %>
+                    </main>
+                    <%- include ('include/footer') %>
+                </div>
+        </div>
+        <%- include ('include/d_footer') %>
+            <script src="/tinymce/tinymce.min.js"></script>
+            <script>
+                $(document).ready(function () {
+
+                    if ($("#mymce").length > 0) {
+                        tinymce.init({
+                            selector: "textarea#mymce",
+                            theme: "modern",
+                            height: 300,
+                            plugins: [
+                                "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+                                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                                "save table contextmenu directionality emoticons template paste textcolor"
+                            ],
+                            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | l      ink image | print preview media fullpage | forecolor backcolor emoticons",
+
+                        });
+                    }
+                });
+            </script>
+</body>
+
+</html>

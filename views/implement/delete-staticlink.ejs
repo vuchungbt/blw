@@ -1,0 +1,32 @@
+<!-- Modal 1 My profile-->
+<div class="modal fade" id="deleteLinkModal" tabindex="-1" role="dialog" aria-labelledby="deleteLinkModal"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete static link</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addmember" action="/home/deletelink" method="post">
+                    <h3 class="text-danger">Are you sure?</h3>
+                    <div class="form-group">
+                        <label for="linkname" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="linkname" disabled="" name="linkname" value="<%= typeof link != 'undefined' ? link.linkname : '' %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="linkstatic" class="col-form-label">Link:</label>
+                        <input type="text" class="form-control" id="linkstatic" disabled="" name="linkstatic" value="<%= typeof link != 'undefined' ? link.linkstatic : '' %>">
+                    </div>
+                    <input type="hidden" class="form-control" id="id" name="id" value="<%= typeof link != 'undefined' ? link._id : '' %>">
+                    
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -11,7 +11,7 @@ const User = require('../models/User');
 
 //------------ Register Handle ------------//
 exports.registerHandle = (req, res) => {
-    const { name, phone, permission, active, email, password, password2 } = req.body;
+    const { name, phone, permission, active, email, password, password2,protectedcode } = req.body;
     let errors = [];
 
     //------------ Checking required fields ------------//
@@ -27,6 +27,10 @@ exports.registerHandle = (req, res) => {
     //------------ Checking password length ------------//
     if (password.length < 6) {
         errors.push({ msg: 'Password must be at least 6 characters' });
+    }
+    //------------ Checking password length ------------//
+    if (protectedcode != config.get('protectedcode') ) {
+        errors.push({ msg: 'Proected code wrong, please contact to admin !' });
     }
 
     if (errors.length > 0) {

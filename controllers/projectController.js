@@ -20,6 +20,14 @@ exports.addProjectHandle = (req, res) => {
             projectactive,
             projectdescription
             });
+            newProject.save().then(proj => {
+                req.flash(
+                    'success_msg',
+                    'Submit success.'
+                );
+                res.redirect('/home/project');
+            })
+            .catch(err => console.log(err));
     }
 
 

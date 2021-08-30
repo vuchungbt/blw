@@ -15,7 +15,7 @@
                     <div class="container p-5">
                         <div class="row justify-content-center">
                             <div class="col-lg-7">
-                                <div class="card shadow-lg border-0 rounded-lg mt-5 bg-transparent">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5 ">
                                     <div class="card-header">
                                         <h3 class="text-center font-weight-light my-4 text-white">Sign in</h3>
                                         <%- include ('implement/messages') %>
@@ -23,12 +23,12 @@
                                     <div class="card-body">
                                         <form action="/auth/login" method="POST">
                                             <div class="form-floating mb-3">
-                                                <input class="form-control  bg-transparent text-white" id="email" name="email"
+                                                <input class="form-control bg-transparent text-white" id="email" name="email"
                                                     type="email" placeholder="name@example.com" />
                                                 <label for="email" class="text-white">Email address</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control  bg-transparent text-white" name="password"
+                                                <input class="form-control bg-transparent  text-white" name="password"
                                                     id="password" type="password" placeholder="password" />
                                                 <label for="password" class="text-white">Password</label>
                                             </div>
@@ -37,7 +37,7 @@
                                                         type="submit">Submit</button></div>
                                             </div>
                                         </form>
-                                    </div>
+                                    </div> <!--
                                     <div class="card-footer text-center py-3">
                                         <div class="container-fluid px-4">
                                             <div class="d-flex align-items-center justify-content-between ">
@@ -46,7 +46,7 @@
                                                 <a href="/auth/forgot">Forgot password?</a>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </div>
                         </div>

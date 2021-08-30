@@ -15,44 +15,34 @@
                     <main>
                         <div class="container-fluid px-4">
                             <h1 class="mt-4">Document</h1>
+                            <%- include ('implement/messages') %>
                             <div class="row">
                                 <h4>Static link</h4>
-                                <a class="text-dark" href="#"><i class="fas fa-plus-circle"></i> Add</a>
+                                <a class="text-dark" href="./addlink"><i class="fas fa-plus-circle"></i> Add</a>
                                 <div class="row pt-2">
                                     <table id="datatablesSimple">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
+                                                <th>Name</th>
                                                 <th>Link</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1111</td>
-                                                <td>abc.com/efr</td>
-                                                <td>
-                                                    <a href="#" class="text-success px-sm-1"><i
-                                                            class="fas fa-eye"></i></a>
-                                                    <a href="#" class="text-blue px-sm-1"><i
-                                                            class="fas fa-edit"></i></a>
-                                                    <a href="#" class="text-danger px-sm-1"><i
-                                                            class="fas fa-times"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2222</td>
-                                                <td>abc.com/efr</td>
-                                                <td>
-                                                    <a href="#" class="text-success px-sm-1"><i
-                                                            class="fas fa-eye"></i></a>
-                                                    <a href="#" class="text-blue px-sm-1"><i
-                                                            class="fas fa-edit"></i></a>
-                                                    <a href="#" class="text-danger px-sm-1"><i
-                                                            class="fas fa-times"></i></a>
-                                                </td>
+                                        <tbody><% if(typeof links != 'undefined'){ %> 
+                                            <% links.forEach(function(link) { 
+                                                
+                                                %> 
+                                            <tr> 
+                                                    <td><%= link.linkname %></td>
+                                                    <td> <a href="<%= links.host+ link.linkstatic%>"><%=link.linkstatic%></a> </td>
+                                                    <td>
+                                                        <a href="<%= links.host+ link.linkstatic%>" target="_blank" class="text-success px-sm-1"><i class="fas fa-eye"></i></a>
+                                                        <a href="./editlink/<%= link._id%>" class="text-blue px-sm-1"><i class="fas fa-edit"></i></a>
+                                                    </td>
                                             </tr>
 
+                                            <% }) %> 
+                                            <% } %>
                                         </tbody>
                                     </table>
                                 </div>
