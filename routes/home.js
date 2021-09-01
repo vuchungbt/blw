@@ -7,19 +7,20 @@ const {Link} = require('../models/Link');
 
 
 
-
 //------------ Importing Controllers ------------//
 const projectController = require('../controllers/projectController');
 //------------ Importing Controllers ------------//
 const linkController = require('../controllers/staticlinkController');
 
+
+
 //------------ member ------------//
 router.get('/member',ensureAuthenticated, (req, res) => {
-    res.render('d_member',{user: req.user});
+    res.render('d_member',{user: req.user,active:'member'});
 });
 //------------edit member ------------//
 router.get('/edit-user',ensureAuthenticated, (req, res) => {
-    res.render('d_edit-user',{user: req.user});
+    res.render('d_edit-user',{user: req.user,active:'member'});
 });
 
 
@@ -33,7 +34,7 @@ router.get('/document',ensureAuthenticated,async (req, res) => {
         const links = await Link.find();
         links.host = 'http://'+config.get('host')+'/static/';
         
-        res.render('d_documents',{user: req.user, links : links});
+        res.render('d_documents',{user: req.user, links : links, active:'document'});
 
     }   catch(err) {
         console.log(err)
@@ -41,7 +42,7 @@ router.get('/document',ensureAuthenticated,async (req, res) => {
 });
 router.get('/addlink',ensureAuthenticated, (req, res) => {
 
-    res.render('d_add-link',{user: req.user});
+    res.render('document/d_add-link',{user: req.user,active:'document'});
 });
 
 router.get('/editlink/:_id',ensureAuthenticated, async (req, res) => {
@@ -49,7 +50,7 @@ router.get('/editlink/:_id',ensureAuthenticated, async (req, res) => {
     const link = await Link.findById({
         _id
     });
-    res.render('d_edit-link',{user: req.user,link:link});
+    res.render('d_edit-link',{user: req.user,link:link,active:'document'});
 });
 
 //------------ Register POST Handle ------------//
@@ -63,10 +64,10 @@ router.post('/deletelink',ensureAuthenticated, linkController.deleteLinkHandle);
 
 //------------ project ------------//
 router.get('/project',ensureAuthenticated, (req, res) => {
-    res.render('d_project',{user: req.user});
+    res.render('d_project',{user: req.user,active:'project'});
 });
 router.get('/addproject',ensureAuthenticated, (req, res) => {
-    res.render('d_add-project',{user: req.user});
+    res.render('d_add-project',{user: req.user,active:'project'});
 });
 //------------ Register POST Handle ------------//
 router.post('/project', ensureAuthenticated,projectController.addProjectHandle);

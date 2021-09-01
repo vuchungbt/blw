@@ -4,7 +4,7 @@
 <head>
     <meta name="description" content="<%= link.header %>" />
     <title><%= link.header %></title>
-    <%- include ('include/header') %>
+    <%- include ('../include/header') %>
 
 </head>
 
@@ -12,11 +12,11 @@
     <div id="layoutAuthentication">
         <div id="layoutAuthentication_content">
             <main>
-                <%- include ('include/nav') %>
+                <%- include ('../include/nav') %>
                     
                     <div class="container p-3">
                         <div class="row  p-5">
-                            <%- include ('implement/messages') %>
+                            <%- include ('../implement/messages') %>
                             <div class="col-12 p-2">
                                 <h2 class="col-12 text-white"><%= link.header %></h2>
                             </div>
@@ -24,7 +24,7 @@
                         <div class="row" style="margin-top: -30px;">
                             <div class="col-12 ">
                                 <div class="card">
-                                    <div class="card-body">
+                                    <div class="card-body text-white">
                                         <%- link.area %>
                                     </div>
                                 </div>

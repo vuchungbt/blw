@@ -3,20 +3,20 @@
 
 <head>
     <title>Member - kaydadocument</title>
-    <%- include ('include/d_header') %>
+    <%- include ('../include/d_header') %>
         <link rel="stylesheet" href="/html5-editor/bootstrap-wysihtml5.css" />
 
 </head>
 
 <body class="sb-nav-fixed">
-    <%- include ('include/d_hnav') %>
+    <%- include ('../include/d_hnav') %>
         <div id="layoutSidenav">
-            <%- include ('include/d_leftnav') %>
+            <%- include ('../include/d_leftnav') %>
                 <div id="layoutSidenav_content">
                     <main>
                         <div class="container-fluid px-4">
                             <h1 class="mt-4">Add Link</h1>
-                            <%- include ('implement/messages') %>
+                            <%- include ('../implement/messages') %>
                             <div class="row">
                                 <div class="project">
                                     <div class="projectbody">
@@ -70,10 +70,10 @@
                             </div>
                         </div>
                     </main>
-                    <%- include ('include/footer') %>
+                    <%- include ('../include/footer') %>
                 </div>
         </div>
-        <%- include ('include/d_footer') %>
+        <%- include ('../include/d_footer') %>
             <script src="/tinymce/tinymce.min.js"></script>
             <script>
                 $(document).ready(function () {

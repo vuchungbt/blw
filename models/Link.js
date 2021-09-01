@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 //------------ Link Schema ------------//
 const LinkSchema = new mongoose.Schema({
-    linkname: {
+  linkname: {
     type: String
   },
   linkstatic: {
@@ -17,6 +17,16 @@ const LinkSchema = new mongoose.Schema({
   },
   footer: {
     type: String
+  },
+  description: {
+    type: String
+  },
+  meta_image: {
+    type: String
+  },
+  status: {
+    type: String,
+    default:'Enable'
   },
   createdBy: {
     type: Schema.Types.ObjectId,

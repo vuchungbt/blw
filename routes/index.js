@@ -24,7 +24,7 @@ router.get('/static/:_link', async(req, res) => {
     try {
         const link = await Link.findOne({ linkstatic: _link });
         if (link) {
-            res.render('staticlink', {link:link});
+            res.render('document/staticlink', {link:link});
         }
         else {
             res.render('404');

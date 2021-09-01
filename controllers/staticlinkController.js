@@ -11,7 +11,7 @@ exports.addLinkHandle = (req, res) => {
         errors.push({ msg: 'Please enter body fields' });
     }
     if (errors.length > 0) {
-        res.render('d_add-link', {
+        res.render('document/d_add-link', {
             errors,linkname, linkstatic,header,area,footer
         });
     } else {
@@ -19,7 +19,7 @@ exports.addLinkHandle = (req, res) => {
             if(link) {
                  //------------ User already exists ------------//
                  errors.push({ msg: 'Static link already!!!' });
-                 res.render('d_add-link', {
+                 res.render('document/d_add-link', {
                      errors,
                      linkname,
                      linkstatic,
