@@ -32,6 +32,10 @@ const LinkSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
+  createdByName: {
+    type: String,
+    default: 'Not setup yet'
+  },
   created_at: {
     type: Date,
     default: Date.now,

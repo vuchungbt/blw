@@ -23,7 +23,8 @@ router.get('/static/:_link', async(req, res) => {
     console.log("LINK:", _link);
     try {
         const link = await Link.findOne({ linkstatic: _link });
-        if (link) {
+      
+        if (link.status!=='Disable') {
             res.render('document/staticlink', {link:link});
         }
         else {

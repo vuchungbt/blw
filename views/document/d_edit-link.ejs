@@ -21,7 +21,7 @@
                                     <div class="project">
                                         <div class="projectbody">
                                             <form id="addproject" action="/home/updatelink" method="POST">
-                                                <div class="row mb-3">
+                                                <div class="row mb-1">
                                                     <div class="col-md-6 ">
                                                         <div class="form-group mb-3 mb-md-0 ">
                                                             <label for="linkname" class="col-form-label">Name:</label>
@@ -59,6 +59,19 @@
                                                         value="<%= typeof link != 'undefined' ? link.footer : '' %>">
                                                     <input type="hidden" class="form-control" id="id" name="id"
                                                         value="<%= typeof link != 'undefined' ? link._id : '' %>">
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mb-1 mb-md-0 ">
+                                                            <label for="status" class="col-form-label">Status:</label>
+                                                            <select id="status" name="status" class="form-control">
+                                                                <option value="Enable" <%= typeof link != 'undefined' && link.status=='Enable' ? 'selected' : '' %>>Enable</option>
+                                                                <option value="Disable" <%= typeof link != 'undefined' && link.status=='Disable' ? 'selected' : '' %>>Disable</option>
+                                                                <option value="Editing" <%= typeof link != 'undefined' && link.status=='Editing' ? 'selected' : '' %>>Editing</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <div class="modal-footer">

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const config = require('config');
 const { ensureAuthenticated } = require('../middleware/checkAuth');
-
+const mongoose = require('mongoose');
 const {Link} = require('../models/Link');
 
 
@@ -47,10 +47,15 @@ router.get('/addlink',ensureAuthenticated, (req, res) => {
 
 router.get('/editlink/:_id',ensureAuthenticated, async (req, res) => {
     const _id = req.params._id;
+    if(!mongoose.Types.ObjectId.isValid(_id)) { 
+        res.render('404');
+    }
     const link = await Link.findById({
         _id
     });
-    res.render('d_edit-link',{user: req.user,link:link,active:'document'});
+    if(link)
+        res.render('document/d_edit-link',{user: req.user,link:link,active:'document'});
+    else res.render('404');
 });
 
 //------------ Register POST Handle ------------//
@@ -90,7 +95,7 @@ router.get('/file/id', ensureAuthenticated,(req, res) => {
 
 
 router.get('/', ensureAuthenticated, (req,res) => {
-    res.render('dashboard',{user: req.user});
+    res.render('dashboard',{user: req.user,active:"home"});
 });
 
 module.exports = router;
