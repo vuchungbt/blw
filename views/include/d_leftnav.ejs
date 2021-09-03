@@ -3,26 +3,43 @@
         <div class="sb-sidenav-menu">
             <div class="nav">
 
-                <a class="nav-link active" href="/home">
+                
+                <a class="nav-link 
+                <% if(typeof active != 'undefined' && active=='home' ){  %> 
+                    active
+                <% } %>
+                "  href="/home">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Dashboard
                 </a>
                 <div class="sb-sidenav-menu-heading">Interface</div>
-                <a class="nav-link" href="/home/member">
+                <a class="nav-link
+                <% if(typeof active != 'undefined' && active=='member' ){  %> 
+                    active
+                <% } %>
+                " href="/home/member">
                     <div class="sb-nav-link-icon"><i class="fas fa-user-shield"></i></div>
                     Member
                 </a>
 
-                <a class="nav-link" href="/home/project">
+                <a class="nav-link
+                <% if(typeof active != 'undefined' && active=='project' ){  %> 
+                    active
+                <% } %>
+                " href="/home/project">
                     <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
                     Projects
                 </a>
-                <a class="nav-link" href="/home/document">
+                <a class="nav-link 
+                <% if(typeof active != 'undefined' && active=='document' ){  %> 
+                    active
+                <% } %>
+                " href="/home/document">
                     <div class="sb-nav-link-icon"><i class="fas fa-project-diagram"></i></div>
                     Documents
                 </a>
                 <div class="sb-sidenav-menu-heading">Server</div>
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link " href="tables.html">
                     <div class="sb-nav-link-icon"><i class="fas fa-server"></i></div>
                     Server
                 </a>
