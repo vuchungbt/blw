@@ -6,9 +6,11 @@ const validUrl = require('valid-url');
 
 exports.addLinkHandle = (req, res) => {
 
-    const { linkname, linkstatic, header, area, footer, status } = req.body;
+    let { linkname, linkstatic, header, area, footer, status } = req.body;
     let errors = [];
-    linkstatic.replace('//',"-");
+    linkstatic = linkstatic.replace(/\//g,'-');
+   
+    
     //------------ Checking required fields ------------//
     if (!area || !linkstatic) {
         errors.push({ msg: 'Please enter body fields' });
