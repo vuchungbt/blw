@@ -4,6 +4,7 @@ const config = require('config');
 const { ensureAuthenticated } = require('../middleware/checkAuth');
 const mongoose = require('mongoose');
 const {Link} = require('../models/Link');
+const {User} = require('../models/User');
 
 
 
@@ -15,12 +16,29 @@ const linkController = require('../controllers/staticlinkController');
 
 
 //------------ member ------------//
-router.get('/member',ensureAuthenticated, (req, res) => {
-    res.render('d_member',{user: req.user,active:'member'});
+router.get('/member',ensureAuthenticated,async (req, res) => {
+    try { 
+        const users = await User.find();
+        res.render('d_member',{user: req.user,users,active:'member'});
+    }
+    catch(err) {
+        console.log(err);
+        res.render('404');
+    }
 });
 //------------edit member ------------//
-router.get('/edit-user',ensureAuthenticated, (req, res) => {
-    res.render('d_edit-user',{user: req.user,active:'member'});
+router.get('/edit-user/:_id',ensureAuthenticated,async (req, res) => {
+    
+    const _id = req.params._id;
+    if(!mongoose.Types.ObjectId.isValid(_id)) { 
+        res.render('404');
+    }
+    const userEdit = await User.findById({
+        _id
+    });
+    if(userEdit)
+        res.render('d_edit-user',{user: req.user,active:'member'});
+    else res.render('404');
 });
 
 
@@ -37,7 +55,8 @@ router.get('/document',ensureAuthenticated,async (req, res) => {
         res.render('d_documents',{user: req.user, links : links, active:'document'});
 
     }   catch(err) {
-        console.log(err)
+        console.log(err);
+        res.render('404');
     }
 });
 router.get('/addlink',ensureAuthenticated, (req, res) => {
