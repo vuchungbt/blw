@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const Schema = mongoose.Schema;
 //------------ User Schema ------------//
 const UserSchema = new mongoose.Schema({
   name: {
@@ -15,6 +15,7 @@ const UserSchema = new mongoose.Schema({
   },
   permission: {
     type: String,
+    default:'Member',
     required: true
   },
   active: {
@@ -32,9 +33,14 @@ const UserSchema = new mongoose.Schema({
   resetLink: {
     type: String,
     default: ''
-  }
+  },
+  created_at: {
+    type: Date,
+    default: Date.now,
+  },
 }, { timestamps: true });
 
 const User = mongoose.model('User', UserSchema);
 
 module.exports = User;
+module.exports.User = User;

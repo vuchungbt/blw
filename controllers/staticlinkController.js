@@ -1,5 +1,5 @@
 const config = require('config');
-
+const mongoose = require('mongoose');
 //------------ User Model ------------//
 const Link = require('../models/Link');
 const validUrl = require('valid-url');
@@ -69,12 +69,12 @@ exports.addLinkHandle = (req, res) => {
 exports.deleteLinkHandle = async (req, res) => {
     const { linkname, linkstatic, id } = req.body;
     let errors = [];
-    console.log('linkname', linkname);
-
-    console.log('linkstatic', linkstatic);
-    console.log('linkstatic id ', id);
+    console.log('Delete linkstatic id ', id);
     //------------ Checking required fields ------------//
     if (!id) {
+        errors.push({ msg: 'Something failed' });
+    }
+    if(!mongoose.Types.ObjectId.isValid(id)) {  
         errors.push({ msg: 'Something failed' });
     }
     if (errors.length > 0) {
@@ -86,8 +86,6 @@ exports.deleteLinkHandle = async (req, res) => {
         req.flash("success_msg", "Your link has been deleted.");
         res.redirect("/home/document");
     }
-
-
 }
 exports.updateLinkHandle = (req, res) => {
     const { linkname, linkstatic, header, area, footer, id, status } = req.body;
@@ -95,6 +93,9 @@ exports.updateLinkHandle = (req, res) => {
     //------------ Checking required fields ------------//
     if (!area || !linkstatic || !id) {
         errors.push({ msg: 'Please enter body fields !' });
+    }
+    if(!mongoose.Types.ObjectId.isValid(id)) {  
+        errors.push({ msg: 'Something failed' });
     }
     if (errors.length > 0) {
         res.render('document/d_edit-link', {
