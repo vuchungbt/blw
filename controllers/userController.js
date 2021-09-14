@@ -86,7 +86,7 @@ exports.addMemberHandle = (req, res) => {
         }
     });
 }
-exports.deleteMemberHandle = (req, res) => {
+exports.deleteMemberHandle = async (req, res) => {
     const { id } = req.body;
 
     console.log('Delete user ', id);
@@ -123,7 +123,7 @@ exports.deleteMemberHandle = (req, res) => {
         res.redirect('/home/member');
     }
 
-    User.findByIdAndDelete({ _id: id });
+    const user = await User.findByIdAndDelete({ _id: id });
     req.flash("success_msg", "Account has been deleted.");
     res.redirect("/home/member");
 
