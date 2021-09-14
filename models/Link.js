@@ -36,10 +36,6 @@ const LinkSchema = new mongoose.Schema({
     type: String,
     default: 'Not setup yet'
   },
-  created_at: {
-    type: Date,
-    default: Date.now,
-  },
   modified: {
     type: Date
   }

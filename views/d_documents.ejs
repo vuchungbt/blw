@@ -38,7 +38,7 @@
                                                     <td <% if(link.status == 'Disable'){ %> class="text-danger"<% } %> ><%= link.status %></td>
                                                     <td>
                                                         <a href="<% if(link.status !== 'Disable'){ %> <%= links.host+ link.linkstatic%> <% } else { %>javascript:void(0) <% } %>" class="<% if(link.status == 'Disable'){ %> text-dark<% } else { %>text-success <% } %>"><i class="fas fa-eye"></i></a>
-                                                        <a href="#" data-toggle="modal" data-target="#inforStaticlinkModal" data-idlink="<%= link._id%>" data-created_at="<%= link.created_at %>" data-name="<%= link.createdByName %>" data-nameid="<%= link.createdBy %>" data-modified="<%= link.modified %>"  class="text-info px-sm-1 inforbutton"><i class="fas fa-info-circle"></i></a>
+                                                        <a href="#" data-toggle="modal" data-target="#inforStaticlinkModal" data-idlink="<%= link._id%>" data-createdat="<%= link.createdAt.toISOString() %>" data-name="<%= link.createdByName %>" data-nameid="<%= link.createdBy %>" data-modified=" <%= typeof link.modified != 'undefined'  ? link.modified.toISOString() : '' %> "  class="text-info px-sm-1 inforbutton"><i class="fas fa-info-circle"></i></a>
                                                         <a href="./editlink/<%= link._id%>" class="text-blue px-sm-1"><i class="fas fa-edit"></i></a>
                                                     </td>
                                             </tr>
@@ -129,9 +129,8 @@
             $(document).ready(function () { 
                 $('.inforbutton').click(function(){ 
                    var id = $(this).data('idlink');
-
                    var modified = $(this).data('modified');
-                   var created_at = $(this).data('created_at');
+                   var created_at = $(this).data('createdat');
                    var name = $(this).data('name');
                    $('#name').val(name);
                    $('#created_at').val(created_at);
