@@ -76,9 +76,5 @@ app.use(function (req, res, next) {
 });
 
 
-<<<<<<< HEAD
-const PORT = process.env.PORT || 3000;
-=======
 const PORT = config.get("port") || 3000;
->>>>>>> ead45c7b081189c067b4b22147257008a03b92d9
 app.listen(PORT, console.log(`Server running on PORT ${PORT}`));
