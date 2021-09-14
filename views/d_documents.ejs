@@ -32,7 +32,7 @@
                                         <tbody><% if(typeof links != 'undefined'){ %> 
                                             <% links.forEach(function(link) { 
                                                 %> 
-                                            <tr> 
+                                            <tr class="<% if(link.status == 'Enable'){ %> bg-secondary-light <% } %> "> 
                                                     <td><%= link.linkname %></td>
                                                     <td> <a href="<% if(link.status !== 'Disable'){ %> <%= links.host+ link.linkstatic%> <% } else { %>javascript:void(0) <% } %>"><%=link.linkstatic%></a> </td>
                                                     <td <% if(link.status == 'Disable'){ %> class="text-danger"<% } %> ><%= link.status %></td>

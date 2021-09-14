@@ -15,7 +15,7 @@ exports.registerHandle = (req, res) => {
     let errors = [];
 
     //------------ Checking required fields ------------//
-    if (!name || !phone || !email || !permission || !active || !password || !password2) {
+    if (!name || !phone || !email   || !password || !password2) {
         errors.push({ msg: 'Please enter all fields' });
     }
 

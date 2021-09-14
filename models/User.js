@@ -20,7 +20,8 @@ const UserSchema = new mongoose.Schema({
   },
   active: {
     type: String,
-    required: true
+    required: true,
+    default:'Disable'
   },
   password: {
     type: String,

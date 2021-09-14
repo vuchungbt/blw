@@ -3,33 +3,34 @@
 
 <head>
     <title>Member - kaydadocument</title>
-    <%- include ('include/d_header') %>
+    <%- include ('../include/d_header') %>
 
 </head>
 
 <body class="sb-nav-fixed">
-    <%- include ('include/d_hnav') %>
+    <%- include ('../include/d_hnav') %>
         <div id="layoutSidenav">
-            <%- include ('include/d_leftnav') %>
+            <%- include ('../include/d_leftnav') %>
                 <div id="layoutSidenav_content">
                     <main>
                         <div class="container-fluid px-4">
-                            <h1 class="mt-4">Member</h1>
+                            <h1 class="mt-4">Edit Member</h1>
+                            <%- include ('../implement/messages') %>
                             <div class="row">
 
                                 <div class="mem">
-                                    <form id="editmember" action="/home/edit-user" method="post">
+                                    <form id="editmember" action="/home/updateuser" method="post">
                                         <div class="row mb-3">
                                             <div class="col-md-6 ">
                                                 <div class="form-group mb-3 mb-md-0 ">
                                                     <label for="recipient-name" class="col-form-label">Name:</label>
-                                                    <input class="form-control " id="name" type="text" placeholder="Name" />
+                                                    <input class="form-control " id="name" name="name" type="text" placeholder="Name" value="<%= typeof name != 'undefined' ? name : '' %>" />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="recipient-phone" class="col-form-label">Phone:</label>
-                                                    <input class="form-control   " id="inputTel" type="tel" placeholder="Phone number" />
+                                                    <label for="phone" class="col-form-label">Phone:</label>
+                                                    <input class="form-control" id="phone" name="phone" type="tel" placeholder="Phone number" value="<%= typeof phone != 'undefined' ? phone : '' %>" />
                                                 </div>
                                             </div>
                                         </div>
@@ -37,20 +38,20 @@
                                         <div class="row mb-3">
                                             <div class="col-md-6 ">
                                                 <div class="form-group mb-3 mb-md-0 ">
-                                                    <label for="recipient-permission" class="col-form-label">Permission:</label>
-                                                    <select id="recipient-permission" class="form-control">
-                                                        <option value="Admin">Admin</option>
-                                                        <option value="Owner">Owner</option>
-                                                        <option value="Member" selected>Member</option>
+                                                    <label for="permission" class="col-form-label">Permission:</label>
+                                                    <select id="permission" class="form-control" name="permission"> 
+                                                        <option value="Admin" <%= typeof user.permission != 'undefined' && user.permission=='Owner' || user.permission=='Member' ? 'disabled' : '' %>  <%= typeof permission != 'undefined' && permission=='Admin' ? 'selected' : '' %>>Admin</option>
+                                                        <option value="Owner" <%= typeof user.permission != 'undefined' && user.permission=='Owner' || user.permission=='Member' ? 'disabled' : '' %> <%= typeof permission != 'undefined' && permission=='Owner' ? 'selected' : '' %>>Owner</option>
+                                                        <option value="Member" <%= typeof user.permission != 'undefined' && user.permission=='Owner' || user.permission=='Member' ? 'disabled' : '' %> <%= typeof permission != 'undefined' && permission=='Member' ? 'selected' : '' %>>Member</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="recipient-active" class="col-form-label">Active:</label>
-                                                    <select id="recipient-active" class="form-control">
-                                                        <option value="Disable">Disable</option>
-                                                        <option value="Enable" selected>Enable</option>
+                                                    <label for="active" class="col-form-label">Active:</label>
+                                                    <select id="active" class="form-control" name="active">
+                                                        <option value="Disable" <%= typeof active != 'undefined' && active=='Disable' ? 'selected' : '' %>>Disable</option>
+                                                        <option value="Enable" <%= typeof active != 'undefined' && active=='Enable' ? 'selected' : '' %>>Enable</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -58,14 +59,15 @@
                                         <div class="row mb-3">
                                             <div class="col-md-6 ">
                                                 <div class="form-group mb-3 mb-md-0 ">
-                                                    <label for="recipient-email" class="col-form-label">Email:</label>
-                                                    <input type="email" class="form-control" id="recipient-email">
+                                                    <label for="email" class="col-form-label">Email:</label>
+                                                    <input type="email" name="email" class="form-control" id="email" value="<%= typeof email != 'undefined' ? email : '' %>">
+                                                    <input type="hidden" name="id" class="form-control" id="id" value="<%= typeof id != 'undefined' ? id : '' %>">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="recipient-pass" class="col-form-label">Password:</label>
-                                                    <input type="password" class="form-control" id="recipient-pass">
+                                                    <label for="password" class="col-form-label">Password:</label>
+                                                    <input type="password" class="form-control" name="password" id="password" value="">
                                                 </div>
                                             </div>
                                         </div>
@@ -76,7 +78,9 @@
                                                     <!--
                                                         Handle delete with js code post to /home/edit-user/delete
                                                     -->
-                                                    <div class="text-muted"><a href="/home/edit-user/id-user" class="btn btn-danger">Delete account</a></div>
+                                                    <div class="text-muted"><a class="btn btn-danger" data-toggle="modal"
+                                                        data-target="#deleteUserModal" href="#!"><i
+                                                            class="fas fa-minus-circle"></i> Delete</a></div>
                                                     <div>
                                                         <button type="submit" class="btn btn-primary">Save</button>
                                                     </div>
@@ -87,11 +91,12 @@
                                 </div>
                             </div>
                         </div>
+                        <%- include ('../implement/delete-user') %>
                     </main>
-                    <%- include ('include/footer') %>
+                    <%- include ('../include/footer') %>
                 </div>
         </div>
-        <%- include ('include/d_footer') %>
+        <%- include ('../include/d_footer') %>
 </body>
 
 </html>

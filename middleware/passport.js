@@ -14,6 +14,9 @@ module.exports = function (passport) {
                 if (!user) {
                     return done(null, false, { message: 'This email ID is not registered' });
                 }
+                if (user.active=='Disable') {
+                    return done(null, false, { message: 'Account have been disable. Please contact to adminstrator!' });
+                }
 
                 //------------ Password Matching ------------//
                 bcrypt.compare(password, user.password, (err, isMatch) => {

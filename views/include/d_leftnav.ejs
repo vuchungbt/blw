@@ -5,7 +5,7 @@
 
                 
                 <a class="nav-link 
-                <% if(typeof active != 'undefined' && active=='home' ){  %> 
+                <% if(typeof _active != 'undefined' && _active=='home' ){  %> 
                     active
                 <% } %>
                 "  href="/home">
@@ -14,7 +14,7 @@
                 </a>
                 <div class="sb-sidenav-menu-heading">Interface</div>
                 <a class="nav-link
-                <% if(typeof active != 'undefined' && active=='member' ){  %> 
+                <% if(typeof _active != 'undefined' && _active=='member' ){  %> 
                     active
                 <% } %>
                 " href="/home/member">
@@ -23,7 +23,7 @@
                 </a>
 
                 <a class="nav-link
-                <% if(typeof active != 'undefined' && active=='project' ){  %> 
+                <% if(typeof _active != 'undefined' && _active=='project' ){  %> 
                     active
                 <% } %>
                 " href="/home/project">
@@ -31,7 +31,7 @@
                     Projects
                 </a>
                 <a class="nav-link 
-                <% if(typeof active != 'undefined' && active=='document' ){  %> 
+                <% if(typeof _active != 'undefined' && _active=='document' ){  %> 
                     active
                 <% } %>
                 " href="/home/document">

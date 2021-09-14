@@ -7440,6 +7440,9 @@ textarea.form-control-lg {
 .bg-secondary-dark {
   background-color: #53595e !important;
 }
+.bg-secondary-light {
+  background-color: #ccdeee65 !important;
+}
 
 .bg-success {
   background-color: #05b160 !important;

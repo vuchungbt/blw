@@ -20,7 +20,7 @@ exports.addLinkHandle = (req, res) => {
     }
     if (errors.length > 0) {
         res.render('document/d_add-link', {
-            errors, linkname, linkstatic, header, area, footer, status, user: req.user, active: 'document'
+            errors, linkname, linkstatic, header, area, footer, status, user: req.user, _active: 'document'
         });
     } else {
         Link.findOne({ linkstatic: linkstatic }).then(link => {
@@ -35,7 +35,7 @@ exports.addLinkHandle = (req, res) => {
                     area,
                     footer,
                     status, 
-                    user: req.user, active: 'document'
+                    user: req.user, _active: 'document'
                 });
             }
             else {
@@ -79,7 +79,7 @@ exports.deleteLinkHandle = async (req, res) => {
     }
     if (errors.length > 0) {
         res.render('document/d_edit-link', {
-            errors, user: req.user, active: 'document'
+            errors, user: req.user, _active: 'document'
         });
     } else {
         const link = await Link.findByIdAndDelete({ _id: id });
@@ -99,7 +99,7 @@ exports.updateLinkHandle = (req, res) => {
     }
     if (errors.length > 0) {
         res.render('document/d_edit-link', {
-            errors, linkname, linkstatic, header, area, footer, _id: id, status, user: req.user, active: 'document'
+            errors, linkname, linkstatic, header, area, footer, _id: id, status, user: req.user, _active: 'document'
         });
     } else {
         Link.findOne({ _id: id }).then(link => {
@@ -114,7 +114,7 @@ exports.updateLinkHandle = (req, res) => {
                     area,
                     footer,
                     _id: id,
-                    status, user: req.user, active: 'document'
+                    status, user: req.user, _active: 'document'
                 });
             }
             else {

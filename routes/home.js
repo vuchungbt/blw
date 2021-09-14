@@ -10,8 +10,10 @@ const {User} = require('../models/User');
 
 //------------ Importing Controllers ------------//
 const projectController = require('../controllers/projectController');
-//------------ Importing Controllers ------------//
+
 const linkController = require('../controllers/staticlinkController');
+
+const userController = require('../controllers/userController');
 
 
 
@@ -19,7 +21,7 @@ const linkController = require('../controllers/staticlinkController');
 router.get('/member',ensureAuthenticated,async (req, res) => {
     try { 
         const users = await User.find();
-        res.render('d_member',{user: req.user,users,active:'member'});
+        res.render('d_member',{user: req.user,users,_active:'member'});
     }
     catch(err) {
         console.log(err);
@@ -36,10 +38,21 @@ router.get('/edit-user/:_id',ensureAuthenticated,async (req, res) => {
     const userEdit = await User.findById({
         _id
     });
+    console.log('userEdit >' ,userEdit);
     if(userEdit)
-        res.render('d_edit-user',{user: req.user,active:'member'});
+        res.render('member/d_edit-user',{user: req.user,_active:'member',
+        name :userEdit.name,
+        phone :userEdit.phone,
+        email : userEdit.email,
+        permission: userEdit.permission,
+        active:userEdit.active,
+        id:userEdit._id,
+    });
     else res.render('404');
 });
+router.post('/updateuser',ensureAuthenticated, userController.updateMemberHandle);
+router.post('/deleteuser',ensureAuthenticated, userController.deleteMemberHandle);
+router.post('/adduser',ensureAuthenticated, userController.addMemberHandle);
 
 
 
@@ -50,9 +63,9 @@ router.get('/document',ensureAuthenticated,async (req, res) => {
     
     try {
         const links = await Link.find();
-        links.host = 'http://'+config.get('host')+'/static/';
+        links.host = 'http://'+req.headers.host+'/static/';
         
-        res.render('d_documents',{user: req.user, links : links, active:'document'});
+        res.render('d_documents',{user: req.user, links : links, _active:'document'});
 
     }   catch(err) {
         console.log(err);
@@ -61,7 +74,7 @@ router.get('/document',ensureAuthenticated,async (req, res) => {
 });
 router.get('/addlink',ensureAuthenticated, (req, res) => {
 
-    res.render('document/d_add-link',{user: req.user,active:'document'});
+    res.render('document/d_add-link',{user: req.user,_active:'document'});
 });
 
 router.get('/editlink/:_id',ensureAuthenticated, async (req, res) => {
@@ -73,7 +86,7 @@ router.get('/editlink/:_id',ensureAuthenticated, async (req, res) => {
         _id
     });
     if(link)
-        res.render('document/d_edit-link',{user: req.user,link:link,active:'document'});
+        res.render('document/d_edit-link',{user: req.user,link:link,_active:'document'});
     else res.render('404');
 });
 
@@ -88,10 +101,10 @@ router.post('/deletelink',ensureAuthenticated, linkController.deleteLinkHandle);
 
 //------------ project ------------//
 router.get('/project',ensureAuthenticated, (req, res) => {
-    res.render('d_project',{user: req.user,active:'project'});
+    res.render('d_project',{user: req.user,_active:'project'});
 });
 router.get('/addproject',ensureAuthenticated, (req, res) => {
-    res.render('d_add-project',{user: req.user,active:'project'});
+    res.render('d_add-project',{user: req.user,_active:'project'});
 });
 //------------ Register POST Handle ------------//
 router.post('/project', ensureAuthenticated,projectController.addProjectHandle);
@@ -114,7 +127,7 @@ router.get('/file/id', ensureAuthenticated,(req, res) => {
 
 
 router.get('/', ensureAuthenticated, (req,res) => {
-    res.render('dashboard',{user: req.user,active:"home"});
+    res.render('dashboard',{user: req.user,_active:"home"});
 });
 
 module.exports = router;

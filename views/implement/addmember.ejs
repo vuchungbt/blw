@@ -9,43 +9,44 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="addmember" action="/auth/register" method="post">
+                <form id="addmember" action="/home/adduser" method="post">
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Fullname:</label>
-                        <input type="text" class="form-control" id="recipient-name">
+                        <label for="name" class="col-form-label">Fullname:</label>
+                        <input type="text" class="form-control" id="name" name="name">
                     </div>
                     <div class="form-group">
-                        <label for="recipient-phone" class="col-form-label">Phone:</label>
-                        <input type="text" class="form-control" id="recipient-phone">
+                        <label for="phone" class="col-form-label">Phone:</label>
+                        <input type="text" class="form-control" id="phone" name="phone">
                     </div>
                     <div class="form-group">
-                        <label for="recipient-permission" class="col-form-label">Permission:</label>
-                        <select id="recipient-permission" class="form-control">
-                            <option value="Admin">Admin</option>
-                            <option value="Owner">Owner</option>
+                        <label for="permission" class="col-form-label">Permission:</label>
+                        <select id="permission" class="form-control" name="permission">
+                            <option value="Admin" <%= typeof user.permission != 'undefined' && user.permission=='Owner' || user.permission=='Member' ? 'disabled' : '' %>>Admin</option>
+                            <option value="Owner" <%= typeof user.permission != 'undefined' && user.permission=='Member' ? 'disabled' : '' %>>Owner</option>
                             <option value="Member" selected>Member</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="recipient-active" class="col-form-label">Active:</label>
-                        <select id="recipient-active" class="form-control">
+                        <label for="active" class="col-form-label">Active:</label>
+                        <select id="active" class="form-control" name="active">
                             <option value="Disable">Disable</option>
                             <option value="Enable" selected>Enable</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="recipient-email" class="col-form-label">Email:</label>
-                        <input type="email" class="form-control" id="recipient-email">
+                        <label for="email" class="col-form-label">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" value="">
                     </div>
                     <div class="form-group">
-                        <label for="recipient-pass" class="col-form-label">Password:</label>
-                        <input type="password" class="form-control" id="recipient-pass">
+                        <label for="password" class="col-form-label">Password:</label>
+                        <input type="password" class="form-control" name="password" id="password" value="">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>
