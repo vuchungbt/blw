@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Member - kaydadocument</title>
+    <title>Add - kaydadocument</title>
     <%- include ('../include/d_header') %>
         <link rel="stylesheet" href="/html5-editor/bootstrap-wysihtml5.css" />
 
@@ -57,9 +57,9 @@
                                                     <div class="form-group mb-1 mb-md-0 ">
                                                         <label for="status" class="col-form-label">Status:</label>
                                                         <select id="status" name="status" class="form-control">
-                                                            <option value="Enable" selected>Enable</option>
-                                                            <option value="Disable">Disable</option>
-                                                            <option value="Editing">Editing</option>
+                                                            <option value="Enable" <%= typeof status != 'undefined' && status=='Enable' ? 'selected' : '' %>>Enable</option>
+                                                            <option value="Disable" <%= typeof status != 'undefined' && status=='Disable' ? 'selected' : '' %>>Disable</option>
+                                                            <option value="Editing" <%= typeof status != 'undefined' && status=='Editing' ? 'selected' : '' %>>Editing</option>
                                                         </select>
                                                     </div>
                                                 </div>

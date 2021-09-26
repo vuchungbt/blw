@@ -131,7 +131,6 @@ exports.deleteMemberHandle = async (req, res) => {
 exports.updateMemberHandle = (req, res) => {
     const { name, phone, permission, active, email, password, id } = req.body;
 
-    console.log("Permision:", req.user.permission);
     let errors = [];
 
     //------------ Checking permission fields ------------//
@@ -196,4 +195,105 @@ exports.updateMemberHandle = (req, res) => {
         });
 
     }
+}
+// for ajax request
+exports.updateMyprofileHandle = (req, res) => {
+    console.log('body', req.body);
+    const { name, phone } = req.body;
+
+    //------------ Checking required fields ------------//
+    if (!name || !phone) {
+        res.status(401).json({
+            status: 401,
+            msg: 'Name and phone number not empty!',
+        });
+    }
+
+    //------------ Validation passed ------------//
+    User.findOne({ _id: req.user.id }).then(newUser => {
+
+        newUser.name = name;
+        newUser.phone = phone;
+
+        newUser.save().then(user => {
+            res.json({
+                status: 200,
+                user,
+                msg:'update success!'
+            });
+        })
+            .catch(err => console.log(err));
+
+    });
+}
+// for ajax request
+exports.updatePassprofileHandle = (req, res) => {
+    console.log('body', req.body);
+    const { passwordold,password, password2 } = req.body;
+
+
+    //------------ Checking required fields ------------//
+    if (!password || !password2 || !passwordold) {
+        return res.status(401).json({
+            status: 401,
+            msg: 'Password not empty!',
+        });
+    }
+     //------------ Checking required fields ------------//
+     if (password !=password2) {
+        return  res.status(401).json({
+            status: 401,
+            msg: 'Retype password not correct!',
+        });
+    }
+    //------------ Checking required fields ------------//
+    if (password.length <6) {
+        return res.status(401).json({
+            status: 401,
+            msg: 'Password must be at least 6 characters!',
+        });
+    }
+    //----------- check old password ----------------//
+    User.findOne({ _id: req.user.id  }).then(newUser => {
+        console.log('compare',req.body.passwordold);
+        bcryptjs.compare(req.body.passwordold, newUser.password, function(err, results){
+            if(err){
+                if (err)  {
+                    return res.status(401).json({
+                        msg:'Error!'
+                    });
+                };
+             }
+             if (results) {
+                bcryptjs.genSalt(10, (err, salt) => {
+                    bcryptjs.hash(password, salt, (err, hash) => {
+                        if (err)  {
+                            return res.status(401).json({
+                                msg:'Error!'
+                            });
+                        };
+                        if (password) newUser.password = hash;
+                        console.log('compare before');
+                        newUser
+                            .save()
+                            .then(user => {
+                                res.status(200).json({
+                                    status: 200,
+                                    user,
+                                    msg:'update success!'
+                                });
+                            })
+                            .catch(err => console.log(err));
+                    });
+                });
+            } else {
+                res.status(401).json({
+                    status: 401,
+                    msg: 'Old password not correct!',
+                });
+            }
+           })
+
+    });
+
 }

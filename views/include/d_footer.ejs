@@ -1,6 +1,64 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        crossorigin="anonymous"></script>
-    <script src="/js/scripts.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-    <script src="/js/datatables-simple-demo.js"></script>
+    crossorigin="anonymous"></script>
+<script src="/js/scripts.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.2.js" integrity="sha256-4/zUCqiq0kqxhZIyp4G0Gk+AOtCJsY1TA00k5ClsZYE=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+<script src="/js/datatables-simple-demo.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#profile").submit(function (event) {
+            console.log('#profile clicked !');
+            event.preventDefault();
+
+            var $form = $(this);
+            var formData = {
+                name: $form.find('input[name="name"]').val(),
+                phone: $form.find('input[name="phone"]').val()
+            };
+
+            $.ajax({
+                url: "/home/myprofile",
+                type: "POST",
+                data: JSON.stringify(formData),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data, textStatus, jqXHR) {
+                    $('#textResult').html('Updated sucess !');
+                    console.log('/home/myprofile success !');
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    $('#textResult').html('Update failed! ' + jqXHR.responseJSON.msg);
+                }
+            });
+        });
+        $("#changepassword").submit(function (event) {
+            console.log('#changepassword clicked !');
+            event.preventDefault();
+
+            var $form = $(this);
+            var formData = {
+                passwordold: $form.find('input[name="passwordold"]').val(),
+                password: $form.find('input[name="password"]').val(),
+                password2: $form.find('input[name="password2"]').val()
+            };
+
+            $.ajax({
+                url: "/home/updatemypassword",
+                type: "POST",
+                data: JSON.stringify(formData),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data, textStatus, jqXHR) {
+                    $('#textResultPw').html('Updated sucess !');
+                    console.log('/home/updatemypassword success !');
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                    $('#textResultPw').html('Update failed! '+jqXHR.responseJSON.msg);
+                }
+            });
+        });
+
+
+    });
+</script>

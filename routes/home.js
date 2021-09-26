@@ -38,7 +38,6 @@ router.get('/edit-user/:_id',ensureAuthenticated,async (req, res) => {
     const userEdit = await User.findById({
         _id
     });
-    console.log('userEdit >' ,userEdit);
     if(userEdit)
         res.render('member/d_edit-user',{user: req.user,_active:'member',
         name :userEdit.name,
@@ -53,6 +52,8 @@ router.get('/edit-user/:_id',ensureAuthenticated,async (req, res) => {
 router.post('/updateuser',ensureAuthenticated, userController.updateMemberHandle);
 router.post('/deleteuser',ensureAuthenticated, userController.deleteMemberHandle);
 router.post('/adduser',ensureAuthenticated, userController.addMemberHandle);
+router.post('/myprofile',ensureAuthenticated, userController.updateMyprofileHandle);
+router.post('/updatemypassword',ensureAuthenticated, userController.updatePassprofileHandle);
 
 
 
@@ -75,6 +76,25 @@ router.get('/document',ensureAuthenticated,async (req, res) => {
 router.get('/addlink',ensureAuthenticated, (req, res) => {
 
     res.render('document/d_add-link',{user: req.user,_active:'document'});
+});
+
+router.get('/clone/:_id',ensureAuthenticated, async (req, res) => {
+    const _id = req.params._id;
+    if(!mongoose.Types.ObjectId.isValid(_id)) { 
+        res.render('404');
+    }
+    const link = await Link.findById({
+        _id
+    });
+    if(link)
+        res.render('document/d_add-link',{user: req.user,
+            linkname:link.linkname,
+            linkstatic:link.linkstatic+"-2",
+            header:link.header,
+            area:link.area,
+            footer:link.footer,
+            _active:'document'});
+    else res.render('404');
 });
 
 router.get('/editlink/:_id',ensureAuthenticated, async (req, res) => {
