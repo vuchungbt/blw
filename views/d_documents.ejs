@@ -62,60 +62,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="card bg-warning text-white mb-4">
-                                            <div class="card-body">Warning Card</div>
-                                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                                <a class="small text-white " href="#">View Details</a>
-                                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="card bg-success text-white mb-4">
-                                            <div class="card-body">Success Card</div>
-                                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                                <a class="small text-white " href="#">View Details</a>
-                                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="card bg-danger text-white mb-4">
-                                            <div class="card-body">Danger Card</div>
-                                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                                <a class="small text-white " href="#">View Details</a>
-                                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="card bg-dark text-white mb-4">
-                                            <div class="card-body">Close Project</div>
-                                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                                <a class="small text-white " href="#">View Details</a>
-                                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="card bg-dark text-white mb-4">
-                                            <div class="card-body">Disable Project</div>
-                                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                                <a class="small text-white " href="#">View Details</a>
-                                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="card bg-light text-dark mb-4">
-                                            <div class="card-body">Add new project</div>
-                                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                                <a class="small text-dark " href="#"><i
-                                                        class="fas fa-plus-circle"></i> Add</a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -127,11 +74,13 @@
         <%- include ('include/d_footer') %>
         <script>
             $(document).ready(function () { 
-                $('.inforbutton').click(function(){ 
+                $("#datatablesSimple").on('click', '.inforbutton', function(){ 
+
                    var id = $(this).data('idlink');
                    var modified = $(this).data('modified');
                    var created_at = $(this).data('createdat');
                    var name = $(this).data('name');
+
                    $('#name').val(name);
                    $('#created_at').val(created_at);
                    $('#modified').val(modified);

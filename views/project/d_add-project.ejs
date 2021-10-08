@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Project</title>
+    <%- include ('../include/d_header') %>
+    <link href="/css/custom.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/html5-editor/bootstrap-wysihtml5.css" />
+
+</head>
+
+<body class="sb-nav-fixed">
+    <%- include ('../include/d_hnav') %>
+        <div id="layoutSidenav">
+            <%- include ('../include/d_leftnav') %>
+                <div id="layoutSidenav_content">
+                    <main>
+                        <div class="container-fluid px-4">
+                            <h1 class="mt-4">Add Project</h1>
+                            <div class="row">
+                                <div class="project">
+                                    <div class="projectbody">
+                                        <form id="addproject" action="/home/project" method="POST">
+                                            <div class="row mb-3">
+                                                <div class="col-md-4 ">
+                                                    <div class="form-group mb-3 mb-md-0 ">
+                                                        <label for="projectname" class="col-form-label">Name:</label>
+                                                        <input type="text" class="form-control" id="projectname" name="projectname">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 ">
+                                                    <div class="form-group mb-3 mb-md-0 ">
+                                                        <label for="address" class="col-form-label">Address:</label>
+                                                        <input type="text" class="form-control" id="address" name="address">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="projectstatus" class="col-form-label">Active:</label>
+                                                        <select id="projectstatus" name="projectstatus" class="form-control">
+                                                            <option value="Disable">Disable</option>
+                                                            <option value="Enable" selected>Enable</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="mymce" class="col-form-label">Body:</label>
+                                                <textarea id="mymce" name="projectbody" class="textarea_editor form-control" rows="4"></textarea>
+                                            </div>
+                                            <hr>
+                                            <div><span>Top</span></div>
+                                            <div class="row">
+                                                <nav>
+                                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                      <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">
+                                                          Nav1
+                                                        </a>
+                                                      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">
+                                                          Nav2
+                                                        </a>
+                                                        
+                                                      <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">
+                                                            Nav3
+                                                        </a>
+                                                        <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">
+                                                            Nav4
+                                                        </a>
+                                                    </div>
+                                                  </nav>
+                                                  <div class="tab-content" id="nav-tabContent">
+                                                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                                        
+                                                        <div class="form-group">
+
+                                                            <input type="text" class="menuname" name="tabname1" placeholder="tab name"> 
+                                                            <select id="tabname1status" name="tabname1status" class="menuname"  >
+                                                                <option value="Disable" selected>Disable</option>
+                                                                <option value="Enable">Enable</option>
+                                                            </select>
+
+                                                            <textarea id="nav1" name="nav1" class="textarea_editor form-control" rows="4"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                                        <div class="form-group">
+
+                                                            <input type="text" class="menuname" name="tabname2" placeholder="tab name">
+                                                            <select id="tabname2status" name="tabname2status" class="menuname"  >
+                                                                <option value="Disable" selected>Disable</option>
+                                                                <option value="Enable">Enable</option>
+                                                            </select>
+
+                                                            <textarea id="nav2" name="nav2" class="textarea_editor form-control" rows="4"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                                                        <div class="form-group">
+
+                                                            <input type="text" class="menuname" name="tabname3" placeholder="tab name">
+                                                            <select id="tabname3status" name="tabname3status" class="menuname"  >
+                                                                <option value="Disable" selected>Disable</option>
+                                                                <option value="Enable">Enable</option>
+                                                            </select>
+                                                            
+                                                            <textarea id="nav3" name="nav3" class="textarea_editor form-control" rows="4"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+                                                        <div class="form-group">
+
+                                                            <input type="text" class="menuname" name="tabname4" placeholder="tab name">
+                                                            <select id="tabname4status" name="tabname4status" class="menuname"  >
+                                                                <option value="Disable" selected>Disable</option>
+                                                                <option value="Enable">Enable</option>
+                                                            </select>
+
+                                                            <textarea id="nav4" name="nav4" class="textarea_editor form-control" rows="4"></textarea>
+                                                        </div>
+                                                    </div>
+                                                  </div>
+                                            </div>
+
+
+                                            <div class="modal-footer">
+                                                <div class="container-fluid px-4">
+                                                    <div
+                                                        class="d-flex align-items-center justify-content-between small">
+                                                        <div class="text-muted"><a href="/home/project" class="btn btn-secondary">Cancel</a></div>
+                                                        <div>
+                                                            <button type="submit" class="btn btn-primary">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                    <%- include ('../include/footer') %>
+                </div>
+        </div>
+        <%- include ('../include/d_footer') %>
+        
+        <script src="/tinymce/tinymce.min.js"></script>
+        <script>
+            $(document).ready(function () {
+
+                if ($(".textarea_editor").length > 0) {
+                    tinymce.init({
+                        selector: "textarea.textarea_editor",
+                        theme: "modern",
+                        height: 300,
+                        plugins: [
+                            "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+                            "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                            "save table contextmenu directionality emoticons template paste textcolor"
+                        ],
+                        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | l      ink image | print preview media fullpage | forecolor backcolor emoticons",
+
+                    });
+                }
+            });
+        </script>
+</body>
+
+</html>

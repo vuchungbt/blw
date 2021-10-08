@@ -2,97 +2,76 @@
 <html lang="en">
 
 <head>
-    <title>Project - kaydadocument</title>
+    <title>Edit Project - kaydadocument</title>
     <%- include ('include/d_header') %>
-    <link rel="stylesheet" href="/html5-editor/bootstrap-wysihtml5.css" />
+        <link rel="stylesheet" href="/html5-editor/bootstrap-wysihtml5.css" />
 </head>
 
 <body class="sb-nav-fixed">
     <%- include ('include/d_hnav') %>
-    <div id="layoutSidenav">
-        <%- include ('include/d_leftnav') %>
-        <div id="layoutSidenav_content">
-            <main>
-                <div class="container-fluid px-4">
-                    <h1 class="mt-4">Project</h1>
-                    <a class="text-dark " data-toggle="modal" data-target="#addprojectModal" href="#!"><i class="fas fa-plus-circle"></i> Add</a>
-                    <%- include ('implement/addproject') %>
-                        <div class="row pt-2">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">Primary Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white " href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
+        <div id="layoutSidenav">
+            <%- include ('include/d_leftnav') %>
+                <div id="layoutSidenav_content">
+                    <main>
+                        <div class="container-fluid px-4">
+                            <h1 class="mt-4">Project</h1>
+                            <a class="text-dark " data-toggle="modal" data-target="#addprojectModal" href="#!"><i
+                                    class="fas fa-plus-circle"></i> Add</a>
+                            <%- include ('implement/addproject') %>
+                                <div class="row pt-2">
+                                    <% if(typeof projects !='undefined' ){ %>
+                                        <% projects.forEach(function(project) { %>
+                                            <%- include ('implement/delete-project') %>
+                                            <%- include ('implement/info-project') %>
+                                            <div class="col-xl-3 col-md-6">
+
+                                                <div class="card bg-primary text-white mb-4">
+                                                    <div class="card-body">
+                                                        <%= project.projectname %> [<%= project.pages.length %>]
+                                                    </div>
+                                                    <div
+                                                        class="card-footer d-flex align-items-center justify-content-between">
+                                                        <a class="small text-white " href="#">Details</a>
+                                                        <div class="small">
+                                                            <a href="#" class="text-info px-sm-1 inforbutton">
+                                                                <i class="fas fa-paper-plane"></i></a>
+                                                            <a href="/home/editproject" class="text-info px-sm-1 inforbutton">
+                                                                <i class="fas fa-edit"></i></a>
+                                                            <a href="#" class="text-info px-sm-1 inforbutton" data-toggle="modal" data-target="#inforProjectModal" >
+                                                                <i class="fas fa-info-circle"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <% }) %>
+                                                <% } %>
+
+
+                                                    <div class="col-xl-3 col-md-6">
+                                                        <div class="card bg-light text-dark mb-4">
+                                                            <div class="card-body">Add new with template</div>
+                                                            <div
+                                                                class="card-footer d-flex align-items-center justify-content-between">
+                                                                <a class="small text-dark " href="#"><i
+                                                                        class="fas fa-plus-circle"></i> Add</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">Warning Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white " href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Success Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white " href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">Danger Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white " href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-dark text-white mb-4">
-                                    <div class="card-body">Close Project</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white " href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-dark text-white mb-4">
-                                    <div class="card-body">Disable Project</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white " href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-light text-dark mb-4">
-                                    <div class="card-body">Add new project</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-dark " href="#"><i class="fas fa-plus-circle"></i> Add</a>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
+                    </main>
+                    <%- include ('include/footer') %>
                 </div>
-            </main>
-            <%- include ('include/footer') %>
         </div>
-    </div>
-    <%- include ('include/d_footer') %>
-    <script src="/html5-editor/wysihtml5-0.3.0.js"></script>
-    <script src="/html5-editor/bootstrap-wysihtml5.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.textarea_editor').wysihtml5();
-        });
-    </script>
+        <%- include ('include/d_footer') %>
+            <script src="/html5-editor/wysihtml5-0.3.0.js"></script>
+            <script src="/html5-editor/bootstrap-wysihtml5.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('.textarea_editor').wysihtml5();
+                });
+            </script>
 </body>
+
 </html>
