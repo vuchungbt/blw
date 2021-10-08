@@ -5,6 +5,7 @@ const { ensureAuthenticated } = require('../middleware/checkAuth');
 const mongoose = require('mongoose');
 const {Link} = require('../models/Link');
 const {User} = require('../models/User');
+const {Project} = require('../models/Project');
 
 
 
@@ -120,11 +121,26 @@ router.post('/deletelink',ensureAuthenticated, linkController.deleteLinkHandle);
 
 
 //------------ project ------------//
-router.get('/project',ensureAuthenticated, (req, res) => {
-    res.render('d_project',{user: req.user,_active:'project'});
+router.get('/project',ensureAuthenticated, async (req, res) => {
+    try {
+        const project = await Project.find();
+        console.log(project);
+        res.render('d_project',{ projects:project, user: req.user,_active:'project'});
+
+    }   catch(err) {
+        console.log(err);
+        res.render('404');
+    }
+    
 });
 router.get('/addproject',ensureAuthenticated, (req, res) => {
-    res.render('d_add-project',{user: req.user,_active:'project'});
+    res.render('project/d_add-project',{user: req.user,_active:'project'});
+});
+router.get('/editproject',ensureAuthenticated, (req, res) => {
+    res.render('project/d_edit-project',{user: req.user,_active:'project'});
+});
+router.get('/viewporject',ensureAuthenticated, (req, res) => {
+    res.render('project/viewproject');
 });
 //------------ Register POST Handle ------------//
 router.post('/project', ensureAuthenticated,projectController.addProjectHandle);

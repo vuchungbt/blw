@@ -1,32 +1,23 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 //------------ Project Schema ------------//
-const ProjectSchema = new mongoose.Schema({
-  projectname: {
+const PageSchema = new mongoose.Schema({
+  page_name: {
     type: String,
     required: true
   },
-  address: {
-    type: String,
-    required: true,
-    unique:true
-  },
-  projectstatus: {
+  page_address: {
     type: String,
     required: true
   },
-  projectbody: {
+  page_status: {
     type: String,
-    required: true
+    required:true
   },
-  createdBy: {
-    type: Schema.Types.ObjectId,
-    ref: 'User'
+  page_body: {
+    type: String,
+    required:true
   },
-  pages: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Page',
-  }],
   logo :{
     type: String
   },
@@ -42,10 +33,8 @@ const ProjectSchema = new mongoose.Schema({
   meta_link2 :{
     type: String
   }
-
 }, { timestamps: true });
 
-const Project = mongoose.model('Project', ProjectSchema);
+const Page = mongoose.model('Page', PageSchema);
 
-module.exports = Project;
-module.exports.Project = Project;
+module.exports = Page;
