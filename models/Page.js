@@ -3,20 +3,17 @@ const Schema = mongoose.Schema;
 //------------ Project Schema ------------//
 const PageSchema = new mongoose.Schema({
   page_name: {
-    type: String,
-    required: true
+    type: String
   },
   page_address: {
-    type: String,
-    required: true
+    type: String
   },
   page_status: {
     type: String,
-    required:true
+    default: 'Disable'
   },
   page_body: {
-    type: String,
-    required:true
+    type: String
   },
   logo :{
     type: String
@@ -38,3 +35,4 @@ const PageSchema = new mongoose.Schema({
 const Page = mongoose.model('Page', PageSchema);
 
 module.exports = Page;
+module.exports.Page = Page;

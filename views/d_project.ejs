@@ -21,7 +21,7 @@
                                 <div class="row pt-2">
                                     <% if(typeof projects !='undefined' ){ %>
                                         <% projects.forEach(function(project) { %>
-                                            <%- include ('implement/delete-project') %>
+                                            
                                             <%- include ('implement/info-project') %>
                                             <div class="col-xl-3 col-md-6">
 
@@ -35,7 +35,7 @@
                                                         <div class="small">
                                                             <a href="#" class="text-info px-sm-1 inforbutton">
                                                                 <i class="fas fa-paper-plane"></i></a>
-                                                            <a href="/home/editproject" class="text-info px-sm-1 inforbutton">
+                                                            <a href="/home/editproject/<%= project._id %>" class="text-info px-sm-1 inforbutton">
                                                                 <i class="fas fa-edit"></i></a>
                                                             <a href="#" class="text-info px-sm-1 inforbutton" data-toggle="modal" data-target="#inforProjectModal" >
                                                                 <i class="fas fa-info-circle"></i></a>

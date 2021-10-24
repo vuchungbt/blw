@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const {Link} = require('../models/Link');
 const {User} = require('../models/User');
 const {Project} = require('../models/Project');
+const {Page} = require('../models/Page');
 
 
 
@@ -136,14 +137,44 @@ router.get('/project',ensureAuthenticated, async (req, res) => {
 router.get('/addproject',ensureAuthenticated, (req, res) => {
     res.render('project/d_add-project',{user: req.user,_active:'project'});
 });
-router.get('/editproject',ensureAuthenticated, (req, res) => {
-    res.render('project/d_edit-project',{user: req.user,_active:'project'});
+
+router.get('/editproject/:_id',ensureAuthenticated, (req, res) => {
+    const _id = req.params._id;
+    if(!mongoose.Types.ObjectId.isValid(_id)) { 
+        res.render('404');
+    }
+    Project.findById({
+        _id
+    }).then(project =>{
+          
+        let listpages = [];
+        project.pages.forEach(pageId => {
+            Page.findById({
+                _id:pageId
+            }).then(page => {
+                listpages.push(page);
+            });
+            
+        });
+        project.pagelist=listpages;
+        
+        if(project)
+            res.render('project/d_edit-project',{user: req.user,project:project,_active:'project'});
+        else res.render('404');
+    }).catch(err => {
+        console.log(err);
+        res.render('404');
+    });;
+
+    
 });
 router.get('/viewporject',ensureAuthenticated, (req, res) => {
     res.render('project/viewproject');
 });
 //------------ Register POST Handle ------------//
 router.post('/project', ensureAuthenticated,projectController.addProjectHandle);
+//------------ Register POST Handle ------------//
+router.post('/deleteproject',ensureAuthenticated, projectController.deleteProjectHandle);
 
 
 

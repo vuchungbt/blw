@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Project</title>
+    <title>Edit Project</title>
     <%- include ('../include/d_header') %>
     <link href="/css/custom.css" rel="stylesheet" />
     <link rel="stylesheet" href="/html5-editor/bootstrap-wysihtml5.css" />
@@ -20,33 +20,33 @@
                             <div class="row">
                                 <div class="project">
                                     <div class="projectbody">
-                                        <form id="addproject" action="/home/project" method="POST">
+                                        <form id="addproject" action="/home/updateproject" method="POST">
                                             <div class="row mb-3">
                                                 <div class="col-md-4 ">
                                                     <div class="form-group mb-3 mb-md-0 ">
                                                         <label for="projectname" class="col-form-label">Name:</label>
-                                                        <input type="text" class="form-control" id="projectname" name="projectname">
+                                                        <input type="text" class="form-control" id="projectname" name="projectname" value="<%= typeof project.projectname != 'undefined' ? project.projectname : '' %>">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 ">
                                                     <div class="form-group mb-3 mb-md-0 ">
                                                         <label for="address" class="col-form-label">Address:</label>
-                                                        <input type="text" class="form-control" id="address" name="address">
+                                                        <input type="text" class="form-control" id="address" name="address" value="<%= typeof project.address != 'undefined' ? project.address : '' %>" >
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="projectstatus" class="col-form-label">Active:</label>
                                                         <select id="projectstatus" name="projectstatus" class="form-control">
-                                                            <option value="Disable">Disable</option>
-                                                            <option value="Enable" selected>Enable</option>
+                                                            <option value="Disable" <%= typeof project.projectstatus != 'undefined' && project.projectstatus=='Enable' ? 'selected' : '' %> >Disable</option>
+                                                            <option value="Enable" <%= typeof project.projectstatus != 'undefined' && project.projectstatus=='Disable' ? 'selected' : '' %>>Enable</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="mymce" class="col-form-label">Body:</label>
-                                                <textarea id="mymce" name="projectbody" class="textarea_editor form-control" rows="4"></textarea>
+                                                <textarea id="mymce" name="projectbody" class="textarea_editor form-control" rows="4"> <%= typeof project.projectbody != 'undefined' ? project.projectbody : '' %> </textarea>
                                             </div>
                                             <hr>
                                             <div><span>Top</span></div>
@@ -79,7 +79,7 @@
                                                                 <option value="Enable">Enable</option>
                                                             </select>
 
-                                                            <textarea id="nav1" name="nav1" class="textarea_editor form-control" rows="4"></textarea>
+                                                            <textarea id="nav1" name="nav1" class="textarea_editor form-control" rows="4"> <%= project.projectname %> [<%= project.pagelist.length %>] [<%= project.pages.length %>] </textarea>
                                                         </div>
                                                     </div>
                                                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -130,7 +130,9 @@
                                                                 class="btn btn-secondary">Cancel</a>
                                                             
                                                                 <a href="/home/project" class="btn btn-secondary">Duplicate</a>
-                                                                <a href="/home/project" class="btn btn-danger">Delete</a></div>
+                                                                <a class="btn btn-danger" data-toggle="modal"
+                                                                    data-target="#deleteProjectModal" href="#!"><i
+                                                                        class="fas fa-minus-circle"></i> Delete</a>
                                                         <div>
                                                             <button type="submit" class="btn btn-primary">Save</button>
                                                         </div>
@@ -142,6 +144,7 @@
                                 </div>
                             </div>
                         </div>
+                        <%- include ('../implement/delete-project') %>
                     </main>
                     <%- include ('../include/footer') %>
                 </div>

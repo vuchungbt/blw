@@ -13,13 +13,9 @@
                     <h3 class="text-danger">Are you sure?</h3>
                     <div class="form-group">
                         <label for="linkname" class="col-form-label">Name:</label>
-                        <input type="text" class="form-control" id="linkname" disabled="" name="linkname">
+                        <input type="text" class="form-control" id="linkname" disabled="" name="linkname"value="<%= typeof project.projectname != 'undefined' ? project.projectname : '' %>">
                     </div>
-                    <div class="form-group">
-                        <label for="linkstatic" class="col-form-label">Link:</label>
-                        <input type="text" class="form-control" id="linkstatic" disabled="" name="linkstatic">
-                    </div>
-                    <input type="hidden" class="form-control" id="id" name="id" >
+                    <input type="hidden" class="form-control" id="id" name="id" value="<%= typeof project._id != 'undefined' ? project._id : '' %>">
                     
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

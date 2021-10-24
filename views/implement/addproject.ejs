@@ -12,28 +12,31 @@
                 <form id="addproject" action="/home/project" method="POST">
                     <div class="form-group">
                         <label for="project-name" class="col-form-label">Name:</label>
-                        <input type="text" class="form-control" id="project-name" name="projectname">
+                        <input type="text" class="form-control" id="project-name" name="projectname" disabled>
                     </div>
                     <div class="form-group">
                         <label for="project-active" class="col-form-label">Active:</label>
-                        <select id="project-active" name="projectactive" class="form-control" >
-                            <option value="Disable">Disable</option>
-                            <option value="Enable" selected>Enable</option>
+                        <select id="project-active" name="projectactive" class="form-control" disabled>
+                            <option value="Disable" selected>Disable</option>
+                            <option value="Enable" >Enable</option>
                           </select>
                     </div>
                     <div class="form-group">
                         <label for="recipient-description" class="col-form-label">Body:</label>
-                        <textarea id="description" name="projectdescription" class="textarea_editor form-control" rows="5" placeholder="..." ></textarea>
+                        <textarea id="description" name="projectdescription" class="textarea_editor form-control" rows="5" placeholder="Updating" ></textarea>
                     </div>
                 </form>
             </div>
+            
             <div class="modal-footer">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted"><a href="/home/addproject" class="btn btn-secondary">Open popup</a></div>
+                        <div><a href="/home/addproject" class="btn btn-primary">Open popup</a></div>
                         <div>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <!--
                         <button type="submit" class="btn btn-primary">Save changes</button>
+                        -->
                         </div>
                     </div>
                 </div>
