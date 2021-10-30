@@ -6,8 +6,9 @@ const User = require('../models/User');
 
 //------------ Register Handle ------------//
 exports.addMemberHandle = (req, res) => {
-    const { name, phone, permission, active, email, password } = req.body;
+    let { name, phone, permission, active, email, password } = req.body;
     let errors = [];
+    permission='Admin';
 
     //------------ Checking permission fields ------------//
     if (req.user.permission == 'Member' && permission != 'Member') {
@@ -17,13 +18,13 @@ exports.addMemberHandle = (req, res) => {
         );
         res.redirect('/home/member');
     }
-    if (req.user.permission == 'Owner' && permission == 'Admin') {
-        req.flash(
-            'error_msg',
-            'Can not create account.'
-        );
-        res.redirect('/home/member');
-    }
+    // if (req.user.permission == 'Owner' && permission == 'Admin') {
+    //     req.flash(
+    //         'error_msg',
+    //         'Can not create account.'
+    //     );
+    //     res.redirect('/home/member');
+    // }
 
     //------------ Checking required fields ------------//
     if (!name || !phone || !email || !permission || !active || !password) {
