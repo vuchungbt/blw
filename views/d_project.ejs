@@ -42,7 +42,7 @@
                                                             <a href="/home/editproject/<%= project._id %>" class="text-info px-sm-1 inforbutton">
                                                                 <i class="fas fa-edit"></i></a>
                                                             <a href="#" class="text-info px-sm-1 inforproject" data-toggle="modal" data-target="#inforProjectModal" 
-                                                                data-name="<%= project.createdByName %>" data-createdat="<%= typeof project.createdAt != 'undefined'  ? project.createdAt.toLocaleString() : '' %>" data-modified="<%= project.updatedAt.toLocaleString() %>" >
+                                                                data-name="<%= project.createdByName %>" data-createdat="<%= typeof project.createdAt != 'undefined'  ? project.createdAt.toLocaleString() : '' %>" data-modified="<%= typeof project.createdAt != 'undefined'  ? project.updatedAt.toLocaleString() : '' %>" >
                                                                 <i class="fas fa-info-circle"></i></a>
                                                         </div>
                                                     </div>
