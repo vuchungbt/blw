@@ -11,6 +11,10 @@ const ProjectSchema = new mongoose.Schema({
     required: true,
     unique:true
   },
+  filenginx: {
+    type: String,
+    default:''
+  },
   projectstatus: {
     type: String,
     required: true

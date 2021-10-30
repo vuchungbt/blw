@@ -12,5 +12,6 @@
     "host": "blackwolves.info",
 	"port":"3000",
     "gg-ClientID":"327616110679-65nmdl6096hig27ictvh8ahcg4mrae5c.apps.googleusercontent.com",
-    "gg-ClientSecret":"h0YmYixF2iHkaoWpojEQ0bdR"
+    "gg-ClientSecret":"h0YmYixF2iHkaoWpojEQ0bdR",
+    "nginxdir" :"/etc/nginx"
 }

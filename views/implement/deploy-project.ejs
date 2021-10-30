@@ -1,0 +1,26 @@
+<!-- Modal Deloy project-->
+<div class="modal fade" id="deployProjectModal" tabindex="-1" role="dialog" aria-labelledby="deployProjectModal"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deployProjectModal">Forward Project</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="deployproject" action="/home/deployproject" method="post">
+                    <div class="form-group">
+                        <label for="contentnginx" class="col-form-label">Content:</label>
+                        <textarea  class="form-control" id="contentnginx" name="contentnginx" rows="4" ></textarea>
+                    </div>
+                    
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Process</button>
+            </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

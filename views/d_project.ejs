@@ -15,6 +15,7 @@
                     <main>
                         <div class="container-fluid px-4">
                             <h1 class="mt-4">Project</h1>
+                            <%- include ('implement/messages') %>
                             <a class="text-dark " data-toggle="modal" data-target="#addprojectModal" href="#!"><i
                                     class="fas fa-plus-circle"></i> Add</a>
                             <%- include ('implement/addproject') %>
@@ -23,6 +24,7 @@
                                         <% projects.forEach(function(project) { %>
                                             
                                             <%- include ('implement/info-project') %>
+                                            <%- include ('implement/deploy-project') %>
                                             <div class="col-xl-3 col-md-6">
 
                                                 <div class="card bg-primary text-white mb-4">
@@ -33,8 +35,8 @@
                                                         class="card-footer d-flex align-items-center justify-content-between">
                                                         <a class="small text-white " href="#">Details</a>
                                                         <div class="small">
-                                                            <a href="#" class="text-info px-sm-1 inforbutton">
-                                                                <i class="fas fa-paper-plane"></i></a>
+                                                            <a href="#" class="text-info px-sm-1 deploybutton" data-address="<%= project.address %>" data-toggle="modal" data-target="#deployProjectModal">
+                                                                <i class="fas fa-paper-plane" ></i></a>
                                                             <a href="/home/editproject/<%= project._id %>" class="text-info px-sm-1 inforbutton">
                                                                 <i class="fas fa-edit"></i></a>
                                                             <a href="#" class="text-info px-sm-1 inforbutton" data-toggle="modal" data-target="#inforProjectModal" >
@@ -71,6 +73,32 @@
                 $(document).ready(function () {
                     $('.textarea_editor').wysihtml5();
                 });
+            </script>
+            <script>
+                $(document).ready(function () { 
+                    
+                    $(".deploybutton").on('click', function(){ 
+                        var address = $(this).data('address');
+                       console.log('---deploybutton',address);
+
+                       $.ajax({
+                        url: "/home/getcontentdeploy",
+                        type: "POST",
+                        data: JSON.stringify({'address':address}),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function(data, textStatus, jqXHR) {
+                            console.log('---deploybutton success');
+                            $("#contentnginx").text(data.data);
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.log('---deploybutton failed');
+                            $("#contentnginx").text(data.data);
+                        } 
+                    });
+                       
+                    })
+                })
             </script>
 </body>
 

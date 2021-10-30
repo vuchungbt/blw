@@ -4,6 +4,133 @@ const mongoose = require('mongoose');
 const Project = require('../models/Project');
 const Page = require('../models/Page');
 
+const fs = require("fs");
+const  {exec } = require("child_process");
+exports.getdeployProjectHandle = async (req,res) => {
+
+    const address = req.body.address;
+    let filepath = config.get("nginxdir") + '/' + address + '.conf';
+
+    fs.readFile(filepath, function(err, buf) {
+        if(err)  {
+            console.log( 'file not exist',err);
+            data = 'server {' +
+            '\t\nlisten       80;' +
+            '\t\nserver_name  ' + address +'.'+ req.headers.host+';' +
+            '\t\nlocation / {' +
+            '\t\t\nproxy_set_header Host $host;' +
+            '\t\t\nproxy_set_header X-Real-IP $remote_addr;' +
+            '\t\t\nproxy_pass      '+req.headers.host+'/projectpage/' + address + ';' +
+            '\t\n}' +
+            '\n}'
+            return res.status(200).json({
+                status: 200,
+                data: data,
+                msg:'Get data in file'
+            });
+        }
+        var data ='Error';
+        if(buf.toString()!=null && buf.toString()!=undefined && buf.toString()){
+            data = buf.toString();
+        } else {
+             data = 'server {' +
+            '\t\nlisten       80;' +
+            '\t\nserver_name  ' + address + req.headers.host+';' +
+            '\t\nlocation / {' +
+            '\t\t\nproxy_set_header Host $host;' +
+            '\t\t\nproxy_set_header X-Real-IP $remote_addr;' +
+            '\t\t\nproxy_pass      '+req.headers.host+'/projectpage/' + address + ';' +
+            '\t\n}' +
+            '\n}'
+    
+            console.log('DATA NGINX', data);
+    
+        }
+        return res.status(200).json({
+            status: 200,
+            data: data,
+            msg:'Get data in file'
+        });
+      });
+
+}
+exports.deployProjectHandle = async (req,res) => {
+    const address = req.body.address;
+    const contentnginx = req.body.contentnginx;
+    let filepath = config.get("nginxdir") + '/' + address + '.conf';
+
+    fs.readFile(filepath, function(err, buf) {
+        if(err)  {
+            let msg ='';
+            fs.writeFile(filepath, contentnginx, (err) => {
+                if(err){
+                    console.log('Write file error',err);
+                    msg = 'Write file error.';
+                    return res.status(400).json({
+                        status: 400,
+                        msg:msg
+                    });
+                } 
+                else {
+                    console.log("Successfully Written to File.");
+                    msg = 'Successfully Written to File.';
+                    exec("sudo service nginx reload", (error, stdout, stderr) => {
+                        if (error) {
+                            console.log(`error: ${error.message}`);
+                            msg = 'Error restarted' ;
+                        }
+                        if (stderr) {
+                            console.log(`stderr: ${stderr}`);
+                        }
+                        console.log(`stdout: ${stdout}`);
+    
+                        return res.status(200).json({
+                            status: 200,
+                            msg:msg
+                        });
+                    });
+    
+                } 
+                             
+            });
+        }
+        else {
+            fs.writeFile(filepath, contentnginx, (err) => {
+                if(err){
+                    console.log('Write file error',err);
+                    msg = 'Write file error.';
+                    return res.status(400).json({
+                        status: 400,
+                        msg:msg
+                    });
+                } 
+                else {
+                    console.log("Successfully Written to File.");
+                    msg = 'Successfully Written to File.';
+                    exec("sudo service nginx reload", (error, stdout, stderr) => {
+                        if (error) {
+                            console.log(`error: ${error.message}`);
+                            msg = 'Error restarted' ;
+                        }
+                        if (stderr) {
+                            console.log(`stderr: ${stderr}`);
+                        }
+                        console.log(`stdout: ${stdout}`);
+    
+                        return res.status(200).json({
+                            status: 200,
+                            msg:msg
+                        });
+                    });
+    
+                } 
+                             
+            });
+    
+        }
+      });
+}
+
 exports.addProjectHandle = async (req, res) => {
 
     const { projectname, address, projectstatus, projectbody } = req.body;
@@ -14,43 +141,44 @@ exports.addProjectHandle = async (req, res) => {
     const { tabname4, tabname4status, nav4 } = req.body;
 
     let errors = [];
+    let msg='error!';
+    let check = 0 ;
     //------------ Checking required fields ------------//
-    if (!projectname || !address || !projectstatus || !projectbody) {
-        errors.push({ msg: 'Please enter all required fields' });
+    if (!projectname || !address || !projectstatus ) {
+        msg = 'Please enter all required fields';
+        check = 1;
     }
     if (!tabname1 && tabname1status == 'Enable') {
-        errors.push({ msg: 'Tabname can not null' });
+        msg=  'Tabname can not null';
+        check = 1;
     }
     if (!tabname2 && tabname2status == 'Enable') {
-        errors.push({ msg: 'Tabname can not null' });
+        msg=  'Tabname can not null';
+        check = 1;
     }
     if (!tabname3 && tabname3status == 'Enable') {
-        errors.push({ msg: 'Tabname can not null' });
+        msg=  'Tabname can not null' ;
+        check = 1;
     }
     if (!tabname4 && tabname4status == 'Enable') {
-        errors.push({ msg: 'Tabname can not null' });
+        msg=  'Tabname can not null';
+        check = 1;
     }
-    if (errors.length > 0) {
-        res.render('d_project', {
-            projectname, address, projectstatus, projectbody,
-            tabname1, tabname1status, nav1,
-            tabname2, tabname2status, nav2,
-            tabname3, tabname3status, nav3,
-            tabname4, tabname4status, nav4,
-            errors, user: req.user, _active: 'project'
-        });
+    if (check == 1) {
+        req.flash(
+            'error_msg',
+            msg
+        );
+        res.redirect('/home/project');
     } else {
         await Project.findOne({ address: address }).then(project => {
             if (project) {
                 errors.push({ msg: 'Address exist' });
-                res.render('d_project', {
-                    projectname, address, projectstatus, projectbody,
-                    tabname1, tabname1status, nav1,
-                    tabname2, tabname2status, nav2,
-                    tabname3, tabname3status, nav3,
-                    tabname4, tabname4status, nav4,
-                    errors, user: req.user, _active: 'project'
-                });
+                req.flash(
+                    'error_msg',
+                    'Submit error.'
+                );
+                res.redirect('/home/project');
             }
             else {
                 let newProject = new Project({
@@ -96,11 +224,12 @@ exports.addProjectHandle = async (req, res) => {
 
 
                 Page.insertMany(pages).then(function (data) {
-                    console.log("Data inserted")  // Success
+                    console.log("Data Page inserted")  // Success
                     let pageIds = data.map(x => x._id);
                     newProject.pages.push(...pageIds);
                     newProject.save().then(project => {
                         if (project) {
+                            console.log("Data Project inserted")  // Success
                             req.flash(
                                 'success_msg',
                                 'Submit success.'
@@ -122,118 +251,118 @@ exports.addProjectHandle = async (req, res) => {
 }
 exports.updateProjectHandle = async (req, res) => {
 
-    const { projectid,projectname, address, projectstatus, projectbody } = req.body;
+    const { projectid,projectname, projectstatus, projectbody } = req.body;
 
-    const { tabname1, tabname1status, nav1 } = req.body;
-    const { tabname2, tabname2status, nav2 } = req.body;
-    const { tabname3, tabname3status, nav3 } = req.body;
-    const { tabname4, tabname4status, nav4 } = req.body;
+    const { tabname1, tabname1status, nav1, pageid1 } = req.body;
+    const { tabname2, tabname2status, nav2, pageid2} = req.body;
+    const { tabname3, tabname3status, nav3, pageid3} = req.body;
+    const { tabname4, tabname4status, nav4, pageid4} = req.body;
 
     
 
     let errors = [];
+    let msg='error!';
+    let check = 0 ;
     //------------ Checking required fields ------------//
-    if (!projectname || !address || !projectstatus || !projectbody) {
-        errors.push({ msg: 'Please enter all required fields' });
+    if (!projectname || !projectstatus ) {
+        msg = 'Please enter all required fields';
+        check = 1;
     }
     if (!tabname1 && tabname1status == 'Enable') {
-        errors.push({ msg: 'Tabname can not null' });
+        msg=  'Tabname can not null';
+        check = 1;
     }
     if (!tabname2 && tabname2status == 'Enable') {
-        errors.push({ msg: 'Tabname can not null' });
+        msg=  'Tabname can not null';
+        check = 1;
     }
     if (!tabname3 && tabname3status == 'Enable') {
-        errors.push({ msg: 'Tabname can not null' });
+        msg=  'Tabname can not null' ;
+        check = 1;
     }
     if (!tabname4 && tabname4status == 'Enable') {
-        errors.push({ msg: 'Tabname can not null' });
+        msg=  'Tabname can not null';
+        check = 1;
     }
-    if (errors.length > 0) {
-        res.render('d_project', {
-            projectname, address, projectstatus, projectbody,
-            tabname1, tabname1status, nav1,
-            tabname2, tabname2status, nav2,
-            tabname3, tabname3status, nav3,
-            tabname4, tabname4status, nav4,
-            errors, user: req.user, _active: 'project'
-        });
+    if (check == 1) {
+        req.flash(
+            'error_msg',
+            msg
+        );
+        res.redirect('/home/project');
     } else {
-        await Project.findOne({ address: address }).then(project => {
-            if (project) {
-                errors.push({ msg: 'Address exist' });
-                res.render('d_project', {
-                    projectname, address, projectstatus, projectbody,
-                    tabname1, tabname1status, nav1,
-                    tabname2, tabname2status, nav2,
-                    tabname3, tabname3status, nav3,
-                    tabname4, tabname4status, nav4,
-                    errors, user: req.user, _active: 'project'
-                });
-            }
-            else {
-                let newProject = new Project({
-                    projectname, address, projectstatus, projectbody
-                });
-                let pages = [];
+        const project = await Project.findByIdAndUpdate(projectid, {projectname, projectstatus, projectbody});
+        if (!project) {
+            req.flash(
+                'error_msg',
+                'Not found Project'
+            );
+            res.redirect('/home/project');
+        }
+        else 
+        {
+            console.log('save sucess Project', project); 
+            let pages = [];
+            pages.push({
+                _id: pageid1,
+                page_name: tabname1,
+                page_address: address + ".1",
+                page_status: tabname1status,
+                page_body: nav1
+            });
 
-                const newPage1 = new Page({
-                    page_name: tabname1,
-                    page_address: address + ".1",
-                    page_status: tabname1status,
-                    page_body: nav1
-                });
-                pages.push(newPage1);
+            pages.push({
+                _id: pageid2,
+                page_name: tabname2,
+                page_address: address + ".2",
+                page_status: tabname2status,
+                page_body: nav2
+            });
 
+            pages.push({
+                _id: pageid3,
+                page_name: tabname3,
+                page_address: address + ".3",
+                page_status: tabname3status,
+                page_body: nav3
+            });
 
+            pages.push({
+                _id: pageid4,
+                page_name: tabname4,
+                page_address: address + ".4",
+                page_status: tabname4status,
+                page_body: nav4
+            });
 
-                const newPage2 = new Page({
-                    page_name: tabname2,
-                    page_address: address + ".2",
-                    page_status: tabname2status,
-                    page_body: nav2
-                });
-                pages.push(newPage2);
+            console.log('Pages', pages);
+            let pageIds = pages.map(x => x._id);
 
+            // Page.updateMany({ "_id": { "$in": ids }}, { "$set": { "Supplier": "S" }});
 
-                const newPage3 = new Page({
-                    page_name: tabname3,
-                    page_address: address + ".3",
-                    page_status: tabname3status,
-                    page_body: nav3
-                });
-                pages.push(newPage3);
+            pages.forEach(async page => {
+               await Page.findByIdAndUpdate(page._id, page);
+            });
 
-
-                const newPage4 = new Page({
-                    page_name: tabname4,
-                    page_address: address + ".4",
-                    page_status: tabname4status,
-                    page_body: nav4
-                });
-                pages.push(newPage4);
-
-
-                Page.insertMany(pages).then(function (data) {
-                    console.log("Data inserted")  // Success
-                    let pageIds = data.map(x => x._id);
-                    newProject.pages.push(...pageIds);
-                    newProject.save().then(project => {
-                        if (project) {
-                            req.flash(
-                                'success_msg',
-                                'Submit success.'
-                            );
-                            res.redirect('/home/project');
-                        }
-                    });
-                }).catch(function (error) {
-                    console.log(error)      // Failure
-                    res.render('404');
-                });
-
-
-            }
-        });
+            console.log('Update pages ok');
+            // Page.updateMany(pages).then(function (data) {
+            //     console.log("Data inserted")  // Success
+                
+            //     newProject.pages.push(...pageIds);
+            //     newProject.save().then(project => {
+            //         if (project) {
+            //             req.flash(
+            //                 'success_msg',
+            //                 'Submit success.'
+            //             );
+            //             res.redirect('/home/project');
+            //         }
+            //     });
+            // }).catch(function (error) {
+            //     console.log(error)      // Failure
+            //     res.render('404');
+            // });
+        }
     }
 
 

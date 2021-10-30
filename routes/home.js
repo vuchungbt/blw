@@ -148,19 +148,32 @@ router.get('/editproject/:_id',ensureAuthenticated, (req, res) => {
     }).then(project =>{
           
         let listpages = [];
-        project.pages.forEach(pageId => {
-            Page.findById({
-                _id:pageId
-            }).then(page => {
-                listpages.push(page);
-            });
-            
+
+        Page.find({
+            '_id': { 
+                $in: project.pages.map(p => mongoose.Types.ObjectId(p))
+            }
+        }).then(pages => {
+            project.pagelist = pages;
+            if(project)
+                res.render('project/d_edit-project',{user: req.user,project:project,_active:'project'});
+            else 
+                res.render('404');
         });
-        project.pagelist=listpages;
         
-        if(project)
-            res.render('project/d_edit-project',{user: req.user,project:project,_active:'project'});
-        else res.render('404');
+        // project.pages.forEach(pageId => {
+        //     Page.findById({
+        //         _id:pageId
+        //     }).then(page => {
+        //         listpages.push(page);
+        //     });
+            
+        // });
+        // project.pagelist=listpages;
+        
+        // if(project)
+        //     res.render('project/d_edit-project',{user: req.user,project:project,_active:'project'});
+        // else res.render('404');
     }).catch(err => {
         console.log(err);
         res.render('404');
@@ -173,9 +186,11 @@ router.get('/viewporject',ensureAuthenticated, (req, res) => {
 });
 //------------ Register POST Handle ------------//
 router.post('/project', ensureAuthenticated,projectController.addProjectHandle);
-//------------ Register POST Handle ------------//
+//------------ Delete POST Handle ------------//
 router.post('/deleteproject',ensureAuthenticated, projectController.deleteProjectHandle);
-
+//------------ Update POST Handle ------------//
+router.post('/updateproject', ensureAuthenticated,projectController.updateProjectHandle);
+router.post('/getcontentdeploy', ensureAuthenticated,projectController.getdeployProjectHandle);
 
 
 

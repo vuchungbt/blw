@@ -3,7 +3,7 @@
 
 <head>
 
-    <title><%= typeof project.projectname != 'undefined' ? project.projectname : '' %></title>
+    <title>Blw</title>
     <%- include ('../include/header') %>
 </head>
 
@@ -13,25 +13,15 @@
             <main>
                 <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-3 navbar-shrink " id="mainNav">
                     <div class="container px-4 px-lg-5">
-                        <a class="navbar-brand" href="./<%=project.address %>"><%= typeof project.projectname != 'undefined' ? project.projectname : '' %></a>
+                        <a class="navbar-brand" href="./<%= page.parent  %>"><%= page.parentname  %></a>
                         <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                             aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                        <div class="collapse navbar-collapse" id="navbarResponsive">
-                            <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                                <li class="nav-item"><a class="nav-link" href="./<%=project.address %>">Home</a></li>
-                                <% project.pagelist.forEach(function(page) { %>
-                                    <li class="nav-item"><a class="nav-link" href="./<%=project.address %>?page=<%=page.page_address%>"><%=page.page_name%></a></li>
-                                <% }) %>
-                            </ul>
-                        </div>
-                
-                
                     </div>
                 </nav>
                
                     <div class="pt-5">
-                        <span><%-project.projectbody %></span>
+                        <span><%- page.page_body  %></span>
                     </div>
             </main>
         </div>
