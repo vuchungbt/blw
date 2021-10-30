@@ -80,7 +80,7 @@ router.get('/addlink',ensureAuthenticated, (req, res) => {
     res.render('document/d_add-link',{user: req.user,_active:'document'});
 });
 
-router.get('/clone/:_id',ensureAuthenticated, async (req, res) => {
+router.get('/addlink/:_id',ensureAuthenticated, async (req, res) => {
     const _id = req.params._id;
     if(!mongoose.Types.ObjectId.isValid(_id)) { 
         res.render('404');

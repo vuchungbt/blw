@@ -16,8 +16,10 @@
                         <div class="container-fluid px-4">
                             <h1 class="mt-4">Project</h1>
                             <%- include ('implement/messages') %>
+                            <span><a class="text-dark " href="./addproject"><i class="fas fa-plus-circle"></i> Add</a></span> 
+                            <br>
                             <span><a class="text-dark " data-toggle="modal" data-target="#addprojectModal" href="#!"><i class="fas fa-plus-circle"></i> Quick Add (Popup)</a> </span> 
-                            <span>  <a class="text-dark " href="./addproject"><i class="fas fa-plus-circle"></i> Add</a></span> 
+                           
                             <%- include ('implement/addproject') %>
                                 <div class="row pt-2">
                                     <% if(typeof projects !='undefined' ){ %>
@@ -29,13 +31,13 @@
 
                                                 <div class="card bg-primary text-white mb-4">
                                                     <div class="card-body">
-                                                        <%= project.projectname %> [<%= project.pages.length %>]
+                                                        <%= project.projectname %>
                                                     </div>
                                                     <div
                                                         class="card-footer d-flex align-items-center justify-content-between">
                                                         <a class="small text-white " href="http://<%= projects.host %>/projectpage/<%= project.address %>">Details</a>
                                                         <div class="small">
-                                                            <a href="#" class="text-info px-sm-1 deploybutton" data-address="<%= project.address %>" data-toggle="modal" data-target="#deployProjectModal">
+                                                            <a href="#" title="Deploy" class="text-info px-sm-1 deploybutton" data-address="<%= project.address %>" data-toggle="modal" data-target="#deployProjectModal">
                                                                 <i class="fas fa-paper-plane" ></i></a>
                                                             <a href="/home/editproject/<%= project._id %>" class="text-info px-sm-1 inforbutton">
                                                                 <i class="fas fa-edit"></i></a>
@@ -52,7 +54,7 @@
 
                                                     <div class="col-xl-3 col-md-6">
                                                         <div class="card bg-light text-dark mb-4">
-                                                            <div class="card-body">Add new with template</div>
+                                                            <div class="card-body">With template</div>
                                                             <div
                                                                 class="card-footer d-flex align-items-center justify-content-between">
                                                                 <a class="small text-dark " href="#"><i
@@ -81,27 +83,30 @@
                         var address = $(this).data('address');
                        console.log('---deploybutton',address);
 
-                       $.ajax({
-                        url: "/home/getcontentdeploy",
-                        type: "POST",
-                        data: JSON.stringify({'address':address}),
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function(data, textStatus, jqXHR) {
-                            console.log('---deploybutton success');
-                            $("#contentnginx").text(data.data);
-                            console.log('---address',address);
-                            $("#address").val(address);
-                            
-                        },
-                        error: function(jqXHR, textStatus, errorThrown) {
-                            console.log('---address failed');
-                            $("#contentnginx").text(data.data);
-                            $("#address").val(address);
-                        } 
-                    });
+                        $.ajax({
+                            url: "/home/getcontentdeploy",
+                            type: "POST",
+                            data: JSON.stringify({'address':address}),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function(data, textStatus, jqXHR) {
+                                console.log('---deploybutton success');
+                                $("#contentnginx").text(data.data);
+                                console.log('---address',address);
+                                $("#address").val(address);
+                                
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                console.log('---address failed');
+                                $("#contentnginx").text(data.data);
+                                $("#address").val(address);
+                            } 
+                        });
                        
-                    })
+                    });
+
+                
+                    
                 })
             </script>
 </body>
