@@ -55,12 +55,11 @@ exports.getdeployProjectHandle = async (req,res) => {
 
 }
 exports.deployProjectHandle = async (req,res) => {
-    const address = req.query.address;
+    const address = req.body.address;
     const contentnginx = req.body.contentnginx;
     
     let filepath = config.get("nginxdir") + '/' + address + '.conf';
  
-    console.log('DEtail>:',req.query);
 
     fs.readFile(filepath, function(err, buf) {
         if(err)  {

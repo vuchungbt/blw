@@ -82,7 +82,7 @@
                        console.log('---deploybutton',address);
 
                        $.ajax({
-                        url: "/home/getcontentdeploy?address="+address,
+                        url: "/home/getcontentdeploy",
                         type: "POST",
                         data: JSON.stringify({'address':address}),
                         contentType: "application/json; charset=utf-8",
@@ -90,10 +90,14 @@
                         success: function(data, textStatus, jqXHR) {
                             console.log('---deploybutton success');
                             $("#contentnginx").text(data.data);
+                            $("#address").text(address);
+                            
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
                             console.log('---deploybutton failed');
                             $("#contentnginx").text(data.data);
+                            $("#address").text(address);
+                            
                         } 
                     });
                        
