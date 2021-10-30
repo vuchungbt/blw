@@ -18,6 +18,7 @@ exports.addMemberHandle = (req, res) => {
         );
         res.redirect('/home/member');
     }
+    
     // if (req.user.permission == 'Owner' && permission == 'Admin') {
     //     req.flash(
     //         'error_msg',
