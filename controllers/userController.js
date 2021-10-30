@@ -101,31 +101,33 @@ exports.deleteMemberHandle = async (req, res) => {
     }
 
     //------------ Checking required fields ------------//
-    if (req.user._id == id) {
+    else  if (req.user._id == id) {
         req.flash(
             'error_msg',
             'Something failed. Access denied.'
         );
         res.redirect('/home/member');
     }
-    if (!id) {
+    else if (!id) {
         req.flash(
             'error_msg',
             'Something failed. Access denied.'
         );
         res.redirect('/home/member');
     }
-    if (!mongoose.Types.ObjectId.isValid(id)) {
+    else if (!mongoose.Types.ObjectId.isValid(id)) {
         req.flash(
             'error_msg',
             'Something failed. Access denied.'
         );
         res.redirect('/home/member');
     }
-
-    const user = await User.findByIdAndDelete({ _id: id });
-    req.flash("success_msg", "Account has been deleted.");
-    res.redirect("/home/member");
+    else {
+        const user = await User.findByIdAndDelete({ _id: id });
+        req.flash("success_msg", "Account has been deleted.");
+        res.redirect("/home/member");
+    }
+   
 
 }
 exports.updateMemberHandle = (req, res) => {
