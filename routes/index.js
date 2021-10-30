@@ -40,6 +40,7 @@ router.get('/projectpage', async(req, res) => {
    
     const _link = req.params._link;
     const _page = req.query.page;
+    const _host = req.headers.host;
     
     console.log("_page ADDRESS:", _page);
     console.log("_link ADDRESS:", _link);
@@ -48,6 +49,8 @@ router.get('/projectpage', async(req, res) => {
         Page.findOne({ page_address: _page }).then(page =>{
             
             if(page && page.page_status!=='Disable') {
+                page.parentname = 'Home';
+                page.host = _host;
                 res.render('project/viewpage',{page:page});
             }
             else {
