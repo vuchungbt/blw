@@ -43,7 +43,25 @@ router.get('/projectpage', async(req, res) => {
     
     console.log("_page ADDRESS:", _page);
     console.log("_link ADDRESS:", _link);
-    res.render('404');
+
+    if(_page && _page !==null && _page!== undefined) {
+        Page.findOne({ page_address: _page }).then(page =>{
+            
+            if(page && page.page_status!=='Disable') {
+                res.render('project/viewpage',{page:page});
+            }
+            else {
+                console.log('Not found Page with page:',_page); 
+                res.render('404');
+            }
+                
+        }).catch(err => {
+            console.log(err);
+            res.render('404');
+        });
+    }
+    else
+        res.render('404');
 }) 
 //------------ static project ------------//
 router.get('/projectpage/:_link', async(req, res) => {
