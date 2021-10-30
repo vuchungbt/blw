@@ -295,6 +295,7 @@ exports.updateProjectHandle = async (req, res) => {
         res.redirect('/home/project');
     } else {
         const project = await Project.findByIdAndUpdate(projectid, {projectname, projectstatus, projectbody});
+        const address = project.address;
         if (!project) {
             req.flash(
                 'error_msg',
