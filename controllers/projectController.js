@@ -60,6 +60,7 @@ exports.deployProjectHandle = async (req,res) => {
     
     let filepath = config.get("nginxdir") + '/' + address + '.conf';
  
+    console.log('DEtail address> :',address);
 
     fs.readFile(filepath, function(err, buf) {
         if(err)  {
