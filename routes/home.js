@@ -191,6 +191,7 @@ router.post('/deleteproject',ensureAuthenticated, projectController.deleteProjec
 //------------ Update POST Handle ------------//
 router.post('/updateproject', ensureAuthenticated,projectController.updateProjectHandle);
 router.post('/getcontentdeploy', ensureAuthenticated,projectController.getdeployProjectHandle);
+router.post('/deployproject', ensureAuthenticated,projectController.deployProjectHandle);
 
 
 

@@ -82,7 +82,7 @@
                        console.log('---deploybutton',address);
 
                        $.ajax({
-                        url: "/home/getcontentdeploy",
+                        url: "/home/getcontentdeploy?address="+address,
                         type: "POST",
                         data: JSON.stringify({'address':address}),
                         contentType: "application/json; charset=utf-8",
