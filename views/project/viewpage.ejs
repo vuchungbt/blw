@@ -3,8 +3,21 @@
 
 <head>
 
-    <title>Blw</title>
-    <%- include ('../include/header') %>
+    <title><%= page.page_name  %></title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="icon" href="http://blwsmartware.net/assets/fav.ico">
+    <meta name="author" content="vuchung" />
+    <meta name="generator" content="Blackwolves">
+    <meta name="version" content="1.0.0">
+    
+    <meta property="og:site_name" content="Blackwolves">
+    <meta property="og:image" content="http://blwsmartware.net/assets/logo.png">
+
+    <link href="http://blwsmartware.net/css/styles.css" rel="stylesheet" />
+    <link href="http://blwsmartware.net/css/custom.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="masthead">
@@ -13,7 +26,7 @@
             <main>
                 <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-3 navbar-shrink " id="mainNav">
                     <div class="container px-4 px-lg-5">
-                        <a class="navbar-brand" href="./<%= page.parent  %>"><%= page.parentname  %></a>
+                        <a class="navbar-brand" href="./"><%= page.parentname  %></a>
                         <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                             aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -25,7 +38,6 @@
                     </div>
             </main>
         </div>
-        <%- include ('../include/footer') %>
     </div>
 
     <!-- Bootstrap JS -->
@@ -40,7 +52,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
-    <script src="/js/scripts.js"></script>
+    <script src="http://blwsmartware.net/js/scripts.js"></script>
 </body>
 
 </html>
