@@ -36,6 +36,15 @@ router.get('/static/:_link', async(req, res) => {
         console.log(error);
     }
 });
+router.get('/projectpage', async(req, res) => { 
+   
+    const _link = req.params._link;
+    const _page = req.query.page;
+    
+    console.log("_page ADDRESS:", _page);
+    console.log("_link ADDRESS:", _link);
+    res.render('404');
+}) 
 //------------ static project ------------//
 router.get('/projectpage/:_link', async(req, res) => {
     
