@@ -20,7 +20,7 @@ exports.getdeployProjectHandle = async (req,res) => {
             '\t\nlocation / {' +
             '\t\t\nproxy_set_header Host $host;' +
             '\t\t\nproxy_set_header X-Real-IP $remote_addr;' +
-            '\t\t\nproxy_pass      '+req.headers.host+'/projectpage/' + address + ';' +
+            '\t\t\nproxy_pass      '+'http://localhost:3000'+'/projectpage/' + address + ';' +
             '\t\n}' +
             '\n}'
             return res.status(200).json({
@@ -39,7 +39,7 @@ exports.getdeployProjectHandle = async (req,res) => {
             '\t\nlocation / {' +
             '\t\t\nproxy_set_header Host $host;' +
             '\t\t\nproxy_set_header X-Real-IP $remote_addr;' +
-            '\t\t\nproxy_pass      '+req.headers.host+'/projectpage/' + address + ';' +
+            '\t\t\nproxy_pass      '+'http://localhost:3000'+'/projectpage/' + address + ';' +
             '\t\n}' +
             '\n}'
     
