@@ -126,7 +126,7 @@ router.get('/project',ensureAuthenticated, async (req, res) => {
     try {
         const project = await Project.find();
         project.host = req.headers.host;
-        // console.log(project);
+        console.log(project);
         res.render('d_project',{ projects:project, user: req.user,_active:'project'});
 
     }   catch(err) {

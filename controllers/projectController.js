@@ -188,8 +188,10 @@ exports.addProjectHandle = async (req, res) => {
                 res.redirect('/home/project');
             }
             else {
+                let createdByName = req.user.name;
+                let createdBy = req.user._id;
                 let newProject = new Project({
-                    projectname, address, projectstatus, projectbody
+                    projectname, address, projectstatus, projectbody,createdByName,createdBy
                 });
                 let pages = [];
 

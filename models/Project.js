@@ -27,6 +27,9 @@ const ProjectSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
+  createdByName: {
+    type: String
+  },
   pages: [{
     type: Schema.Types.ObjectId,
     ref: 'Page',

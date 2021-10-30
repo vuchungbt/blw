@@ -41,7 +41,8 @@
                                                                 <i class="fas fa-paper-plane" ></i></a>
                                                             <a href="/home/editproject/<%= project._id %>" class="text-info px-sm-1 inforbutton">
                                                                 <i class="fas fa-edit"></i></a>
-                                                            <a href="#" class="text-info px-sm-1 inforbutton" data-toggle="modal" data-target="#inforProjectModal" >
+                                                            <a href="#" class="text-info px-sm-1 inforproject" data-toggle="modal" data-target="#inforProjectModal" 
+                                                                data-name="<%= project.createdByName %>" data-createdat="<%= typeof project.createdAt != 'undefined'  ? project.createdAt.toLocaleString() : '' %>" data-modified="<%= project.updatedAt.toLocaleString() %>" >
                                                                 <i class="fas fa-info-circle"></i></a>
                                                         </div>
                                                     </div>
@@ -78,7 +79,7 @@
             </script>
             <script>
                 $(document).ready(function () { 
-                    
+                    //inforproject
                     $(".deploybutton").on('click', function(){ 
                         var address = $(this).data('address');
                        console.log('---deploybutton',address);
@@ -105,6 +106,17 @@
                        
                     });
 
+                    $(".inforproject").on('click', function(){  
+                        
+                        var modified = $(this).data('modified');
+                        var created_at = $(this).data('createdat');
+                        var name = $(this).data('name');
+                        console.log('created_at',created_at);
+
+                        $('#name').val(name);
+                        $('#created_at').val(created_at);
+                        $('#modified').val(modified);
+                    })
                 
                     
                 })
