@@ -69,10 +69,11 @@ exports.deployProjectHandle = async (req,res) => {
                 if(err){
                     console.log('Write file error',err);
                     msg = 'Write file error.';
-                    return res.status(400).json({
-                        status: 400,
-                        msg:msg
-                    });
+                    req.flash(
+                        'error_msg',
+                        msg
+                    );
+                    res.redirect('/home/project');
                 } 
                 else {
                     console.log("Successfully Written to File.");
@@ -87,10 +88,11 @@ exports.deployProjectHandle = async (req,res) => {
                         }
                         console.log(`stdout: ${stdout}`);
     
-                        return res.status(200).json({
-                            status: 200,
-                            msg:msg
-                        });
+                        req.flash(
+                            'success_msg',
+                            msg
+                        );
+                        res.redirect('/home/project');
                     });
     
                 } 
@@ -102,10 +104,11 @@ exports.deployProjectHandle = async (req,res) => {
                 if(err){
                     console.log('Write file error',err);
                     msg = 'Write file error.';
-                    return res.status(400).json({
-                        status: 400,
-                        msg:msg
-                    });
+                    req.flash(
+                        'error_msg',
+                        msg
+                    );
+                    res.redirect('/home/project');
                 } 
                 else {
                     console.log("Successfully Written to File.");
@@ -120,10 +123,11 @@ exports.deployProjectHandle = async (req,res) => {
                         }
                         console.log(`stdout: ${stdout}`);
     
-                        return res.status(200).json({
-                            status: 200,
-                            msg:msg
-                        });
+                        req.flash(
+                            'success_msg',
+                            msg
+                        );
+                        res.redirect('/home/project');
                     });
     
                 } 
@@ -366,6 +370,11 @@ exports.updateProjectHandle = async (req, res) => {
             //     console.log(error)      // Failure
             //     res.render('404');
             // });
+            req.flash(
+                'success_msg',
+                'Submit success.'
+            );
+            res.redirect('/home/project');
         }
     }
 
