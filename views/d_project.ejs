@@ -96,7 +96,7 @@
                         error: function(jqXHR, textStatus, errorThrown) {
                             console.log('---deploybutton failed');
                             $("#contentnginx").text(data.data);
-                            $("#address").text(address);
+                            $("#address").val(address);
                             
                         } 
                     });
