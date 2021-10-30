@@ -16,9 +16,8 @@
                         <div class="container-fluid px-4">
                             <h1 class="mt-4">Project</h1>
                             <%- include ('implement/messages') %>
-                            <a class="text-dark " data-toggle="modal" data-target="#addprojectModal" href="#!"><i
-                                    class="fas fa-plus-circle"></i> Quick Add (Popup)</a>
-                            <a class="text-dark " href="./home/addproject"><i class="fas fa-plus-circle"></i> Add</a>
+                            <span><a class="text-dark " data-toggle="modal" data-target="#addprojectModal" href="#!"><i class="fas fa-plus-circle"></i> Quick Add (Popup)</a> </span> 
+                            <span>  <a class="text-dark " href="./addproject"><i class="fas fa-plus-circle"></i> Add</a></span> 
                             <%- include ('implement/addproject') %>
                                 <div class="row pt-2">
                                     <% if(typeof projects !='undefined' ){ %>
