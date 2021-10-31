@@ -104,7 +104,7 @@ exports.deployProjectHandle = async (req,res) => {
 
                         console.log('url-----------', url);
 
-                        const datares= axios.post(url, body, {
+                        const datares= await axios.post(url, body, {
                             headers: {
                             'Content-Type': 'application/json',
                             'Authorization' : config.get('CLAPIKey')
