@@ -104,13 +104,13 @@ exports.deployProjectHandle = async (req,res) => {
 
                         console.log('url-----------', url);
 
-                        const datares = await axios.post(url, body, {
+                        const datares = (await axios.post(url, body, {
                             headers: {
                             'Content-Type': 'application/json',
                             'Authorization' : config.get('CLAPIKey')
                             }
                           }
-                        ) ;
+                        )).data;
                         console.log('datares-----------', datares);
                         if (datares && datares.success==true) {
                             req.flash(
@@ -172,13 +172,13 @@ exports.deployProjectHandle = async (req,res) => {
 
                         console.log('url-----------', url);
 
-                        const datares = await axios.post(url, body, {
+                        const datares = (await axios.post(url, body, {
                             headers: {
                             'Content-Type': 'application/json',
                             'Authorization' : config.get('CLAPIKey')
                             }
                           }
-                        ) ;
+                        )).data; ;
                         console.log('datares-----------', datares);
                         if (datares && datares.success==true) {
                             req.flash(
@@ -188,7 +188,7 @@ exports.deployProjectHandle = async (req,res) => {
                             res.redirect('/home/project');
                         }
                         else {
-                            msg+= datares.errors.messages;
+                            //msg+= datares.errors.messages;
                             req.flash(
                                 'error_msg',
                                 msg
