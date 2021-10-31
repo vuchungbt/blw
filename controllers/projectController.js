@@ -82,7 +82,7 @@ exports.deployProjectHandle = async (req,res) => {
                 else {
                     console.log("Successfully Written to File.");
                     msg = 'Successfully Written conf to File.';
-                    exec("sudo service nginx reload", (error, stdout, stderr) => {
+                    exec("sudo service nginx reload", async (error, stdout, stderr) => {
                         if (error) {
                             console.log(`error: ${error.message}`);
                             msg = 'Error restarted.' ;
@@ -104,7 +104,7 @@ exports.deployProjectHandle = async (req,res) => {
 
                         console.log('url-----------', url);
 
-                        const datares= await axios.post(url, body, {
+                        const datares = await axios.post(url, body, {
                             headers: {
                             'Content-Type': 'application/json',
                             'Authorization' : config.get('CLAPIKey')
@@ -113,7 +113,6 @@ exports.deployProjectHandle = async (req,res) => {
                         ) ;
                         console.log('datares-----------', datares);
                         if (datares && datares.success==true) {
-                            
                             req.flash(
                                 'success_msg',
                                 msg
