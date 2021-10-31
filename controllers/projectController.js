@@ -128,29 +128,11 @@ exports.deployProjectHandle = async (req,res) => {
                             }
                             catch (error) {
                                 console.error(error);
-                                const datares = (await axios.put(url, body, {
-                                    headers: {
-                                    'Content-Type': 'application/json',
-                                    'Authorization' : config.get('CLAPIKey')
-                                    }
-                                  }
-                                )).data;
-                                
-                                if (datares && datares.success==true) {
-                                    req.flash(
-                                        'success_msg',
-                                        msg
-                                    );
-                                    res.redirect('/home/project');
-                                }
-                                else {
-                                    msg+= datares.errors.messages;
-                                    req.flash(
-                                        'error_msg',
-                                        msg
-                                    );
-                                    res.redirect('/home/project');
-                                }
+                                req.flash(
+                                    'error_msg',
+                                    'Subdomain exist DNS'
+                                );
+                                res.redirect('/home/project');
 
                               }
                         
@@ -222,29 +204,11 @@ exports.deployProjectHandle = async (req,res) => {
                        }
                        catch (error) {
                         console.error(error);
-                        const datares = (await axios.put(url, body, {
-                            headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization' : config.get('CLAPIKey')
-                            }
-                          }
-                        )).data;
-                        
-                        if (datares && datares.success==true) {
-                            req.flash(
-                                'success_msg',
-                                msg
-                            );
-                            res.redirect('/home/project');
-                        }
-                        else {
-                            msg+= datares.errors.messages;
-                            req.flash(
-                                'error_msg',
-                                msg
-                            );
-                            res.redirect('/home/project');
-                        }
+                        req.flash(
+                            'error_msg',
+                            'Subdomain exist DNS'
+                        );
+                        res.redirect('/home/project');
                         
                       }
                        
