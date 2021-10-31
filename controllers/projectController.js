@@ -149,7 +149,7 @@ exports.deployProjectHandle = async (req,res) => {
                 else {
                     console.log("Successfully Written to File.");
                     msg = 'Successfully Written to File.';
-                    exec("sudo service nginx reload", (error, stdout, stderr) => {
+                    exec("sudo service nginx reload", async (error, stdout, stderr) => {
                         if (error) {
                             console.log(`error: ${error.message}`);
                             msg = 'Error restarted' ;
