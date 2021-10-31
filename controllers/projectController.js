@@ -120,7 +120,7 @@ exports.deployProjectHandle = async (req,res) => {
                             res.redirect('/home/project');
                         }
                         else {
-                            msg+= datares.errors.message ;
+                            msg+= datares.errors.messages;
                             req.flash(
                                 'error_msg',
                                 msg
@@ -159,11 +159,42 @@ exports.deployProjectHandle = async (req,res) => {
                         }
                         console.log(`stdout: ${stdout}`);
     
-                        req.flash(
-                            'success_msg',
-                            msg
-                        );
-                        res.redirect('/home/project');
+                        
+                        let url = 'https://api.cloudflare.com/client/v4/zones/'+config.get('DNSzoneID')+'/dns_records';
+                        let body = {
+                            "type":"CNAME",
+                            "name":address+".blwsmartware.net",
+                            "content":"blwsmartware.net",
+                            "ttl":1,
+                            "proxied":true
+                            }
+                        console.log('body-----------', body);
+
+                        console.log('url-----------', url);
+
+                        const datares = await axios.post(url, body, {
+                            headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization' : config.get('CLAPIKey')
+                            }
+                          }
+                        ) ;
+                        console.log('datares-----------', datares);
+                        if (datares && datares.success==true) {
+                            req.flash(
+                                'success_msg',
+                                msg
+                            );
+                            res.redirect('/home/project');
+                        }
+                        else {
+                            msg+= datares.errors.messages;
+                            req.flash(
+                                'error_msg',
+                                msg
+                            );
+                            res.redirect('/home/project');
+                        }
                     });
     
                 } 
