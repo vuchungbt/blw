@@ -100,33 +100,42 @@ exports.deployProjectHandle = async (req,res) => {
                             "ttl":1,
                             "proxied":true
                             }
-                        console.log('body-----------', body);
-
-                        console.log('url-----------', url);
-
-                        const datares = (await axios.post(url, body, {
-                            headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization' : config.get('CLAPIKey')
+                        
+                            try {
+                                const datares = (await axios.post(url, body, {
+                                    headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization' : config.get('CLAPIKey')
+                                    }
+                                  }
+                                )).data;
+                                
+                                if (datares && datares.success==true) {
+                                    req.flash(
+                                        'success_msg',
+                                        msg
+                                    );
+                                    res.redirect('/home/project');
+                                }
+                                else {
+                                    msg+= datares.errors.messages;
+                                    req.flash(
+                                        'error_msg',
+                                        msg
+                                    );
+                                    res.redirect('/home/project');
+                                }
                             }
-                          }
-                        )).data;
-                        console.log('datares-----------', datares);
-                        if (datares && datares.success==true) {
-                            req.flash(
-                                'success_msg',
-                                msg
-                            );
-                            res.redirect('/home/project');
-                        }
-                        else {
-                            msg+= datares.errors.messages;
-                            req.flash(
-                                'error_msg',
-                                msg
-                            );
-                            res.redirect('/home/project');
-                        }
+                            catch (error) {
+                                console.error(error);
+                                req.flash(
+                                    'error_msg',
+                                    'subdomain failed'
+                                );
+                                res.redirect('/home/project');
+
+                              }
+                        
     
                         
                     });
@@ -168,10 +177,7 @@ exports.deployProjectHandle = async (req,res) => {
                             "ttl":1,
                             "proxied":true
                             }
-                        console.log('body-----------', body);
-
-                        console.log('url-----------', url);
-
+                       try {
                         const datares = (await axios.post(url, body, {
                             headers: {
                             'Content-Type': 'application/json',
@@ -179,7 +185,6 @@ exports.deployProjectHandle = async (req,res) => {
                             }
                           }
                         )).data; ;
-                        console.log('datares-----------', datares);
                         if (datares && datares.success==true) {
                             req.flash(
                                 'success_msg',
@@ -195,6 +200,19 @@ exports.deployProjectHandle = async (req,res) => {
                             );
                             res.redirect('/home/project');
                         }
+
+                       }
+                       catch (error) {
+                        console.error(error);
+                        req.flash(
+                            'error_msg',
+                            'subdomain failed'
+                        );
+                        res.redirect('/home/project');
+                        
+                      }
+                       
+                        
                     });
     
                 } 
