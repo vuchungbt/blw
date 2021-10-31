@@ -485,24 +485,8 @@ exports.deleteProjectHandle = async (req, res) => {
     } else {
         const pj = await Project.findByIdAndDelete({ _id: id });
 
-        let filepath = config.get("nginxdir") + '/' + pj.address + '.conf';
-
-        fs.unlink(filepath, function(err) {
-            let msg = "Your project has been deleted.";
-            if(err && err.code == 'ENOENT') {
-                msg+= "File conf doesn't exist";
-                console.log("File doesn't exist, won't remove it.",pr.address);
-            } else if (err) {
-                msg+=  "Remove conf error";
-                console.log("Error occurred while trying to remove file",pr.address);
-            } else {
-                console.log('removed file conf',pr.address);
-            }
-            req.flash("success_msg", msg);
-            res.redirect("/home/project");
-        });
-        
-
+        req.flash("success_msg", 'Submit success. Deleted');
+        res.redirect("/home/project");
         
     }
 }
