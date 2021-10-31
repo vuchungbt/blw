@@ -77,22 +77,50 @@ exports.deployProjectHandle = async (req,res) => {
                 } 
                 else {
                     console.log("Successfully Written to File.");
-                    msg = 'Successfully Written to File.';
+                    msg = 'Successfully Written conf to File.';
                     exec("sudo service nginx reload", (error, stdout, stderr) => {
                         if (error) {
                             console.log(`error: ${error.message}`);
-                            msg = 'Error restarted' ;
+                            msg = 'Error restarted.' ;
                         }
                         if (stderr) {
                             console.log(`stderr: ${stderr}`);
                         }
                         console.log(`stdout: ${stdout}`);
+
+                        let url = 'https://api.cloudflare.com/client/v4/zones/'+config.get('DNSzoneID')+'/dns_records';
+                        let body = {
+                            "type":"CNAME",
+                            "name":address+".blwsmartware.net",
+                            "content":"blwsmartware.net",
+                            "ttl":1,
+                            "proxied":true
+                            }
+                        const datares= axios.post(url, body, {
+                            headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization' : config.get('CLAPIKey')
+                            }
+                          }
+                        ) ;
+                        if (datares && datares.success==true) {
+                            
+                            req.flash(
+                                'success_msg',
+                                msg
+                            );
+                            res.redirect('/home/project');
+                        }
+                        else {
+                            msg+= datares.errors.message ;
+                            req.flash(
+                                'error_msg',
+                                msg
+                            );
+                            res.redirect('/home/project');
+                        }
     
-                        req.flash(
-                            'success_msg',
-                            msg
-                        );
-                        res.redirect('/home/project');
+                        
                     });
     
                 } 
@@ -399,7 +427,25 @@ exports.deleteProjectHandle = async (req, res) => {
         });
     } else {
         const pj = await Project.findByIdAndDelete({ _id: id });
-        req.flash("success_msg", "Your project has been deleted.");
-        res.redirect("/home/project");
+
+        let filepath = config.get("nginxdir") + '/' + pj.address + '.conf';
+
+        fs.unlink(filepath, function(err) {
+            let msg = "Your project has been deleted.";
+            if(err && err.code == 'ENOENT') {
+                msg+= "File conf doesn't exist";
+                console.log("File doesn't exist, won't remove it.",pr.address);
+            } else if (err) {
+                msg+=  "Remove conf error";
+                console.log("Error occurred while trying to remove file",pr.address);
+            } else {
+                console.log('removed file conf',pr.address);
+            }
+            req.flash("success_msg", msg);
+            res.redirect("/home/project");
+        });
+        
+
+        
     }
 }

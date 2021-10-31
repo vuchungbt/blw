@@ -13,5 +13,8 @@
 	"port":"3000",
     "gg-ClientID":"327616110679-65nmdl6096hig27ictvh8ahcg4mrae5c.apps.googleusercontent.com",
     "gg-ClientSecret":"h0YmYixF2iHkaoWpojEQ0bdR",
-    "nginxdir" :"/etc/nginx/sites-available"
+    "nginxdir" :"/etc/nginx/sites-available",
+    "DNSzoneID":"a2169ba1b5f050d4924bf3c89d00eed8",
+    "CFemail":"vuchungbt@gmail.com",
+    "CLAPIKey":"Bearer eS8H1pzyxMQk31_tulDUKi4r0a8Qq_SDA9KvRoHb"
 }
