@@ -100,6 +100,10 @@ exports.deployProjectHandle = async (req,res) => {
                             "ttl":1,
                             "proxied":true
                             }
+                        console.log('body-----------', body);
+
+                        console.log('url-----------', url);
+
                         const datares= axios.post(url, body, {
                             headers: {
                             'Content-Type': 'application/json',
@@ -107,6 +111,7 @@ exports.deployProjectHandle = async (req,res) => {
                             }
                           }
                         ) ;
+                        console.log('datares-----------', datares);
                         if (datares && datares.success==true) {
                             
                             req.flash(
