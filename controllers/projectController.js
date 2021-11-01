@@ -80,7 +80,7 @@ exports.deployProjectHandle = async (req,res) => {
                     res.redirect('/home/project');
                 } 
                 else {
-                    console.log("Successfully Written to File.");
+                    console.log("Successfully Written to File config.");
                     msg = 'Successfully Written conf to File.';
                     exec("sudo service nginx reload", async (error, stdout, stderr) => {
                         if (error) {
