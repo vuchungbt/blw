@@ -7,6 +7,15 @@
     background-attachment: scroll;
     background-size: cover;
   }
+  .masthead_cle {
+    color:#bfbfbf !important;
+    padding-bottom: calc(10rem - 4.5rem);
+    background: gray;
+    background-position: center;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    background-size: cover;
+  }
   .bg-transparent-white {
     background-color: #ffffffaa ;
   }
