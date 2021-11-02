@@ -63,13 +63,10 @@
                     contentType: false,
                     processData: false,
                     success: function (data, textStatus, jqXHR) {
-                        
                         data.file.forEach(f => {
-                            //console.log('element', f);
                             $('#textResultimg').html(data.host+'/'+f.filename);
                             $('#img').attr('src', data.host+'/'+f.filename);
                         });
-                        
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         $('#textResultimg').html('Upload failed! '+jqXHR.responseJSON.msg);
