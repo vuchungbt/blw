@@ -72,7 +72,7 @@
                         
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
-                        $('#textResultimg').html('Upload failed! ');
+                        $('#textResultimg').html('Upload failed! '+jqXHR.responseJSON.msg);
                     }
                 });
             });

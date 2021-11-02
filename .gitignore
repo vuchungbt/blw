@@ -6,3 +6,4 @@ build/Release
 .cache
 .cache/
 config/default.json
+uploads/
