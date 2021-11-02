@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const config = require('config');
+
+const multer = require('multer');
+const fs = require("fs");
+
 const { ensureAuthenticated } = require('../middleware/checkAuth');
 const mongoose = require('mongoose');
 const {Link} = require('../models/Link');
@@ -8,6 +12,22 @@ const {User} = require('../models/User');
 const {Project} = require('../models/Project');
 const {Page} = require('../models/Page');
 
+
+var Storage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, "./uploads");
+    },
+    filename: function(req, file, callback) {
+        callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+    }
+});
+const upload = multer({
+    limits: {
+        fileSize: 8 * 1024 * 1024,
+      },
+    storage: Storage
+}).array("img", 3);
+  
 
 
 //------------ Importing Controllers ------------//
@@ -199,12 +219,53 @@ router.post('/deployproject', ensureAuthenticated,projectController.deployProjec
 
 //------------ file ------------//
 router.get('/file',ensureAuthenticated, (req, res) => {
-    res.render('d_file',{user: req.user});
+    fs.readdir('./uploads', function (err, files) {
+        //handling error
+        if (err) {
+            return console.log('Unable to scan directory: ' + err);
+        } 
+        
+        files.forEach(function (file) {
+            
+            console.log(file); 
+           
+        });
+        files.host ='http://blwsmartware.net';
+        res.render('d_file',{user: req.user,files:files});
+        
+    });
+    
 });
 //------------ file ------------//
 router.get('/file/id', ensureAuthenticated,(req, res) => {
     console.log('file/id');
     res.render('d_filedownload',{user: req.user});
+});
+//------------ upload image ------------//
+router.get('/img',ensureAuthenticated, (req, res) => {
+    
+    res.render('updownload/upload_image',{user: req.user});
+    
+});
+
+router.post("/imgupload", function(req, res) {
+    
+    upload(req, res, function(err) {
+        console.log('==========================\n',req.files);
+        if (err) {
+            console.log('Something went wrong');
+            return res.status(200).json({
+                status: 400,
+                msg:'Something went wrong'
+            });
+        }
+        console.log('File uploaded sucessfully');
+        return res.status(200).json({
+            status: 200,
+            file:req.files,
+            host:'http://blwsmartware.net'
+        });
+    });
 });
 
 
