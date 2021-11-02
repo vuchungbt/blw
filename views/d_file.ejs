@@ -14,45 +14,39 @@
                 <div id="layoutSidenav_content">
                     <main>
                         <div class="container-fluid px-4">
-                            <h1 class="mt-4">Document</h1>
+                            <h1 class="mt-4">File</h1>
                             <div class="row">
-                                <h4>Static link</h4>
-                                <a class="text-dark" href="#"><i class="fas fa-plus-circle"></i> Add</a>
+                                <h4>List file in Upload folder</h4>
+                                <span><a class="text-dark" href="/home/img"><i class="fas fa-plus-circle"></i> Add photo</a></span></br>
+                                <span></span><a class="text-dark" href="#"><i class="fas fa-plus-circle"></i> Add file</a></span>
                                 <div class="row pt-2">
                                     <table id="datatablesSimple">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
                                                 <th>Link</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <% if(typeof files != 'undefined'){ %> 
+                                                <% files.forEach(function(file) { 
+                                                    %> 
                                             <tr>
-                                                <td>1111</td>
-                                                <td><a href="http://localhost:3000/home/file/id">http://localhost:3000/home/file/id</a></td>
+                                                <td><a href="<%= files.host +'/'+ file %>"><%= file %></a></td>
                                                 <td>
+                                                    <!--
                                                     <a href="#" class="text-gray px-sm-3" title="copy"><i
                                                             class="fas fa-copy"></i></a>
                                                     <a href="#" class="text-blue px-sm-2"><i
                                                             class="fas fa-edit"></i></a>
                                                     <a href="#" class="text-danger px-sm-2"><i
                                                             class="fas fa-times"></i></a>
+                                                    -->
+                                                    
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>2222</td>
-                                                <td><a href="http://localhost:3000/home/file/id">http://localhost:3000/home/file/id</a></td>
-                                                <td>
-                                                    <a href="#" class="text-gray px-sm-3" title="copy"><i
-                                                            class="fas fa-copy"></i></a>
-                                                    <a href="#" class="text-blue px-sm-2"><i
-                                                            class="fas fa-edit"></i></a>
-                                                    <a href="#" class="text-danger px-sm-2"><i
-                                                            class="fas fa-times"></i></a>
-                                                </td>
-                                            </tr>
-
+                                            <% }) %> 
+                                            <% } %>
                                         </tbody>
                                     </table>
                                 </div>
