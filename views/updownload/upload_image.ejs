@@ -66,8 +66,8 @@
                         
                         data.file.forEach(f => {
                             //console.log('element', f);
-                            $('#textResultimg').html(f.host+'/'+f.filename);
-                            $('#img').attr('src', f.host+'/'+f.filename);
+                            $('#textResultimg').html(data.host+'/'+f.filename);
+                            $('#img').attr('src', data.host+'/'+f.filename);
                         });
                         
                     },
