@@ -256,7 +256,7 @@ router.post("/imgupload", function(req, res) {
             console.log('Something went wrong');
             return res.status(200).json({
                 status: 400,
-                msg:'Something went wrong'
+                msg:err
             });
         }
         console.log('File uploaded sucessfully');
