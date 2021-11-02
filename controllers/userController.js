@@ -131,8 +131,8 @@ exports.deleteMemberHandle = async (req, res) => {
 
 }
 exports.updateMemberHandle = (req, res) => {
-    const { name, phone, permission, active, email, password, id } = req.body;
-
+    let { name, phone, permission, active, email, password, id } = req.body;
+ 
     let errors = [];
 
     //------------ Checking permission fields ------------//
