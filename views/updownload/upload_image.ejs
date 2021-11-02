@@ -64,7 +64,7 @@
                     processData: false,
                     success: function (data, textStatus, jqXHR) {
                         
-                        data.file.forEach(element => {
+                        data.file.forEach(f => {
                             //console.log('element', f);
                             $('#textResultimg').html(f.host+'/'+f.filename);
                             $('#img').attr('src', f.host+'/'+f.filename);
