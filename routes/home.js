@@ -231,7 +231,7 @@ router.get('/file',ensureAuthenticated, (req, res) => {
            
         });
         files.host ='http://blwsmartware.net';
-        res.render('d_file',{user: req.user,files:files});
+        res.render('d_file',{user: req.user,files:files,_active:'file'});
         
     });
     

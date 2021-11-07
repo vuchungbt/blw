@@ -55,7 +55,10 @@
 
                 -->
                 <div class="sb-sidenav-menu-heading">Share</div>
-                <a class="nav-link" href="/home/file">
+                <a class="nav-link
+                <% if(typeof _active != 'undefined' && _active=='file' ){  %> 
+                    active
+                <% } %>" href="/home/file">
                     <div class="sb-nav-link-icon"><i class="fas fa-file"></i></div>
                     File
                 </a>
