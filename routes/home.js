@@ -225,13 +225,10 @@ router.get('/file',ensureAuthenticated, (req, res) => {
             return console.log('Unable to scan directory: ' + err);
         } 
         
-        files.forEach(function (file) {
-            
-            console.log(file); 
-           
-        });
+        console.log(files); 
+        
         files.host ='http://blwsmartware.net';
-        res.render('d_file',{user: req.user,files:files,_active:'file'});
+        res.render('d_file',{user: req.user,files:files,_active:'filegit '});
         
     });
     
