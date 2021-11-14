@@ -224,9 +224,9 @@ router.get('/file',ensureAuthenticated, (req, res) => {
         if (err) {
             return console.log('Unable to scan directory: ' + err);
         } 
-        
+        files.reverse();
         console.log(files); 
-        
+
         files.host ='http://blwsmartware.net';
         res.render('d_file',{user: req.user,files:files,_active:'filegit '});
         
