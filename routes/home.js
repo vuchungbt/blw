@@ -23,10 +23,25 @@ var Storage = multer.diskStorage({
 });
 const upload = multer({
     limits: {
-        fileSize: 8 * 1024 * 1024,
+        fileSize: 10 * 1024 * 1024,
       },
     storage: Storage
 }).array("img", 3);
+
+var StorageFile = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, "./uploadsFile");
+    },
+    filename: function(req, file, callback) {
+        callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+    }
+});
+const uploadFile = multer({
+    limits: {
+        fileSize: 50 * 1024 * 1024,
+      },
+    storage: StorageFile
+}).array("file", 3);
   
 
 
@@ -228,15 +243,10 @@ router.get('/file',ensureAuthenticated, (req, res) => {
         console.log(files); 
 
         files.host ='http://blwsmartware.net';
-        res.render('d_file',{user: req.user,files:files,_active:'filegit '});
+        res.render('d_file',{user: req.user,files:files,_active:'file'});
         
     });
     
-});
-//------------ file ------------//
-router.get('/file/id', ensureAuthenticated,(req, res) => {
-    console.log('file/id');
-    res.render('d_filedownload',{user: req.user});
 });
 //------------ upload image ------------//
 router.get('/img',ensureAuthenticated, (req, res) => {
@@ -248,7 +258,30 @@ router.get('/img',ensureAuthenticated, (req, res) => {
 router.post("/imgupload", function(req, res) {
     
     upload(req, res, function(err) {
-        console.log('==========================\n',req.files);
+        console.log('=============img=============\n',req.files);
+        if (err) {
+            console.log('Something went wrong');
+            return res.status(200).json({
+                status: 400,
+                msg:err
+            });
+        }
+        console.log('Image uploaded sucessfully');
+        return res.status(200).json({
+            status: 200,
+            file:req.files,
+            host:'http://blwsmartware.net'
+        });
+    });
+});
+//------------ file ------------//
+router.get('/file/:_name', ensureAuthenticated,(req, res) => {
+    res.render('d_filedownload',{user: req.user});
+});
+router.post("/fileupload", function(req, res) {
+    
+    upload(req, res, function(err) {
+        console.log('=============file=============\n',req.files);
         if (err) {
             console.log('Something went wrong');
             return res.status(200).json({

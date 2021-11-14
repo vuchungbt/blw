@@ -24,6 +24,7 @@ app.locals.env = process.env.NODE_ENV || config.get("env");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static("uploads"));
+app.use(express.static("uploadsFile"));
 app.use(express.static("public")); //static rsc from public folder
 app.set("view engine", "ejs");
 app.set("views", "./views"); // html client side from views folder
