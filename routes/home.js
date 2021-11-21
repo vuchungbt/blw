@@ -28,22 +28,6 @@ const upload = multer({
     storage: Storage
 }).array("img", 3);
 
-var StorageFile = multer.diskStorage({
-    destination: function(req, file, callback) {
-        callback(null, "./uploadsFile");
-    },
-    filename: function(req, file, callback) {
-        callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
-    }
-});
-const uploadFile = multer({
-    limits: {
-        fileSize: 50 * 1024 * 1024,
-      },
-    storage: StorageFile
-}).array("file", 3);
-  
-
 
 //------------ Importing Controllers ------------//
 const projectController = require('../controllers/projectController');
@@ -297,6 +281,44 @@ router.post("/fileupload", function(req, res) {
         });
     });
 });
+
+// router.get("/removeimage/:_name", function(req, res) { 
+//     const _name = req.params._name;
+//     fs.unlink('./uploads/'+_name, function (err) {
+//         if (err) {
+//             console.log(err);
+//             res.render('404');
+//         }
+//         else {
+//             console.log('File deleted!',_name);
+//             req.flash(
+//                 'error_msg',
+//                 'File Deleted success'
+//             );
+//             res.redirect('/home/file');
+//         }
+
+//       });
+// });
+router.get("/removefile/:_name", function(req, res) { 
+    const _name = req.params._name;
+    fs.unlink('./uploads/'+_name, function (err) {
+        if (err) {
+            console.log(err);
+            res.render('404');
+        }
+        else {
+            console.log('File deleted!',_name);
+            req.flash(
+                'error_msg',
+                'File Deleted success'
+            );
+            res.redirect('/home/file');
+        }
+
+      });
+});
+
 
 
 

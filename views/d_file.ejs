@@ -15,6 +15,7 @@
                     <main>
                         <div class="container-fluid px-4">
                             <h1 class="mt-4">File</h1>
+                            <%- include ('implement/messages') %>
                             <div class="row">
                                 <h4>List file in Upload folder</h4>
                                 <span><a class="text-dark" href="/home/img"><i class="fas fa-plus-circle"></i> Add photo</a></span></br>
@@ -28,6 +29,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            
                                             <% if(typeof files != 'undefined'){ %> 
                                                 <% files.forEach(function(file) { 
                                                     %> 
@@ -39,9 +41,10 @@
                                                             class="fas fa-copy"></i></a>
                                                     <a href="#" class="text-blue px-sm-2"><i
                                                             class="fas fa-edit"></i></a>
-                                                    <a href="#" class="text-danger px-sm-2"><i
+                                                            -->
+                                                    <a href="/home/removefile/<%= file %>" class="text-danger px-sm-2"><i
                                                             class="fas fa-times"></i></a>
-                                                    -->
+                                                    
                                                     
                                                 </td>
                                             </tr>
