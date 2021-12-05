@@ -73,7 +73,19 @@ app.use("/", index);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  res.render("404");
+  var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+app.use(function(err, req, res, next) {
+  if(err.status=404) {
+    res.status(err.status);
+    res.render('404');
+  } else {
+    res.status(500);
+    res.render('500');
+  }
+  
 });
 
 

@@ -63,12 +63,13 @@ exports.addLinkHandle = (req, res) => {
 
     }
 
-
 }
 
 exports.deleteLinkHandle = async (req, res) => {
+
     const { linkname, linkstatic, id } = req.body;
     let errors = [];
+
     console.log('Delete linkstatic id ', id);
     //------------ Checking required fields ------------//
     if (!id) {
@@ -135,6 +136,4 @@ exports.updateLinkHandle = (req, res) => {
         });
 
     }
-
-
 }

@@ -457,6 +457,7 @@ exports.updateProjectHandle = async (req, res) => {
             //     console.log(error)      // Failure
             //     res.render('404');
             // });
+
             req.flash(
                 'success_msg',
                 'Submit success.'
@@ -464,9 +465,11 @@ exports.updateProjectHandle = async (req, res) => {
             res.redirect('/home/project');
         }
     }
-
-
 }
+
+
+
+
 exports.deleteProjectHandle = async (req, res) => {
     const { id } = req.body;
     let errors = [];
