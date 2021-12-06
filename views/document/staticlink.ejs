@@ -18,7 +18,7 @@
                         <div class="row  p-5">
                             <%- include ('../implement/messages') %>
                             <div class="col-12 p-2">
-                                <h2 class="col-12 text-white"><%= link.header %></h2>
+                                <h2 class="col-12 text-white"><%- link.header %></h2>
                             </div>
                         </div>
                         <div class="row" style="margin-top: -30px;">
@@ -33,7 +33,7 @@
                         <% if(typeof link.footer != 'undefined'){ %> 
                         <div class="row">
                             <div class="col-12">
-                                <div class="card-body text-white"><%= link.footer %></div>
+                                <div class="card-body text-white"><%- link.footer %></div>
                             </div>
                         </div>
                         <% } %>
