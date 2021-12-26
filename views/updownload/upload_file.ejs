@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Upload image</title>
+    <title>Upload File</title>
     <%- include ('../include/header') %>
 
     <style>
@@ -55,6 +55,7 @@
                                         
                                     </div>
                                     <div class="card-body">
+                                        <div id="textResultimg"></div>
                                         <div class="progress">
                                             <div class="bar"></div >
                                             <div class="percent text-danger">0%</div >
@@ -108,7 +109,7 @@
                         console.log('#fileupload done !',data);
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
-                        $('#textResultimg').html('Upload failed! '+jqXHR.responseJSON.msg);
+                        $('#textResultimg').html('Upload failed!');
                     },
                     beforeSend: function() {
                         status.empty();
