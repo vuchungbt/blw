@@ -19,7 +19,7 @@
                             <div class="row">
                                 <h4>List file in Upload folder</h4>
                                 <span><a class="text-dark" href="/home/img"><i class="fas fa-plus-circle"></i> Add photo</a></span></br>
-                                <span></span><a class="text-dark" href="#"><i class="fas fa-plus-circle"></i> Add file</a></span>
+                                <span></span><a class="text-dark" href="/home/viewupload"><i class="fas fa-plus-circle"></i> Add file</a></span>
                                 <div class="row pt-2">
                                     <table id="datatablesSimple">
                                         <thead>
@@ -44,6 +44,9 @@
                                                             -->
                                                     <a href="/home/removefile/<%= file %>" class="text-danger px-sm-2"><i
                                                             class="fas fa-times"></i></a>
+                                                    <a href="#" class="text-gray px-sm-3 copy" data-copydata="<%= files.host +'/'+ file %>" 
+                                                        data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i
+                                                                class="fas fa-copy"></i></a>
                                                     
                                                     
                                                 </td>
@@ -60,6 +63,24 @@
                 </div>
         </div>
         <%- include ('include/d_footer') %>
+        <script>
+            
+            $(document).ready(function () { 
+                $('[data-toggle="tooltip"]').tooltip();
+                $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+
+                $("#datatablesSimple").on('click', '.copy', function(){ 
+                    var data = $(this).data('copydata');
+                    
+                    navigator.clipboard.writeText(data);
+                    var elt= $(this);
+                    var title = "Copied";
+                    elt.tooltip('dispose');
+                    elt.attr('title', title);
+                    elt.tooltip('show');
+                })
+            })
+        </script>
 </body>
 
 </html>

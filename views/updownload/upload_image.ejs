@@ -4,6 +4,46 @@
 <head>
     <title>Upload image</title>
     <%- include ('../include/header') %>
+
+    <style>
+        .tooltip {
+          position: relative;
+          display: inline-block;
+        }
+        
+        .tooltip .tooltiptext {
+          visibility: hidden;
+          width: 140px;
+          background-color: #555;
+          color: #fff;
+          text-align: center;
+          border-radius: 6px;
+          padding: 5px;
+          position: absolute;
+          z-index: 1;
+          bottom: 150%;
+          left: 50%;
+          margin-left: -75px;
+          opacity: 0;
+          transition: opacity 0.3s;
+        }
+        
+        .tooltip .tooltiptext::after {
+          content: "";
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          margin-left: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: #555 transparent transparent transparent;
+        }
+        
+        .tooltip:hover .tooltiptext {
+          visibility: visible;
+          opacity: 1;
+        }
+        </style>
 </head>
 
 <body class="masthead">
@@ -21,13 +61,12 @@
                                     <div class="card-body">
                                         <form action="/home/imgupload" method="POST" enctype="multipart/form-data"
                                             id="imgupload">
-                                            <p class="text-info">Select Image(max 10M):</p>
+                                            <p class="text-info">Select Image(max 16M):</p>
                                             <p><a href="https://blwsmartware.net/home/file">List all file</a></p>
                                             <input type="file" name="img" accept="image/png, image/gif, image/jpeg, image/webp" />
                                             <div class="mt-4 mb-0">
                                                 <div class="d-grid">
-                                                    <button class="btn btn-primary btn-block"
-                                                        href="/login">Submit</button>
+                                                    <button class="btn btn-primary btn-block" >Submit</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -74,7 +113,8 @@
                     }
                 });
             });
-
+            //--------
+  
         });
     </script>
 </body>

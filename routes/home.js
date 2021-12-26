@@ -2,32 +2,17 @@ const express = require('express');
 const router = express.Router();
 const config = require('config');
 
-const multer = require('multer');
 const fs = require("fs");
 
 const { ensureAuthenticated } = require('../middleware/checkAuth');
+
+const { uploadImage,uploadFile } = require('../middleware/uploadFile');
+
 const mongoose = require('mongoose');
 const {Link} = require('../models/Link');
 const {User} = require('../models/User');
 const {Project} = require('../models/Project');
 const {Page} = require('../models/Page');
-
-
-var Storage = multer.diskStorage({
-    destination: function(req, file, callback) {
-        callback(null, "./uploads");
-    },
-    filename: function(req, file, callback) {
-        callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
-    }
-});
-const upload = multer({
-    limits: {
-        fileSize: 10 * 1024 * 1024,
-      },
-    storage: Storage
-}).array("img", 3);
-
 
 //------------ Importing Controllers ------------//
 const projectController = require('../controllers/projectController');
@@ -35,8 +20,6 @@ const projectController = require('../controllers/projectController');
 const linkController = require('../controllers/staticlinkController');
 
 const userController = require('../controllers/userController');
-
-
 
 //------------ member ------------//
 router.get('/member',ensureAuthenticated,async (req, res) => {
@@ -234,14 +217,20 @@ router.get('/file',ensureAuthenticated, (req, res) => {
 });
 //------------ upload image ------------//
 router.get('/img',ensureAuthenticated, (req, res) => {
-    
+    console.log('img');
     res.render('updownload/upload_image',{user: req.user});
+    
+});
+//------------ upload file ------------//
+router.get('/viewupload',ensureAuthenticated, (req, res) => {
+    console.log('viewupload');
+    res.render('updownload/upload_file',{user: req.user});
     
 });
 
 router.post("/imgupload", function(req, res) {
     
-    upload(req, res, function(err) {
+    uploadImage(req, res, function(err) {
         console.log('=============img=============\n',req.files);
         if (err) {
             console.log('Something went wrong');
@@ -264,7 +253,7 @@ router.get('/file/:_name', ensureAuthenticated,(req, res) => {
 });
 router.post("/fileupload", function(req, res) {
     
-    upload(req, res, function(err) {
+    uploadFile(req, res, function(err) {
         console.log('=============file=============\n',req.files);
         if (err) {
             console.log('Something went wrong');

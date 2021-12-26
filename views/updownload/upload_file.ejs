@@ -4,6 +4,8 @@
 <head>
     <title>Upload image</title>
     <%- include ('../include/header') %>
+
+    
 </head>
 
 <body class="masthead">
@@ -16,18 +18,18 @@
                             <div class="col-lg-7">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5 ">
                                     <div class="card-header">
-                                        <h3 class="text-center font-weight-light my-4 text-white">Upload image</h3>
+                                        <h3 class="text-center font-weight-light my-4 text-white">Upload File</h3>
                                     </div>
                                     <div class="card-body">
-                                        <form action="/home/imgupload" method="POST" enctype="multipart/form-data"
-                                            id="imgupload">
-                                            <p class="text-info">Select file(max 10M):</p>
+                                        <form action="/home/fileupload" method="POST" enctype="multipart/form-data"
+                                            id="fileupload">
+                                            <p class="text-info">Select file(max 50M):</p>
                                             <p><a href="https://blwsmartware.net/home/file">List all file</a></p>
-                                            <input type="file" name="img" accept="image/png, image/gif, image/jpeg, image/webp" />
+                                            <input multiple type="file" name="file" />
                                             <div class="mt-4 mb-0">
                                                 <div class="d-grid">
                                                     <button class="btn btn-primary btn-block"
-                                                        href="/login">Submit</button>
+                                                        >Submit</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -35,7 +37,7 @@
                                     </div>
                                     <div class="card-body">
                                         <div id="textResultimg"></div>
-                                        <img  id="img" width="100%" />
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -51,23 +53,20 @@
 
     <script>
         $(document).ready(function () {
-            $("#imgupload").submit(function (event) {
-                console.log('#imgupload clicked !');
+            $("#fileupload").submit(function (event) {
+                console.log('#fileupload clicked !');
                 event.preventDefault();
 
                 var formData = new FormData(this);
 
                 $.ajax({
-                    url: "/home/imgupload",
+                    url: "/home/fileupload",
                     type: "POST",
                     data: formData,
                     contentType: false,
                     processData: false,
                     success: function (data, textStatus, jqXHR) {
-                        data.file.forEach(f => {
-                            $('#textResultimg').html(data.host+'/'+f.filename);
-                            $('#img').attr('src', data.host+'/'+f.filename);
-                        });
+                        console.log('#fileupload done !',data);
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         $('#textResultimg').html('Upload failed! '+jqXHR.responseJSON.msg);
