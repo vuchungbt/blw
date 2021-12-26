@@ -5,7 +5,26 @@
     <title>Upload image</title>
     <%- include ('../include/header') %>
 
-    
+    <style>
+        progress {
+        border: none;
+        width: 400px;
+        height: 60px;
+        background: crimson;
+        }
+
+        progress {
+        color: lightblue;
+        }
+
+        progress::-webkit-progress-value {
+        background: lightblue;
+        }
+
+        progress::-moz-progress-bar {
+        background: lightcolor;
+        }
+    </style>
 </head>
 
 <body class="masthead">
@@ -36,8 +55,11 @@
                                         
                                     </div>
                                     <div class="card-body">
-                                        <div id="textResultimg"></div>
-                                        
+                                        <div class="progress">
+                                            <div class="bar"></div >
+                                            <div class="percent text-danger">0%</div >
+                                        </div>
+                                        <div id="status"></div>
                                     </div>
                                 </div>
                             </div>
@@ -57,9 +79,26 @@
                 console.log('#fileupload clicked !');
                 event.preventDefault();
 
+                var bar = $('.bar');
+                var percent = $('.percent');
+                var status = $('#status');
+
                 var formData = new FormData(this);
 
                 $.ajax({
+                    xhr: function() {
+                        var xhr = new window.XMLHttpRequest();
+                        xhr.upload.addEventListener("progress", function(evt) {
+                            if (evt.lengthComputable) {
+                                var percentComplete = (evt.loaded / evt.total) * 100;
+                                console.log('percentComplete',percentComplete);
+                                var percentVal = percentComplete + '%';
+                                bar.width(percentVal);
+                                percent.html(percentVal);
+                            }
+                    }, false);
+                    return xhr;
+                    },
                     url: "/home/fileupload",
                     type: "POST",
                     data: formData,
@@ -70,10 +109,18 @@
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         $('#textResultimg').html('Upload failed! '+jqXHR.responseJSON.msg);
-                    }
+                    },
+                    beforeSend: function() {
+                        status.empty();
+                        var percentVal = '0%';
+                        bar.width(percentVal);
+                        percent.html(percentVal);
+                    },
+                    complete: function(xhr) {
+                        status.html(xhr.responseJSON.msg);
+                }
                 });
             });
-
         });
     </script>
 </body>

@@ -257,16 +257,17 @@ router.post("/fileupload", function(req, res) {
         console.log('=============file=============\n',req.files);
         if (err) {
             console.log('Something went wrong');
-            return res.status(200).json({
+            return res.status(400).json({
                 status: 400,
-                msg:err
+                msg:'Fail,Something went wrong'
             });
         }
         console.log('File uploaded sucessfully');
         return res.status(200).json({
             status: 200,
             file:req.files,
-            host:'http://blwsmartware.net'
+            host:'http://blwsmartware.net',
+            msg:'Done'
         });
     });
 });
