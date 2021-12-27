@@ -14,6 +14,8 @@ const {User} = require('../models/User');
 const {Project} = require('../models/Project');
 const {Page} = require('../models/Page');
 
+const Cloudflare = require('../controllers/Cloudflare');
+
 //------------ Importing Controllers ------------//
 const projectController = require('../controllers/projectController');
 
@@ -187,6 +189,10 @@ router.get('/editproject/:_id',ensureAuthenticated, (req, res) => {
 router.get('/viewporject',ensureAuthenticated, (req, res) => {
     res.render('project/viewproject');
 });
+router.get('/cloudflare',ensureAuthenticated, (req, res) => {
+    console.log('d_cloudflare');
+    res.render('d_cloudflare');
+});
 //------------ Register POST Handle ------------//
 router.post('/project', ensureAuthenticated,projectController.addProjectHandle);
 //------------ Delete POST Handle ------------//
@@ -310,6 +316,11 @@ router.get("/removefile/:_name", function(req, res) {
 });
 
 
+router.get('/cloudflare',ensureAuthenticated, (req, res) => {
+    console.log('d_cloudflare requetsed');
+    res.render('d_cloudflare',{user: req.user,_active:"cloudflare"});
+    //return Cloudflare.listDNS;
+});
 
 
 

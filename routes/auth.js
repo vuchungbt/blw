@@ -3,7 +3,7 @@ const router = express.Router();
 const { forwardAuthenticated } = require('../middleware/checkAuth');
 
 //------------ Importing Controllers ------------//
-const authController = require('../controllers/authController')
+const authController = require('../controllers/authController');
 
 //------------ Login Route ------------//
 router.get('/login',forwardAuthenticated, (req, res) => res.render('login'));

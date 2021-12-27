@@ -14,7 +14,7 @@ const uploadImage = multer({
         fileSize: 15 * 1024 * 1024,
       },
     storage: Storage
-}).array("img",3);
+}).array("file",3);
 
 const uploadFileSingle = multer({
     limits: {

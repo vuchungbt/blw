@@ -38,12 +38,17 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-project-diagram"></i></div>
                     Documents
                 </a>
-                <!--
+                
                 <div class="sb-sidenav-menu-heading">Server</div>
-                <a class="nav-link " href="tables.html">
+                <a class="nav-link 
+                <% if(typeof _active != 'undefined' && _active=='clouflare' ){  %> 
+                    active
+                <% } %>
+                " href="/home/cloudflare">
                     <div class="sb-nav-link-icon"><i class="fas fa-server"></i></div>
-                    Server
+                    Cloudflare
                 </a>
+                <!--
                 <a class="nav-link" href="tables.html">
                     <div class="sb-nav-link-icon"><i class="fas fa-feather-alt"></i></div>
                     Deploy
