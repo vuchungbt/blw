@@ -317,9 +317,9 @@ router.get("/removefile/:_name", function(req, res) {
 
 
 router.get('/cloudflare',ensureAuthenticated, (req, res) => {
-    console.log('d_cloudflare requetsed');
+    console.log('d_cloudflare requested');
     res.render('d_cloudflare',{user: req.user,_active:"cloudflare"});
-    //return Cloudflare.listDNS;
+
 });
 
 
