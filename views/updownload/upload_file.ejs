@@ -61,6 +61,11 @@
                                             <div class="percent text-danger">0%</div >
                                         </div>
                                         <div id="status"></div>
+                                        <div id="result" class="pt-3">
+                                            <ul class="list-group" id="resultgr">
+                                                <li class="list-group-item bg-dark text-white"><i class="fas fa-arrow-down"></i>  List file  </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -107,6 +112,10 @@
                     processData: false,
                     success: function (data, textStatus, jqXHR) {
                         console.log('#fileupload done !',data);
+                        data.file.forEach(f => {
+                            $("#resultgr").append('<li class="list-group-item">'+data.host+'/'+f.filename+'</li>');
+                        });
+                        
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         $('#textResultimg').html('Upload failed!');
