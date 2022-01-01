@@ -239,8 +239,8 @@ router.post("/imgupload", function(req, res) {
     uploadImage(req, res, function(err) {
         console.log('=============img=============\n',req.files);
         if (err) {
-            console.log('Something went wrong');
-            return res.status(200).json({
+            console.log('Something went wrong :',err);
+            return res.status(400).json({
                 status: 400,
                 msg:err
             });
