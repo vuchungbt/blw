@@ -14,13 +14,13 @@
                             <div class="col-lg-7">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5 ">
                                     <div class="card-header">
-                                        <h3 class="text-center font-weight-light my-4 text-white" >View file</h3></div>
+                                        <h3 class="text-center font-weight-light my-4 text-white" >Download file</h3></div>
                                     <div class="card-body">
-                                            <p class="text-info">File name:</p>
-                                            <p class="text-info">Size:</p>
-                                            <p class="text-info">Description:</p>
+                                            <p class="text-white">File name: <br/> <span class="text-info"> <%= file_name %> </span> </p>
+                                            <p class="text-white">Link: <br/> <span class="text-info"><%= link %></span> </p>
+                                            <p class="text-info">Description: <br/></p>
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><a class="btn btn-primary btn-block" href="/login">Download</a></div>
+                                                <div class="d-grid"><a class="btn btn-primary btn-block" href="<%= link %>" download>Download</a></div>
                                             </div>
                                     </div>
                                 </div>

@@ -143,6 +143,29 @@ router.get('/pagemenu/:_link', async(req, res) => {
         console.log(err);
         res.render('404');
     });;
+});
+router.get('/file/:_link', async(req, res) => {
+
+    const _link = req.params._link;
+
+    const fs = require('fs')
+
+    const path = './uploads/'+_link;
+
+    try {
+        if (fs.existsSync(path)) {
+            res.render('d_filedownload',{file_name:_link, link:req.headers.host+'/'+_link});
+        }
+        else {
+            console.error('file download not exist' );
+        res.render('404');
+        }
+    } catch(err) {
+        console.error('file download not exist' );
+        res.render('404');
+
+    }
+    
 
 
 });
