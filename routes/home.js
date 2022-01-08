@@ -329,6 +329,7 @@ router.get('/resources',ensureAuthenticated,async (req, res) => {
 router.post('/add_resource',ensureAuthenticated, resourceController.addResourcesHandle);
 
 router.post('/update_resource',ensureAuthenticated, resourceController.updateResourcesHandle);
+router.get('/delete_resource',ensureAuthenticated, resourceController.deleteResourcesHandle);
 
 
 

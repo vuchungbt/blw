@@ -14,7 +14,7 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Resources</h1>
+                    <h1 class="mt-4">Resources API</h1>
                     <%- include ('implement/messages') %>
                     <a class="text-dark " data-toggle="modal" data-target="#addRsModal" href="#!"><i class="fas fa-plus-circle"></i> Add</a>
                     <%- include ('implement/addresource') %>
@@ -50,8 +50,8 @@
                                     <td><%= rss.link %></td>
                                     <td><%= rss.description %></td>
                                     <td>
-                                        <a href="#" title="Edit" class="text-blue px-sm-1"><i class="fas fa-edit"></i></a>
-                                        <a href="#" title="Remove" class="text-danger px-sm-1"><i class="fas fa-times"></i></a>
+                                        <!--<a href="#" title="Edit" class="text-blue px-sm-1"><i class="fas fa-edit"></i></a> -->
+                                        <a href="/home/delete_resource?id=<%= rss._id %>" title="Remove" class="text-danger px-sm-1"><i class="fas fa-times"></i></a>
                                     </td>
                                 </tr>
                                 

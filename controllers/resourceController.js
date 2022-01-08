@@ -1,4 +1,5 @@
 const  Resources  = require('../models/Resources');
+const mongoose = require('mongoose');
 
 exports.addResourcesHandle = (req, res) => {
     const { name, link, res_id, description} = req.body;
@@ -71,4 +72,28 @@ exports.updateResourcesHandle = (req, res) => {
         });
 
     
+}
+exports.deleteResourcesHandle = async (req, res) => {
+    const { id }= req.query;
+    let errors = [];
+
+    console.log('Delete Resources id ', req.query);
+    //------------ Checking required fields ------------//
+    if (!id) {
+        errors.push({ msg: 'Something failed' });
+    }
+    if(!mongoose.Types.ObjectId.isValid(id)) {  
+        errors.push({ msg: 'Something failed' });
+    }
+    if (errors.length > 0) {
+        req.flash(
+            'error_msg',
+            'Something failed.'
+        );
+        res.redirect('/home/resources');
+    } else {
+        const Rs = await Resources.findByIdAndDelete({ _id: id });
+        req.flash("success_msg", "Your link has been deleted.");
+        res.redirect("/home/resources");
+    }
 }
