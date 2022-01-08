@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const  Link  = require('../models/Link');
 const  Project  = require('../models/Project');
 const  Page  = require('../models/Page');
+const  Resources  = require('../models/Resources');
+
 
 //------------ Welcome Route ------------//
 router.get('/', (req, res) => {
@@ -142,6 +144,29 @@ router.get('/pagemenu/:_link', async(req, res) => {
         res.render('404');
     });;
 
+
+});
+router.get('/resources',async (req, res) => {
+    try {
+        const rs = await Resources.find();
+        if (rs.length != 0) {
+            return res.status(200).json({
+                status: 200,
+                result:rs
+            });
+        } else {
+            return res.status(404).json({
+                status: 404,
+                msg: 'Not Found'
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({
+            status: 400,
+            msg: 'Link find failed'
+        });
+    }
 
 });
 

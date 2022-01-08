@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Resources static - API</title>
+    <%- include ('include/d_header') %>
+
+</head>
+
+<body class="sb-nav-fixed">
+    <%- include ('include/d_hnav') %>
+    <div id="layoutSidenav">
+        <%- include ('include/d_leftnav') %>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Resources</h1>
+                    <%- include ('implement/messages') %>
+                    <a class="text-dark " data-toggle="modal" data-target="#addRsModal" href="#!"><i class="fas fa-plus-circle"></i> Add</a>
+                    <%- include ('implement/addresource') %>
+                    <div class="row pt-2">
+                        <table id="datatablesSimple">
+                            <thead>
+                                <tr>
+                                    <th>name</th>
+                                    <th>res_id</th>
+                                    <th>link</th>
+                                    <th>description</th>
+                                    <th>Action</th>
+
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>name</th>
+                                    <th>res_id</th>
+                                    <th>link</th>
+                                    <th>description</th>
+                                    <th>Action</th>
+
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <% if(typeof rs != 'undefined'){ %> 
+                                <% rs.forEach(function(rss) { 
+                                    %> 
+                                <tr> 
+                                    <td><%= rss.name %></td>
+                                    <td><%= rss.res_id %></td>
+                                    <td><%= rss.link %></td>
+                                    <td><%= rss.description %></td>
+                                    <td>
+                                        <a href="#" title="Edit" class="text-blue px-sm-1"><i class="fas fa-edit"></i></a>
+                                        <a href="#" title="Remove" class="text-danger px-sm-1"><i class="fas fa-times"></i></a>
+                                    </td>
+                                </tr>
+                                
+                                <% }) %> 
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+            <%- include ('include/footer') %>
+        </div>
+    </div>
+    <%- include ('include/d_footer') %>
+</body>
+
+</html>

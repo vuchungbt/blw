@@ -13,6 +13,7 @@ const {Link} = require('../models/Link');
 const {User} = require('../models/User');
 const {Project} = require('../models/Project');
 const {Page} = require('../models/Page');
+const {Resources} = require('../models/Resources');
 
 const Cloudflare = require('../controllers/Cloudflare');
 
@@ -22,6 +23,8 @@ const projectController = require('../controllers/projectController');
 const linkController = require('../controllers/staticlinkController');
 
 const userController = require('../controllers/userController');
+
+const resourceController = require('../controllers/resourceController');
 
 //------------ member ------------//
 router.get('/member',ensureAuthenticated,async (req, res) => {
@@ -208,7 +211,7 @@ router.get('/file',ensureAuthenticated, (req, res) => {
         if (err) {
             return console.log('Unable to scan directory: ' + err);
         } 
-        files.reverse();
+        //files.reverse();
         console.log(files); 
 
         files.host ='http://blwsmartware.net';
@@ -316,6 +319,16 @@ router.get('/cloudflare',ensureAuthenticated, (req, res) => {
     res.render('d_cloudflare',{user: req.user,_active:"cloudflare"});
 
 });
+
+router.get('/resources',ensureAuthenticated,async (req, res) => {
+    console.log('------/home/resources');
+    const rs = await Resources.find();
+    res.render('resources',{user: req.user,rs,_active:"resources"});
+
+});
+router.post('/add_resource',ensureAuthenticated, resourceController.addResourcesHandle);
+
+router.post('/update_resource',ensureAuthenticated, resourceController.updateResourcesHandle);
 
 
 

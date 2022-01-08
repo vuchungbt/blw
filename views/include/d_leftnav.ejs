@@ -67,6 +67,14 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-file"></i></div>
                     File
                 </a>
+                <a class="nav-link 
+                <% if(typeof _active != 'undefined' && _active=='resources' ){  %> 
+                    active
+                <% } %>
+                " href="/home/resources">
+                    <div class="sb-nav-link-icon"><i class="fas fa-anchor"></i></div>
+                    API static
+                </a>
                 <!--
                 <a class="nav-link" href="tables.html">
                     <div class="sb-nav-link-icon"><i class="fas fa-print"></i></div>
