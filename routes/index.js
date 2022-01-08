@@ -169,7 +169,7 @@ router.get('/file/:_link', async(req, res) => {
 
 
 });
-router.get('/resources',async (req, res) => {
+router.get('/api/resources',async (req, res) => {
     try {
         const rs = await Resources.find();
         if (rs.length != 0) {
