@@ -17,10 +17,12 @@
                                         <h3 class="text-center font-weight-light my-4 text-white" >Download file</h3></div>
                                     <div class="card-body">
                                             <p class="text-white">File name: <br/> <span class="text-info"> <%= file_name %> </span> </p>
-                                            <p class="text-white">Link: <br/> <span class="text-info"><%= link %></span> </p>
-                                            <p class="text-info">Description: <br/></p>
+                                            <p class="text-white">Size: <br/> <span class="text-info"><%= size %>MB (<%= ori_size %>)</span> </p>
+                                            <p class="text-white">Link: <br/> <span class="text-info"> <a class="text-info" href="<%= link %>" ><%= link %></a></span> </p>
+                                            <p class="text-white">Description: <br/></p>
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><a class="btn btn-primary btn-block" href="<%= link %>" download>Download</a></div>
+                                                <div class="d-grid"><a class="btn btn-primary btn-block" href="<%= link %>" download><i    
+                                                    class="fas fa-arrow-down"></i> Download</a></div>
                                             </div>
                                     </div>
                                 </div>

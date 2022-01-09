@@ -154,14 +154,16 @@ router.get('/file/:_link', async(req, res) => {
 
     try {
         if (fs.existsSync(path)) {
-            res.render('d_filedownload',{file_name:_link, link:req.headers.host+'/'+_link});
+            const fileSizeKb = fs.statSync(path).size/1024;
+            const fileSizeMb = (fileSizeKb/1024).toFixed(4);
+            res.render('d_filedownload',{file_name:_link,size:fileSizeMb,ori_size:fileSizeKb, link:req.headers.host+'/'+_link});
         }
         else {
             console.error('file download not exist' );
-        res.render('404');
+            res.render('404');
         }
     } catch(err) {
-        console.error('file download not exist' );
+        console.error('file download not exist' ,err );
         res.render('404');
 
     }

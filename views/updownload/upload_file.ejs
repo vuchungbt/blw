@@ -57,8 +57,9 @@
                                     <div class="card-body">
                                         <div id="textResultimg"></div>
                                         <div class="progress">
-                                            <div class="bar"></div >
-                                            <div class="percent text-danger">0%</div >
+                                            <div class="bar">
+                                                <div class="percent text-danger d-flex justify-content-end">0%</div >
+                                            </div >
                                         </div>
                                         <div id="status"></div>
                                         <div id="result" class="pt-3">
@@ -99,6 +100,7 @@
                                 var percentComplete = (evt.loaded / evt.total) * 100;
                                 console.log('percentComplete',percentComplete);
                                 var percentVal = percentComplete + '%';
+                                bar.addClass("bg-success");
                                 bar.width(percentVal);
                                 percent.html(percentVal);
                             }

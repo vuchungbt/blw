@@ -43,6 +43,7 @@ exports.addResourcesHandle = (req, res) => {
 exports.updateResourcesHandle = (req, res) => {
     const { id, name, link, res_id, description} = req.body;
  
+    console.log('updateResourcesHandle',id);
      //------------ Checking required fields ------------//
      if (!name || !link) {
         req.flash(
@@ -52,7 +53,7 @@ exports.updateResourcesHandle = (req, res) => {
         res.redirect('/home/resources');
     }
         //------------ Validation passed ------------//
-        User.findOne({ _id: id }).then(newLink => {
+        Resources.findOne({ _id: id }).then(newLink => {
 
             newLink.name = name;
             newLink.link = link;
@@ -60,7 +61,7 @@ exports.updateResourcesHandle = (req, res) => {
             newLink.description = description;
 
             newLink.save()
-                        .then(user => {
+                        .then(link => {
                             req.flash(
                                 'success_msg',
                                 'Link have been updated.'

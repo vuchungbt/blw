@@ -14,8 +14,8 @@ const {User} = require('../models/User');
 const {Project} = require('../models/Project');
 const {Page} = require('../models/Page');
 const {Resources} = require('../models/Resources');
+const {Cloudflare} = require('../models/Cloudflare');
 
-const Cloudflare = require('../controllers/Cloudflare');
 
 //------------ Importing Controllers ------------//
 const projectController = require('../controllers/projectController');
@@ -252,10 +252,7 @@ router.post("/imgupload", function(req, res) {
         });
     });
 });
-//------------ file ------------//
-router.get('/file/:_name', ensureAuthenticated,(req, res) => {
-    res.render('d_filedownload',{user: req.user});
-});
+
 router.post("/fileupload", function(req, res) {
     
     uploadFile(req, res, function(err) {
@@ -323,12 +320,29 @@ router.get('/cloudflare',ensureAuthenticated, (req, res) => {
 router.get('/resources',ensureAuthenticated,async (req, res) => {
     console.log('------/home/resources');
     const rs = await Resources.find();
-    res.render('resources',{user: req.user,rs,_active:"resources"});
+    res.render('d_resources',{user: req.user,rs,_active:"resources"});
 
 });
 router.post('/add_resource',ensureAuthenticated, resourceController.addResourcesHandle);
 
+
 router.post('/update_resource',ensureAuthenticated, resourceController.updateResourcesHandle);
+
+router.get('/update_resource/:_id',ensureAuthenticated, (req, res) => {
+    const _id = req.params._id;
+    if(!mongoose.Types.ObjectId.isValid(_id)) { 
+        res.render('404');
+    }
+    Resources.findById({
+        _id
+    }).then(rs =>{
+        res.render('apistatic/d_edit-apistatic',{ _id:rs._id,name:rs.name,res_id:rs.res_id,link:rs.link,description:rs.description, user: req.user,_active:"resources"});
+    }).catch(err => {
+        console.log(err);
+        res.render('404');
+    });;
+
+});
 router.get('/delete_resource',ensureAuthenticated, resourceController.deleteResourcesHandle);
 
 

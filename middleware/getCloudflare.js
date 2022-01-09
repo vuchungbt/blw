@@ -1,15 +1,20 @@
 const axios = require('axios');
 const config = require('config');
 
-exports.listDNS = async (req,res) => {
+const Cloudflare = require('../models/Cloudflare');
 
-    let url = 'https://api.cloudflare.com/client/v4/zones/'+config.get('DNSzoneID')+'/dns_records';
+let url = 'https://api.cloudflare.com/client/v4/zones/';
+
+
+module.exports.listDNS = async (zoneID,apiKey) => {
+
+    url+=zoneID+'/dns_records' ;
 
     try {
         const data_res = (await axios.get(url, {
             headers: {
             'Content-Type': 'application/json',
-            'Authorization' : config.get('CLAPIKey')
+            'Authorization' : apiKey
             }
           }
         )).data;
@@ -37,4 +42,9 @@ exports.listDNS = async (req,res) => {
 
       }
 
+}
+
+module.exports.listAll = async (req,res) => { 
+    const listCF = Cloudflare.find();
+    
 }

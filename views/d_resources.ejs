@@ -50,7 +50,7 @@
                                     <td><%= rss.link %></td>
                                     <td><%= rss.description %></td>
                                     <td>
-                                        <!--<a href="#" title="Edit" class="text-blue px-sm-1"><i class="fas fa-edit"></i></a> -->
+                                        <a href="/home/update_resource/<%= rss._id %>" title="Edit" class="text-blue px-sm-1"><i class="fas fa-edit"></i></a>
                                         <a href="/home/delete_resource?id=<%= rss._id %>" title="Remove" class="text-danger px-sm-1"><i class="fas fa-times"></i></a>
                                     </td>
                                 </tr>
