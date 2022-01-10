@@ -42,7 +42,7 @@ router.get('/projectpage', async(req, res) => {
    
     const _link = req.params._link;
     const _page = req.query.page;
-    const _host = req.headers.host;
+    const _host = 'https://'+ req.headers.host;
     
     console.log("_page ADDRESS:", _page);
     console.log("_link ADDRESS:", _link);
@@ -134,7 +134,7 @@ router.get('/pagemenu/:_link', async(req, res) => {
     Page.findOne({ page_address: _link }).then(page =>{
         
             if(page.page_status!=='Disable') {
-                page.host = req.headers.host;
+                page.host = 'https://'+ req.headers.host;
                 res.render('project/viewpage',{page:page});
             }
             else 
@@ -156,7 +156,7 @@ router.get('/file/:_link', async(req, res) => {
         if (fs.existsSync(path)) {
             const fileSizeKb = fs.statSync(path).size/1024;
             const fileSizeMb = (fileSizeKb/1024).toFixed(4);
-            res.render('d_filedownload',{file_name:_link,size:fileSizeMb,ori_size:fileSizeKb, link:req.headers.host+'/'+_link});
+            res.render('d_filedownload',{file_name:_link,size:fileSizeMb,ori_size:fileSizeKb, link:'https://'+req.headers.host+'/'+_link});
         }
         else {
             console.error('file download not exist' );

@@ -26,6 +26,8 @@ const userController = require('../controllers/userController');
 
 const resourceController = require('../controllers/resourceController');
 
+const cloudflareController = require('../controllers/cloudflareController');
+
 //------------ member ------------//
 router.get('/member',ensureAuthenticated,async (req, res) => {
     try { 
@@ -311,18 +313,15 @@ router.get("/removefile/:_name", function(req, res) {
       });
 });
 
-router.get('/cloudflare',ensureAuthenticated, (req, res) => {
-    console.log('------d_cloudflare requested');
-    res.render('d_cloudflare',{user: req.user,_active:"cloudflare"});
-
-});
+router.get('/cloudflare',ensureAuthenticated, cloudflareController.listAllDNS);
+router.post('/cloudflare',ensureAuthenticated, cloudflareController.addDNS);
 
 router.get('/resources',ensureAuthenticated,async (req, res) => {
     console.log('------/home/resources');
     const rs = await Resources.find();
     res.render('d_resources',{user: req.user,rs,_active:"resources"});
-
 });
+
 router.post('/add_resource',ensureAuthenticated, resourceController.addResourcesHandle);
 
 
