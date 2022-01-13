@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>API static - kaydadocument</title>
+    <title>Cloudflare</title>
     <%- include ('../include/d_header') %>
 
 </head>
@@ -14,7 +14,7 @@
                 <div id="layoutSidenav_content">
                     <main>
                         <div class="container-fluid px-4">
-                            <h1 class="mt-4">Edit Cloudflare</h1>
+                            <h3 class="mt-4">Cloudflare</h3>
                             <%- include ('../implement/messages') %>
                                 <div class="row">
                                     <div class="mem">
@@ -99,49 +99,34 @@
                                     <table id="datatablesSimple">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
                                                 <th>Type</th>
                                                 <th>Name</th>
                                                 <th>Content</th>
                                                 <th>Proxy</th>
-                                                <th>TTL</th>
-                                                <th>Status</th>
+                                                <th>TTL(1=auto)</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>ID</th>
                                                 <th>Type</th>
                                                 <th>Name</th>
                                                 <th>Content</th>
                                                 <th>Proxy</th>
-                                                <th>TTL</th>
-                                                <th>Status</th>
+                                                <th>TTL(1=auto)</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            <% if(typeof records !='undefined' ){ %>
-                                                <% records.forEach(function(record) { %>
+                                            <% if(typeof data_record !='undefined' ){ %>
+                                                <% data_record.forEach(function(record) { %>
                                                     <tr>
-                                                        <td>
-                                                            --
-                                                        </td>
-                                                        <td>
-                                                            -
-                                                        </td>
-                                                        <td>
-                                                            -
-                                                        </td>
-                                                        <td>
-                                                            -
-                                                        </td>
-                                                        <td>
-                                                            -
-                                                        </td>
-                                                        <td >-
-                                                        </td>
+                                                        <td><%= record.type %></td>
+                                                        <td><%= record.name.split('.',1) %></td>
+                                                        <td><%= record.content %></td>
+                                                        <td class="<%= typeof record.proxied != 'undefined' && record.proxied == false ? 'text-danger' : 'text-info' %>"><%= record.proxied %></td>
+                                                        <td><%= record.ttl %></td>
+                                                        
                                                         <td>
                                                             <a href="#" title="Edit"
                                                                 class="text-blue px-sm-1"><i

@@ -91,10 +91,10 @@
             </div>
         </div>
         <div class="sb-sidenav-footer">
-            <div class="small">Logged in as:</div>
-            <% if(typeof user != 'undefined'){ %> 
+            <div class="small">Logged:<% if(typeof user != 'undefined'){ %> 
                 <%= user.name %>
-            <% } %>
+            <% } %></div>
+            
         </div>
     </nav>
 </div>

@@ -329,9 +329,6 @@ router.get('/update_cloudflare/:_id',ensureAuthenticated,async (req, res) => {
     const rs =await Cloudflare.findById({
         _id
     });
-
-    
-
     let url = 'https://api.cloudflare.com/client/v4/zones/'+rs.ZoneID+'/dns_records';
     try {
         console.log('-------rs: ',rs);
@@ -343,17 +340,18 @@ router.get('/update_cloudflare/:_id',ensureAuthenticated,async (req, res) => {
             }
         }
         )).data; 
-        console.log('cloudflare/edit_dns')
+        // console.log('************edit_dns',datares);
         res.render('cloudflare/edit_dns',{
-            records:datares,
-            _id:rs._id,
-            name:rs.name,
-            email:rs.email,
-            AccountID:rs.AccountID,
-            ZoneID:rs.ZoneID,
-            api_key:rs.api_key,
-            description:rs.description,
-            user: req.user,_active:"cloudflare"});
+            data_record: datares.result,
+            _id: rs._id,
+            name: rs.name,
+            email: rs.email,
+            AccountID: rs.AccountID,
+            ZoneID: rs.ZoneID,
+            api_key: rs.api_key,
+            description: rs.description,
+            
+            user: req.user, _active:"cloudflare"});
     }
     catch (error) {
         console.error(error);

@@ -11070,7 +11070,7 @@ body {
   flex-direction: column;
 }
 .sb-sidenav .sb-sidenav-footer {
-  padding: 0.75rem;
+  padding: 0.5rem;
   flex-shrink: 0;
 }
 
