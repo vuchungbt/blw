@@ -52,6 +52,7 @@ exports.updateResourcesHandle = (req, res) => {
         );
         res.redirect('/home/resources');
     }
+    else {
         //------------ Validation passed ------------//
         Resources.findOne({ _id: id }).then(newLink => {
 
@@ -71,14 +72,13 @@ exports.updateResourcesHandle = (req, res) => {
                         .catch(err => console.log(err));
 
         });
-
-    
+    }
+       
 }
 exports.deleteResourcesHandle = async (req, res) => {
     const { id }= req.query;
     let errors = [];
 
-    console.log('Delete Resources id ', req.query);
     //------------ Checking required fields ------------//
     if (!id) {
         errors.push({ msg: 'Something failed' });

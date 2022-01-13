@@ -12,6 +12,9 @@ const CloudflareSchema = new mongoose.Schema({
     AccountID: {
         type: String
     },
+    email: {
+        type: String
+    },
     api_key: {
         type: String,
         required: true

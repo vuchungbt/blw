@@ -16,102 +16,47 @@
                         <div class="container-fluid px-4">
                             <h1 class="mt-4">DNS Cloudflare</h1>
                             <%- include ('implement/messages') %>
+
+                            <a class="text-dark " data-toggle="modal" data-target="#addcloudflareModal" href="#!"><i class="fas fa-plus-circle"></i> Add</a>
+
+                            <%- include ('implement/addcloudflare') %>
                             
-                            <%- include ('implement/addmember') %>
+                                <table id="datatablesSimple" >
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>description</th>
+                                            <th>action</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>description</th>
+                                            <th>action</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <% if(typeof lists !='undefined' ){ %>
+                                            <% lists.forEach(function(dns) { %>
+                                                <tr>
+                                                    <td>
+                                                        <%= dns.name %>
+                                                    </td>
+                                                    <td>
+                                                        <%= dns.description %>
+                                                    </td>
+                                                    <td>
+                                                        <a href="/home/update_cloudflare/<%= dns._id %>" title="Edit " class="text-blue px-sm-1"><i class="fas fa-edit"></i></a>
+                                                        <a href="/home/delete_cloudflare?id=<%= dns._id %>" title="Delete " class="text-danger px-sm-1"><i class="fas fa-times"></i></a>
+                                                    </td>
+                                                </tr>
 
-                                    <div class="card mb-4">
-                                        <div class="card-header">
-                                            <div class="row ">
-                                                <div class="col-md-4">
-                                                    <div class="form-group  ">
-                                                        <label for="name" class="">Name</label>
-                                                        <input type="res_id" class="form-control" name="res_id" id="res_id" value="<%= typeof res_id != 'undefined' ? res_id : '' %>">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 ">
-                                                    <div class="form-group ">
-                                                        <label for="name" class="">ZoneID</label>
-                                                        <input type="res_id" class="form-control" name="res_id" id="res_id" value="<%= typeof res_id != 'undefined' ? res_id : '' %>">
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="col-md-4">
-                                                    <div class="form-group  ">
-                                                        <label for="name" class="">Secret Key</label>
-                                                        <input type="res_id" class="form-control" name="res_id" id="res_id" value="<%= typeof res_id != 'undefined' ? res_id : '' %>">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <a href="#" title="Add record" class="text-blue px-sm-1"><i
-                                                    class="fas fa-plus"></i></a>
-
-                                            <a href="#" title="Remove this" class="text-danger px-sm-1"><i
-                                                    class="fas fa-times"></i></a>
-
-                                        </div>
-                                        <div class="card-body">
-                                            <table id="datatablesSimple">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>Type</th>
-                                                        <th>Name</th>
-                                                        <th>Content</th>
-                                                        <th>Proxy</th>
-                                                        <th>TTL</th>
-                                                        <th>Status</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>Type</th>
-                                                        <th>Name</th>
-                                                        <th>Content</th>
-                                                        <th>Proxy</th>
-                                                        <th>TTL</th>
-                                                        <th>Status</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </tfoot>
-                                                <tbody>
-                                                    <% if(typeof users !='undefined' ){ %>
-                                                        <% users.forEach(function(user) { %>
-                                                            <tr>
-                                                                <td>
-                                                                    <%= user.name %>
-                                                                </td>
-                                                                <td>
-                                                                    <%= user.createdAt.toLocaleString() %>
-                                                                </td>
-                                                                <td>
-                                                                    <%= user.permission %>
-                                                                </td>
-                                                                <td>
-                                                                    <%= user.phone %>
-                                                                </td>
-                                                                <td>
-                                                                    <%= user.email %>
-                                                                </td>
-                                                                <td
-                                                                    class="<%= typeof user.active != 'undefined' && user.active=='Disable' ? 'text-danger' : 'text-info' %>">
-                                                                    <%= user.active %>
-                                                                </td>
-                                                                <td>
-                                                                    <a href="/home/edit-user/<%= user._id %>"
-                                                                        title="Edit user" class="text-blue px-sm-1"><i
-                                                                            class="fas fa-edit"></i></a>
-                                                                </td>
-                                                            </tr>
-
-                                                            <% }) %>
-                                                                <% } %>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                                                <% }) %>
+                                                    <% } %>
+                                    </tbody>
+                                </table>
+                        
                         </div>
                     </main>
                     <%- include ('include/footer') %>

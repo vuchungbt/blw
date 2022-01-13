@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const config = require('config');
 
+const axios = require('axios');
+
 const fs = require("fs");
 
 const { ensureAuthenticated } = require('../middleware/checkAuth');
@@ -315,6 +317,56 @@ router.get("/removefile/:_name", function(req, res) {
 
 router.get('/cloudflare',ensureAuthenticated, cloudflareController.listAllDNS);
 router.post('/cloudflare',ensureAuthenticated, cloudflareController.addDNS);
+router.get('/delete_cloudflare',ensureAuthenticated, cloudflareController.deleteDNSHandle);
+
+router.post('/update_cloudflare',ensureAuthenticated, cloudflareController.updateDNSHandle);
+
+router.get('/update_cloudflare/:_id',ensureAuthenticated,async (req, res) => {
+    const _id = req.params._id;
+    if(!mongoose.Types.ObjectId.isValid(_id)) { 
+        res.render('404');
+    }
+    const rs =await Cloudflare.findById({
+        _id
+    });
+
+    
+
+    let url = 'https://api.cloudflare.com/client/v4/zones/'+rs.ZoneID+'/dns_records';
+    try {
+        console.log('-------rs: ',rs);
+        const datares = ( await axios.get(url, {
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization' : rs.api_key,
+            'X-Auth-Email': rs.email
+            }
+        }
+        )).data; 
+        console.log('cloudflare/edit_dns')
+        res.render('cloudflare/edit_dns',{
+            records:datares,
+            _id:rs._id,
+            name:rs.name,
+            email:rs.email,
+            AccountID:rs.AccountID,
+            ZoneID:rs.ZoneID,
+            api_key:rs.api_key,
+            description:rs.description,
+            user: req.user,_active:"cloudflare"});
+    }
+    catch (error) {
+        console.error(error);
+        req.flash(
+            'error_msg',
+            'some thing failed'
+        );
+        res.redirect('/home/cloudflare');
+        
+      }    
+
+});
+
 
 router.get('/resources',ensureAuthenticated,async (req, res) => {
     console.log('------/home/resources');
