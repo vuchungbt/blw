@@ -30,6 +30,8 @@ const resourceController = require('../controllers/resourceController');
 
 const cloudflareController = require('../controllers/cloudflareController');
 
+const nginxController = require('../controllers/nginxController');
+
 //------------ member ------------//
 router.get('/member',ensureAuthenticated,async (req, res) => {
     try { 
@@ -220,7 +222,6 @@ router.get('/file',ensureAuthenticated, (req, res) => {
 
         files.host ='http://blwsmartware.net';
         res.render('d_file',{user: req.user,files:files,_active:'file'});
-        
     });
     
 });
@@ -395,12 +396,8 @@ router.get('/update_resource/:_id',ensureAuthenticated, (req, res) => {
 router.get('/delete_resource',ensureAuthenticated, resourceController.deleteResourcesHandle);
 
 
+router.get('/nginx',ensureAuthenticated, nginxController.getdeployNginx);
 
-router.get('/nginx',ensureAuthenticated,(req, res) => {
-    console.log('------/home/nginx');
-    res.render('d_nginx',{user: req.user,_active:"nginx"}); 
-});
-// d_backupDB.ejs
 
 
 

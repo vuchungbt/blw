@@ -8,7 +8,7 @@ exports.addLinkHandle = (req, res) => {
 
     let { linkname, linkstatic, header, area, footer, status } = req.body;
     let errors = [];
-    linkstatic = linkstatic.replace(/\//g,'-');
+    linkstatic = linkstatic.replace(/\//g,'-').replace(/\./g,'-').replace(/\s/g, '_');
    
     
     //------------ Checking required fields ------------//

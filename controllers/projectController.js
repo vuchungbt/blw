@@ -12,7 +12,8 @@ const axios = require('axios');
 
 exports.getdeployProjectHandle = async (req,res) => {
 
-    const address = req.body.address;
+    const address = req.body.address.replace(/\//g,'-').replace(/\./g,'-').replace(/\s/g, '_'); //linkstatic = linkstatic.replace(/\//g,'-');
+    
     let filepath = config.get("nginxdir") + '/' + address + '.conf';
 
     fs.readFile(filepath, function(err, buf) {
@@ -59,7 +60,7 @@ exports.getdeployProjectHandle = async (req,res) => {
 
 }
 exports.deployProjectHandle = async (req,res) => {
-    const address = req.body.address;
+    const address = req.body.address.replace(/\//g,'-').replace(/\./g,'-').replace(/\s/g, '_');
     const contentnginx = req.body.contentnginx;
     
     let filepath = config.get("nginxdir") + '/' + address + '.conf';
@@ -225,8 +226,8 @@ exports.deployProjectHandle = async (req,res) => {
 
 exports.addProjectHandle = async (req, res) => {
 
-    const { projectname, address, projectstatus, projectbody } = req.body;
-
+    const { projectname, projectstatus, projectbody } = req.body;
+    const address = req.body.address.replace(/\//g,'-').replace(/\./g,'-').replace(/\s/g, '_');
     const { tabname1, tabname1status, nav1 } = req.body;
     const { tabname2, tabname2status, nav2 } = req.body;
     const { tabname3, tabname3status, nav3 } = req.body;
