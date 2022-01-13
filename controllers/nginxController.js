@@ -5,7 +5,9 @@ exports.getdeployNginx = async (req,res) => {
     let filepath = '/etc/nginx/nginx.conf';
     console.log('filepath ***',filepath);
     fs.readFile(filepath, function(err, buf) {
+        console.log('fs.readFile *4**',filepath);
         if(err)  {
+            console.log('err *5**');
             req.flash(
                 'error_msg',
                 'can not read nginx.conf.'
@@ -14,9 +16,11 @@ exports.getdeployNginx = async (req,res) => {
         }
         var data ='Error';
         if(buf.toString()!=null && buf.toString()!=undefined && buf.toString()){
+            
             data = buf.toString();
+            console.log('success *5**',data);
             fs.readdir('/etc/nginx/sites-available', function (err, files) {
-                //handling error
+                console.log('fs.readdir *8**');
                 if (err) {
                     req.flash(
                         'error_msg',
