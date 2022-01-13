@@ -396,6 +396,19 @@ router.get('/delete_resource',ensureAuthenticated, resourceController.deleteReso
 
 
 
+router.get('/nginx',ensureAuthenticated,(req, res) => {
+    console.log('------/home/nginx');
+    res.render('d_nginx',{user: req.user,_active:"nginx"}); 
+});
+// d_backupDB.ejs
+
+
+
+router.get('/backup',ensureAuthenticated,(req, res) => {
+    console.log('------/home/backup');
+    res.render('d_backupDB',{user: req.user,_active:"backup"}); 
+});
+
 router.get('/', ensureAuthenticated, (req,res) => {
     res.render('dashboard',{user: req.user,_active:"home"});
 });

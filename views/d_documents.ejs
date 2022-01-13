@@ -16,9 +16,10 @@
                         <div class="container-fluid px-4">
                             <h1 class="mt-4">Document</h1>
                             <%- include ('implement/messages') %>
-                            <div class="row">
+
                                 <h4>Static link</h4>
-                                <span> <a class="text-dark" href="./addlink"><i class="fas fa-plus-circle"></i> Add</a></span>
+                                <span> <a class="text-dark" href="./addlink"><i class="fas fa-plus-circle"></i>
+                                        Add</a></span>
                                 <div class="row pt-2">
                                     <table id="datatablesSimple">
                                         <thead>
@@ -29,41 +30,64 @@
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody><% if(typeof links != 'undefined'){ %> 
-                                            <% links.forEach(function(link) { 
-                                                %> 
-                                            <tr class="<% if(link.status == 'Enable'){ %> bg-secondary-light <% } %> "> 
-                                                    <td><%= link.linkname %></td>
-                                                    <td> <a href="<% if(link.status !== 'Disable'){ %> <%= links.host+ link.linkstatic%> <% } else { %>javascript:void(0) <% } %>"><%=link.linkstatic%></a> </td>
-                                                    <td <% if(link.status == 'Disable'){ %> class="text-danger"<% } %> ><%= link.status %></td>
-                                                    <td>
-                                                        <a href="<% if(link.status !== 'Disable'){ %> <%= links.host+ link.linkstatic%> <% } else { %>javascript:void(0) <% } %>" class="<% if(link.status == 'Disable'){ %> text-dark<% } else { %>text-success <% } %>"><i class="fas fa-eye"></i></a>
-                                                        <a href="#" data-toggle="modal" data-target="#inforStaticlinkModal" data-idlink="<%= link._id%>" data-createdat="<%= link.createdAt.toLocaleString() %>" data-name="<%= link.createdByName %>" data-nameid="<%= link.createdBy %>" data-modified=" <%= typeof link.modified != 'undefined'  ? link.modified.toLocaleString() : '' %> "  class="text-info px-sm-1 inforbutton"><i class="fas fa-info-circle"></i></a>
-                                                        <a href="./editlink/<%= link._id%>" class="text-blue px-sm-1"><i class="fas fa-edit"></i></a>
-                                                    </td>
-                                            </tr>
+                                        <tbody>
+                                            <% if(typeof links !='undefined' ){ %>
+                                                <% links.forEach(function(link) { %>
+                                                    <tr
+                                                        class="<% if(link.status == 'Enable'){ %> bg-secondary-light <% } %> ">
+                                                        <td>
+                                                            <%= link.linkname %>
+                                                        </td>
+                                                        <td> <a
+                                                                href="<% if(link.status !== 'Disable'){ %> <%= links.host+ link.linkstatic%> <% } else { %>javascript:void(0) <% } %>">
+                                                                <%=link.linkstatic%>
+                                                            </a> </td>
+                                                        <td <% if(link.status=='Disable' ){ %> class="text-danger"<% }
+                                                                %> ><%= link.status %>
+                                                        </td>
+                                                        <td>
+                                                            <a href="<% if(link.status !== 'Disable'){ %> <%= links.host+ link.linkstatic%> <% } else { %>javascript:void(0) <% } %>"
+                                                                class="<% if(link.status == 'Disable'){ %> text-dark<% } else { %>text-success <% } %>"><i
+                                                                    class="fas fa-eye"></i></a>
+                                                            <a href="#" data-toggle="modal"
+                                                                data-target="#inforStaticlinkModal"
+                                                                data-idlink="<%= link._id%>"
+                                                                data-createdat="<%= link.createdAt.toLocaleString() %>"
+                                                                data-name="<%= link.createdByName %>"
+                                                                data-nameid="<%= link.createdBy %>"
+                                                                data-modified=" <%= typeof link.modified != 'undefined'  ? link.modified.toLocaleString() : '' %> "
+                                                                class="text-info px-sm-1 inforbutton"><i
+                                                                    class="fas fa-info-circle"></i></a>
+                                                            <a href="./editlink/<%= link._id%>"
+                                                                class="text-blue px-sm-1"><i
+                                                                    class="fas fa-edit"></i></a>
+                                                        </td>
+                                                    </tr>
 
-                                            <% }) %> 
-                                            <% } %>
+                                                    <% }) %>
+                                                        <% } %>
                                         </tbody>
                                     </table>
                                 </div>
-                                <hr />
-                                <h4>Specs guide</h4>
-                                <a class="text-dark" href="#"><i class="fas fa-plus-circle"></i> Add</a>
+                              
+                        </div>
+                        <hr />
+                        <div class="container-fluid px-4">
+                          
+                            <h4>Specs guide</h4>
+                            <a class="text-dark" href="#"><i class="fas fa-plus-circle"></i> Add</a>
 
-                                <div class="row pt-2">
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="card bg-primary text-white mb-4">
-                                            <div class="card-body">Primary Card</div>
-                                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                                <a class="small text-white " href="#">View Details</a>
-                                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                            </div>
+                            <div class="row pt-2">
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card bg-primary text-white mb-4">
+                                        <div class="card-body">Primary Card</div>
+                                        <div class="card-footer d-flex align-items-center justify-content-between">
+                                            <a class="small text-white " href="#">View Details</a>
+                                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                         </div>
                                     </div>
-                                    
                                 </div>
+
                             </div>
                         </div>
                     </main>
@@ -72,21 +96,21 @@
                 <%- include ('implement/info-static') %>
         </div>
         <%- include ('include/d_footer') %>
-        <script>
-            $(document).ready(function () { 
-                $("#datatablesSimple").on('click', '.inforbutton', function(){ 
+            <script>
+                $(document).ready(function () {
+                    $("#datatablesSimple").on('click', '.inforbutton', function () {
 
-                   var id = $(this).data('idlink');
-                   var modified = $(this).data('modified');
-                   var created_at = $(this).data('createdat');
-                   var name = $(this).data('name');
+                        var id = $(this).data('idlink');
+                        var modified = $(this).data('modified');
+                        var created_at = $(this).data('createdat');
+                        var name = $(this).data('name');
 
-                   $('#name').val(name);
-                   $('#created_at').val(created_at);
-                   $('#modified').val(modified);
+                        $('#name').val(name);
+                        $('#created_at').val(created_at);
+                        $('#modified').val(modified);
+                    })
                 })
-            })
-        </script>
+            </script>
 </body>
 
 </html>

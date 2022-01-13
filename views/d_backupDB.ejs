@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Backup Database</title>
+    <%- include ('include/d_header') %>
+
+</head>
+
+<body class="sb-nav-fixed">
+    <%- include ('include/d_hnav') %>
+        <div id="layoutSidenav">
+            <%- include ('include/d_leftnav') %>
+                <div id="layoutSidenav_content">
+                    <main>
+                        <div class="container-fluid px-4">
+                            <h1 class="mt-4">Backup Database</h1>
+                            <%- include ('implement/messages') %>
+                            <span>
+                                <a class="btn btn-primary mb-4"href="#!"><i class="fas fa-cloud-download-alt"></i></i> Create a point now</a> 
+                                <a class="btn btn-secondary mb-4"href="#!"><i class="fas fa-cog"></i></i> </a> 
+                                
+                            </span>
+                            
+                            
+                                <table id="datatablesSimple" class="" >
+                                    <thead>
+                                        <tr>
+                                            
+                                            <th>Time</th>
+                                            <th>Type</th>
+                                            <th>Path</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Time</th>
+                                            <th>Type</th>
+                                            <th>Path</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <% if(typeof lists !='undefined' ){ %>
+                                            <% lists.forEach(function(dns) { %>
+                                                <tr>
+                                                    <td>
+                                                        <%= dns.name %>
+                                                    </td>
+                                                    <td>
+                                                        <%= dns.description %>
+                                                    </td>
+                                                    <td>
+                                                        <a href="/home/update_cloudflare/<%= dns._id %>" title="Edit " class="text-blue px-sm-1"><i class="fas fa-edit"></i></a>
+                                                        <a href="/home/delete_cloudflare?id=<%= dns._id %>" title="Delete " class="text-danger px-sm-1"><i class="fas fa-times"></i></a>
+                                                    </td>
+                                                </tr>
+
+                                                <% }) %>
+                                                    <% } %>
+                                    </tbody>
+                                </table>
+                        
+                        </div>
+                    </main>
+                    <%- include ('include/footer') %>
+                </div>
+        </div>
+        <%- include ('include/d_footer') %>
+</body>
+
+</html>
