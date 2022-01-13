@@ -4,15 +4,16 @@ const  {exec } = require("child_process");
 exports.getdeployNginx = async (req,res) => { 
     let filepath = '/etc/nginx/nginx.conf';
     console.log('filepath ***',filepath);
-    fs.readFile(filepath, function(err, buf) {
+    fs.readFile(filepath,  (err, data) => {
         console.log('fs.readFile *4**',filepath);
+        console.log('data *4**',data);
         if(err)  {
-            console.log('err *5**');
+            console.log('err *5**',err);
             req.flash(
                 'error_msg',
                 'can not read nginx.conf.'
               );
-              res.redirect('/home/nginx');
+              res.render('d_nginx',{ 'error':'can not read nginx.conf', user: req.user,_active:"nginx"}); 
         }
         var data ='Error';
         if(buf.toString()!=null && buf.toString()!=undefined && buf.toString()){
@@ -26,7 +27,7 @@ exports.getdeployNginx = async (req,res) => {
                         'error_msg',
                         'can not read folder config.'
                       );
-                      res.redirect('/home/nginx');
+                      res.render('d_nginx',{ 'error':'can not read folder config', user: req.user,_active:"nginx"}); 
                 } 
                 
                 res.render('d_nginx',{ nginx_data: data, nginx_config:files, user: req.user,_active:"nginx"}); 
@@ -36,7 +37,7 @@ exports.getdeployNginx = async (req,res) => {
                 'error_msg',
                 'content empty.'
               );
-            res.redirect('/home/nginx');
+              res.render('d_nginx',{ 'error':'content empty', user: req.user,_active:"nginx"}); 
     
         }
       });
