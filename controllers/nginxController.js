@@ -4,9 +4,9 @@ const  {exec } = require("child_process");
 exports.getdeployNginx = async (req,res) => { 
     let filepath = '/etc/nginx/nginx.conf';
     console.log('filepath ***',filepath);
-    fs.readFile(filepath,  (err, data) => {
+    fs.readFile(filepath,  (err, buf) => {
         console.log('fs.readFile *4**',filepath);
-        console.log('data *4**',data);
+        console.log('data *4**',buf);
         if(err)  {
             console.log('err *5**',err);
             req.flash(
