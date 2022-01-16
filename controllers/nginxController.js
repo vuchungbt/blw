@@ -44,3 +44,21 @@ exports.getdeployNginx = async (req,res) => {
     
 
 }
+exports.reloadyNginx = async (req,res) => { 
+    exec("sudo service nginx reload", async (error, stdout, stderr) => {
+        let msg = "Reload Nginx success!"
+        if (error) {
+            console.log(`error: ${error.message}`);
+            msg = 'Error restarted.' ;
+        }
+        if (stderr) {
+            console.log(`stderr: ${stderr}`);
+        }
+        console.log(`stdout: ${stdout}`);
+        req.flash(
+            'success_msg',
+            msg
+        );
+        res.redirect('/home/nginx');
+    });
+}
