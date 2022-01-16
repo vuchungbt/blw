@@ -72,14 +72,15 @@ exports.rewriteNginx = async (req,res) => {
     const contentnginx = req.body.contentnginx;
     exec('cp '+filepath+' '+backupfolder+'/nginx_'+Date.now()+".bk", async (error, stdout, stderr) => {
         let msg = "Backup file Nginx success!"
+        console.log(`Backup file>>: ${backupfolder}`);
         if (error) {
-            console.log(`error: ${error.message}`);
+            console.log(`Backup error: ${error.message}`);
             msg = 'Error Backup' ;
         }
         if (stderr) {
-            console.log(`stderr: ${stderr}`);
+            console.log(`Backup stderr: ${stderr}`);
         }
-        console.log(`stdout: ${stdout}`);
+        console.log(`Backup stdout: ${stdout}`);
     });
 
     fs.writeFile(filepath, contentnginx, (err) => {
@@ -93,9 +94,36 @@ exports.rewriteNginx = async (req,res) => {
             res.redirect('/home/nginx');
         } 
         req.flash(
-            'error_msg',
-            'Save content Nginx success'
+            'success_msg',
+            'Save content Nginx success, next step to Reload for change'
         );
         res.redirect('/home/nginx');
     });
+}
+
+exports.viewOneconfig = async (req,res) => { 
+    const address = req.body.name;
+    let filepath = config.get("nginxdir") + '/' + address ;
+    fs.readFile(filepath, function(err, buf) {
+        if(err)  {
+            let msg = 'Read file error.';
+                    req.flash(
+                        'error_msg',
+                        msg
+                    );
+                    res.redirect('/home/nginx');
+        }
+        var data ='Error';
+        if(buf.toString()!=null && buf.toString()!=undefined && buf.toString()){
+            data = buf.toString();
+
+        }
+        return res.status(200).json({
+            status: 200,
+            data: data,
+            msg:'Get data in file'
+        });
+
+      });
+
 }

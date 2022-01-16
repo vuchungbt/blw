@@ -399,6 +399,7 @@ router.get('/delete_resource',ensureAuthenticated, resourceController.deleteReso
 router.get('/nginx',ensureAuthenticated, nginxController.getdeployNginx);
 router.get('/nginx_reload',ensureAuthenticated, nginxController.reloadNginx);
 router.post('/nginx_save',ensureAuthenticated, nginxController.rewriteNginx);
+router.post('/nginx_getconfig',ensureAuthenticated, nginxController.viewOneconfig);
 
 
 
