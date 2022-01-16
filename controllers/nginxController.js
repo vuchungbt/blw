@@ -109,12 +109,10 @@ exports.viewOneconfig = async (req,res) => {
     fs.readFile(filepath, function(err, buf) {
         if(err)  {
             console.log('viewOneconfig err',err);
-            let msg = 'Read file error.';
-                    req.flash(
-                        'error_msg',
-                        msg
-                    );
-                    res.redirect('/home/nginx');
+            return res.status(400).json({
+                status: 400,
+                msg:'Get data failed'
+            });
         }
         var data ='Error';
         if(buf.toString()!=null && buf.toString()!=undefined && buf.toString()){
@@ -128,5 +126,26 @@ exports.viewOneconfig = async (req,res) => {
         });
 
       });
+
+}
+exports.deleteOneconfig = async (req,res) => { 
+    const address = req.body.name;
+    let filepath = config.get("nginxdir") + '/' + address ;
+    console.log('deleteOneconfig',filepath);
+    fs.unlink(filepath, function(err) {
+        if (err) {
+            req.flash(
+                'error_msg',
+                'Delete config failed'
+            );
+            res.redirect('/home/nginx');
+        } else {
+            req.flash(
+                'success_msg',
+                'Delete done'
+            );
+            res.redirect('/home/nginx');
+        }
+    });
 
 }
