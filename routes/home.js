@@ -402,8 +402,6 @@ router.post('/nginx_save',ensureAuthenticated, nginxController.rewriteNginx);
 router.post('/nginx_getconfig',ensureAuthenticated, nginxController.viewOneconfig);
 
 
-
-
 router.get('/backup',ensureAuthenticated,(req, res) => {
     console.log('------/home/backup');
     res.render('d_backupDB',{user: req.user,_active:"backup"}); 

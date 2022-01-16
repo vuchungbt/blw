@@ -1,5 +1,6 @@
 const fs = require("fs");
 const  {exec } = require("child_process");
+const config = require('config');
 
 exports.getdeployNginx = async (req,res) => { 
     let filepath = '/etc/nginx/nginx.conf';
