@@ -16,16 +16,18 @@
                         <div class="container-fluid px-4">
                             <h1 class="mt-4">Nginx</h1>
                             <%- include ('implement/messages') %>
-                            <div class="bd-example">
-                                <button type="button" class="btn btn-secondary">Re-open</button>
-                                <button type="button" class="btn btn-primary">Save</button>
-                                <a  class="btn btn-success" href="/home/nginx_reload"><i class="fas fa-sync-alt"></i>Reload</a>
-                                <button type="button" class="btn btn-danger ml-1" disabled><i class="fas fa-stop-circle"></i> Stop</button>
-                            </div>
-                            <div class="form-group">
-                                <label for="recipient-description" class="col-form-label">Context:</label>
-                                <textarea id="description" name="projectdescription" class="textarea_editor form-control" rows="10" placeholder="Updating" > <%= nginx_data %> </textarea>
-                            </div>
+                            <form action="/home/nginx_save" method="post">
+                                <div class="bd-example">
+                                    <a  class="btn btn-secondary" href="/home/nginx_save">Reload</a>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <a  class="btn btn-success" href="/home/nginx_reload"><i class="fas fa-sync-alt"></i>Reload</a>
+                                    <button type="button" class="btn btn-danger ml-1" disabled><i class="fas fa-stop-circle"></i> Stop</button>
+                                </div>
+                                <div class="form-group">
+                                    <label for="recipient-description" class="col-form-label">Context:</label>
+                                    <textarea id="contentnginx" name="contentnginx" class="form-control" rows="10" > <%= nginx_data %> </textarea>
+                                </div>
+                            </form>
                             <label for="recipient-description" class="col-form-label">Config:</label>
                             <a class="text-dark " data-toggle="modal" data-target="#addRsModal" href="#!"><i class="fas fa-plus-circle"></i> Add</a>
                             <table id="datatablesSimple" class="" >
