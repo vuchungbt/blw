@@ -56,7 +56,7 @@
                                         <td>-</td>
                                         <td>
                                             <a href="#" class="text-info px-sm-1 viewbutton" data-name="<%= file %>" data-toggle="modal" data-target="#deployConfigNginx"><i class="fas fa-paper-plane" ></i></a>
-                                            <a href="#" class="text-info px-sm-1 deletebutton" data-name="<%= file %>" ><i class="fas fa-times" ></i></a>
+                                            <a href="#" class="text-danger px-sm-1 deletebutton" data-name="<%= file %>" ><i class="fas fa-times" ></i></a>
                                            
                                         </td>
                                     </tr>
@@ -89,7 +89,25 @@
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
                             console.log('---failed');
-                            $("#contentnginx").text(data.data);
+                        } 
+                    });
+                   
+                });
+                $("#datatablesSimple").on('click', '.deletebutton', function () {
+                    var name = $(this).data('name');
+                   console.log('---deletebutton',name);
+
+                    $.ajax({
+                        url: "/home/nginx_deleteconfig",
+                        type: "POST",
+                        data: JSON.stringify({'name':name}),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function(data, textStatus, jqXHR) {
+                            console.log('---deploybutton success');
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.log('---failed');
                         } 
                     });
                    
