@@ -149,7 +149,7 @@ exports.deleteOneconfig = async (req,res) => {
 }
 exports.updateOneconfig = async (req,res) => { 
 
-    const contentnginx = req.body.name;
+    const contentnginx = req.body.contentnginx;
     const address = req.body.address;
     let filepath = config.get("nginxdir") + '/' + address ;
     fs.writeFile(filepath, contentnginx, (err) => { 
