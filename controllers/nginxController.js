@@ -104,8 +104,10 @@ exports.rewriteNginx = async (req,res) => {
 exports.viewOneconfig = async (req,res) => { 
     const address = req.body.name;
     let filepath = config.get("nginxdir") + '/' + address ;
+    console.log('viewOneconfig',filepath);
     fs.readFile(filepath, function(err, buf) {
         if(err)  {
+            console.log('viewOneconfig err',err);
             let msg = 'Read file error.';
                     req.flash(
                         'error_msg',
