@@ -134,17 +134,15 @@ exports.deleteOneconfig = async (req,res) => {
     console.log('deleteOneconfig',filepath);
     fs.unlink(filepath, function(err) {
         if (err) {
-            req.flash(
-                'error_msg',
-                'Delete config failed'
-            );
-            res.redirect('/home/nginx');
+            return res.status(400).json({
+                status: 400,
+                msg:'Get data in failed'
+            });
         } else {
-            req.flash(
-                'success_msg',
-                'Delete done'
-            );
-            res.redirect('/home/nginx');
+            return res.status(200).json({
+                status: 200,
+                msg:'Sucess'
+            });
         }
     });
 
