@@ -401,6 +401,7 @@ router.get('/nginx_reload',ensureAuthenticated, nginxController.reloadNginx);
 router.post('/nginx_save',ensureAuthenticated, nginxController.rewriteNginx);
 router.post('/nginx_getconfig',ensureAuthenticated, nginxController.viewOneconfig);
 router.post('/nginx_deleteconfig',ensureAuthenticated, nginxController.deleteOneconfig);
+router.post('/nginx_updateconfig',ensureAuthenticated, nginxController.updateOneconfig);
 
 router.get('/backup',ensureAuthenticated,(req, res) => {
     console.log('------/home/backup');

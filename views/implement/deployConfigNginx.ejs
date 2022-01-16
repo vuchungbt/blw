@@ -9,18 +9,18 @@
                 </button>
             </div>
             <div class="modal-body">
-                
+                <form id="deployproject" action="/home/nginx_updateconfig" method="post">
                     <div class="form-group">
-                        <input type="hidden" name="name" id="name" />
+                        <input type="hidden" name="address" id="address" />
                         <label for="contentnginx" class="col-form-label">Content:</label>
                         <textarea  class="form-control" id="contentnginx" name="contentnginx" rows="10" ></textarea>
                     </div>
                     
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        
+                        <button type="submit" class="btn btn-primary">Process</button>
                     </div>
-              
+                </form>
             </div>
         </div>
     </div>

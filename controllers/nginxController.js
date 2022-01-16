@@ -141,9 +141,33 @@ exports.deleteOneconfig = async (req,res) => {
         } else {
             return res.status(200).json({
                 status: 200,
-                msg:'Sucess'
+                msg:'Success'
             });
         }
     });
+
+}
+exports.updateOneconfig = async (req,res) => { 
+
+    const contentnginx = req.body.name;
+    const address = req.body.address;
+    let filepath = config.get("nginxdir") + '/' + address ;
+    fs.writeFile(filepath, contentnginx, (err) => { 
+        if (err) {
+            req.flash(
+                'error_msg',
+                'update failed'
+            );
+            res.redirect('/home/nginx');
+        } else {
+            req.flash(
+                'success_msg',
+                'Updated success'
+            );
+            res.redirect('/home/nginx');
+        }
+
+    });
+
 
 }
