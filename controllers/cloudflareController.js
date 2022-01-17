@@ -92,3 +92,53 @@ exports.updateDNSHandle = (req, res) => {
 
       });
 }
+exports.addRecordDNS = async (req, res) => {
+  const { id,ZoneID,type, address, content, api_key,ttl,proxied} = req.body;
+
+  url+= ZoneID+ '/dns_records';
+  let proxied_ =true;
+  if(proxied=="false") proxied_ = false;
+  
+  let body = {
+      "type": type,
+      "name": address ,
+      "content": content,
+      "ttl": ttl,
+      "proxied": proxied_
+  }
+
+  try {
+      const datares = (await axios.post(url, body, {
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': api_key
+          }
+      }
+      )).data;
+
+      if (datares && datares.success == true) {
+          req.flash(
+              'success_msg',
+              'added success!'
+          );
+          res.redirect('/home/update_cloudflare/'+id);
+      }
+      else {
+          msg += datares.errors.messages;
+          req.flash(
+              'error_msg',
+              'added fail!'
+          );
+          res.redirect('/home/update_cloudflare/'+id);
+      }
+  }
+  catch (error) {
+      console.error(error);
+      req.flash(
+          'error_msg',
+          'Subdomain exist DNS'
+      );
+      res.redirect('/home/update_cloudflare/'+id);
+
+  }
+}
