@@ -4,12 +4,11 @@ const config = require('config');
 
 exports.getdeployNginx = async (req,res) => { 
     let filepath = '/etc/nginx/nginx.conf';
-    console.log('filepath ***',filepath);
+    
     fs.readFile(filepath,  (err, buf) => {
-        console.log('fs.readFile *4**',filepath);
-        console.log('data *4**',buf);
+        
         if(err)  {
-            console.log('err *5**',err);
+            
             req.flash(
                 'error_msg',
                 'can not read nginx.conf.'
@@ -20,7 +19,7 @@ exports.getdeployNginx = async (req,res) => {
         if(buf.toString()!=null && buf.toString()!=undefined && buf.toString()){
             
             data = buf.toString();
-            console.log('success *5**',data);
+            
             fs.readdir('/etc/nginx/sites-available', function (err, files) {
                 console.log('fs.readdir *8**');
                 if (err) {
@@ -49,13 +48,13 @@ exports.reloadNginx = async (req,res) => {
     exec("sudo service nginx reload", async (error, stdout, stderr) => {
         let msg = "Reload Nginx success!"
         if (error) {
-            console.log(`error: ${error.message}`);
+            
             msg = 'Error restarted.' ;
         }
         if (stderr) {
-            console.log(`stderr: ${stderr}`);
+            
         }
-        console.log(`stdout: ${stdout}`);
+        
         req.flash(
             'success_msg',
             msg
@@ -73,20 +72,15 @@ exports.rewriteNginx = async (req,res) => {
     const contentnginx = req.body.contentnginx;
     exec('cp '+filepath+' '+backupfolder+'/nginx_'+Date.now()+".bk", async (error, stdout, stderr) => {
         let msg = "Backup file Nginx success!"
-        console.log(`Backup file>>: ${backupfolder}`);
         if (error) {
-            console.log(`Backup error: ${error.message}`);
             msg = 'Error Backup' ;
         }
         if (stderr) {
-            console.log(`Backup stderr: ${stderr}`);
         }
-        console.log(`Backup stdout: ${stdout}`);
     });
 
     fs.writeFile(filepath, contentnginx, (err) => {
         if(err){
-            console.log('Write file error',err);
             msg = 'Write file error.';
             req.flash(
                 'error_msg',
@@ -105,10 +99,10 @@ exports.rewriteNginx = async (req,res) => {
 exports.viewOneconfig = async (req,res) => { 
     const address = req.body.name;
     let filepath = config.get("nginxdir") + '/' + address ;
-    console.log('viewOneconfig',filepath);
+    
     fs.readFile(filepath, function(err, buf) {
         if(err)  {
-            console.log('viewOneconfig err',err);
+            
             return res.status(400).json({
                 status: 400,
                 msg:'Get data failed'
@@ -131,7 +125,7 @@ exports.viewOneconfig = async (req,res) => {
 exports.deleteOneconfig = async (req,res) => { 
     const address = req.body.name;
     let filepath = config.get("nginxdir") + '/' + address ;
-    console.log('deleteOneconfig',filepath);
+    
     fs.unlink(filepath, function(err) {
         if (err) {
             return res.status(400).json({
