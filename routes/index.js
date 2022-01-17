@@ -151,7 +151,7 @@ router.get('/file/:_link', async(req, res) => {
     const fs = require('fs')
 
     const path = './uploads/'+_link;
-    const path2 = './"uploadsFile"/'+_link;
+    const path2 = './uploadsFile/'+_link;
     try {
         if (fs.existsSync(path)) {
             const fileSizeKb = fs.statSync(path).size/1024;
