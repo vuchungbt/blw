@@ -193,10 +193,12 @@ exports.deleteRecordDNS = async (req, res) => {
   let ZoneID = dns.ZoneID;
   let api_key = dns.api_key;
   let email = dns.email;
-
+  console.log('deleteRecordDNS > ZoneID :: ',ZoneID);
+  console.log('deleteRecordDNS > api_key :: ',api_key);
+  console.log('deleteRecordDNS > email :: ',email);
   let url_ = 'https://api.cloudflare.com/client/v4/zones/'+ ZoneID+ '/dns_records'/+idRecord;
 
-  console.log('deleteRecordDNS > url :: ',url_);
+  console.log('deleteRecordDNS > url_ :: ',url_);
   try {
       const datares = (await axios.delete(url_, {
           headers: {
