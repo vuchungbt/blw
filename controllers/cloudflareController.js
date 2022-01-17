@@ -185,7 +185,7 @@ exports.updateRecordDNS = async (req, res) => {
   }
 }
 exports.deleteRecordDNS = async (req, res) => {
-
+  console.log('deleteRecordDNS');
   const { id,ZoneID,idRecord, api_key} = req.query;
 
   url+= ZoneID+ '/dns_records'/+idRecord;
