@@ -26,39 +26,43 @@
                                 <table id="datatablesSimple" class="" >
                                     <thead>
                                         <tr>
-                                            
-                                            <th>Time</th>
-                                            <th>Type</th>
-                                            <th>Path</th>
+                                            <th>Link</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Time</th>
-                                            <th>Type</th>
-                                            <th>Path</th>
+                                            <th>Link</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <% if(typeof lists !='undefined' ){ %>
-                                            <% lists.forEach(function(dns) { %>
-                                                <tr>
-                                                    <td>
-                                                        <%= dns.name %>
-                                                    </td>
-                                                    <td>
-                                                        <%= dns.description %>
-                                                    </td>
-                                                    <td>
-                                                        <a href="/home/update_cloudflare/<%= dns._id %>" title="Edit " class="text-blue px-sm-1"><i class="fas fa-edit"></i></a>
-                                                        <a href="/home/delete_cloudflare?id=<%= dns._id %>" title="Delete " class="text-danger px-sm-1"><i class="fas fa-times"></i></a>
-                                                    </td>
-                                                </tr>
-
-                                                <% }) %>
-                                                    <% } %>
+                                            
+                                        <% if(typeof files != 'undefined'){ %> 
+                                            <% files.forEach(function(file) { 
+                                                %> 
+                                        <tr>
+                                            <td><a href="<%= files.host +'/'+ file %>"><%= file %></a></td>
+                                            <td>
+                                                <!--
+                                                <a href="#" class="text-gray px-sm-3" title="copy"><i
+                                                        class="fas fa-copy"></i></a>
+                                                <a href="#" class="text-blue px-sm-2"><i
+                                                        class="fas fa-edit"></i></a>
+                                                        -->
+                                                <a href="/home/removefile/<%= file %>" class="text-danger px-sm-2"><i
+                                                        class="fas fa-times"></i></a>
+                                                <a href="<%= files.host +'/'+ file %>" download class="text-info px-sm-2"><i    
+                                                        class="fas fa-arrow-down"></i></a>
+                                                <a href="#" class="text-gray px-sm-3 copy" data-copydata="<%= files.host +'/file/'+ file %>" 
+                                                    data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i
+                                                            class="fas fa-copy"></i></a>
+                                                
+                                                
+                                            </td>
+                                        </tr>
+                                        <% }) %> 
+                                        <% } %>
                                     </tbody>
                                 </table>
                         

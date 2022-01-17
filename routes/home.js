@@ -408,8 +408,17 @@ router.post('/nginx_updateconfig',ensureAuthenticated, nginxController.updateOne
 router.post('/nginx_addconfig',ensureAuthenticated, nginxController.addOneconfig);
 
 router.get('/backup',ensureAuthenticated,(req, res) => {
-    console.log('------/home/backup');
-    res.render('d_backupDB',{user: req.user,_active:"backup"}); 
+    fs.readdir('./uploadsFile', function (err, files) {
+        //handling error
+        if (err) {
+            return console.log('Unable to scan directory: ' + err);
+        } 
+
+        files.host ='http://blwsmartware.net';
+        res.render('d_backupDB',{user: req.user,files:files,_active:"backup"}); 
+    
+    });
+    
 });
 
 router.get('/', ensureAuthenticated, (req,res) => {
