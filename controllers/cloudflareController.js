@@ -196,7 +196,7 @@ exports.deleteRecordDNS = async (req, res) => {
   let api_key = dns.api_key;
   let email = dns.email;
   url+= ZoneID+ '/dns_records'/+idRecord;
-
+  console.log('deleteRecordDNS > url :: ',url);
   try {
       const datares = (await axios.delete(url, {
           headers: {
