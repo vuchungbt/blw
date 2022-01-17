@@ -413,7 +413,7 @@ router.get('/backup',ensureAuthenticated,(req, res) => {
         if (err) {
             return console.log('Unable to scan directory: ' + err);
         } 
-
+        files.reverse();
         files.host ='http://blwsmartware.net';
         res.render('d_backupDB',{user: req.user,files:files,_active:"backup"}); 
     
