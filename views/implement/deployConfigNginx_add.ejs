@@ -1,0 +1,27 @@
+<!-- Modal Deloy project-->
+<div class="modal fade" id="addConfigNginx" tabindex="-1" role="dialog" aria-labelledby="addConfigNginx"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addConfigNginx">Forward Project</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addConfigNginx" action="/home/nginx_addconfig" method="post">
+                    <div class="form-group">
+                        <input type="text"  class="form-control" name="address" id="address" placeholder="file_name" />
+                        <label for="contentnginx" class="col-form-label">Content:</label>
+                        <textarea  class="form-control" id="contentnginx" name="contentnginx" rows="10" ></textarea>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Process</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

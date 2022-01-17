@@ -17,6 +17,7 @@
                             <h1 class="mt-4">Nginx</h1>
                             <%- include ('implement/messages') %>
                             <%- include ('implement/deployConfigNginx') %>
+                            <%- include ('implement/addConfigNginx') %>
                             <form action="/home/nginx_save" method="post">
                                 <div class="bd-example">
                                     <a  class="btn btn-secondary" href="/home/nginx">Reload</a>
@@ -30,7 +31,7 @@
                                 </div>
                             </form>
                             <label for="recipient-description" class="col-form-label">Config:</label>
-                            <a class="text-dark " data-toggle="modal" data-target="#addRsModal" href="#!"><i class="fas fa-plus-circle"></i> Add</a>
+                            <a class="text-dark " data-toggle="modal" data-target="#addConfigNginx" href="#!"><i class="fas fa-plus-circle"></i> Add</a>
                             <table id="datatablesSimple" class="" >
                                 <thead>
                                     <tr>
@@ -116,7 +117,6 @@
                     });
                    
                 });
-
                 
             })
         </script>

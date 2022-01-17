@@ -171,3 +171,47 @@ exports.updateOneconfig = async (req,res) => {
 
 
 }
+exports.addOneconfig = async (req,res) => { 
+
+    const contentnginx = req.body.contentnginx;
+    const address = req.body.address +'.conf';
+    let filepath = config.get("nginxdir") + '/' + address;
+
+    try {
+        if (!fs.existsSync(filepath)) {
+            fs.writeFile(filepath, contentnginx, (err) => { 
+                if (err) {
+                    req.flash(
+                        'error_msg',
+                        'Write failed'
+                    );
+                    res.redirect('/home/nginx');
+                } else {
+                    req.flash(
+                        'success_msg',
+                        'Write success'
+                    );
+                    res.redirect('/home/nginx');
+                }
+        
+            });
+        }
+        else {
+            req.flash(
+                'error_msg',
+                'Write file failed,file exists ! '
+            );
+        }
+      } catch(err) {
+        console.error(err);
+        req.flash(
+            'error_msg',
+            'Write file failed'
+        );
+      }
+
+
+    
+
+
+}
