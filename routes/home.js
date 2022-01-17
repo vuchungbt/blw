@@ -316,7 +316,7 @@ router.get("/removefile/:_name", function(req, res) {
       });
 });
 router.post('/addrecord',ensureAuthenticated, cloudflareController.addRecordDNS);
-router.post('/deleterecord',ensureAuthenticated, cloudflareController.deleteRecordDNS);
+router.get('/deleterecord',ensureAuthenticated, cloudflareController.deleteRecordDNS);
 
 
 router.get('/cloudflare',ensureAuthenticated, cloudflareController.listAllDNS);
