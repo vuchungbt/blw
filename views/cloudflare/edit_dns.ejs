@@ -135,9 +135,8 @@
                                                                     class="fas fa-edit"></i></a>
 
                                                                     <a href="../deleterecord?id=<%= typeof _id != 'undefined' ? _id : ''
-                                                                     %>&api_key=<%= typeof api_key != 'undefined' ? api_key : '' 
-                                                                     %>&idRecord=<%= typeof record.id != 'undefined' ? record.id : '' 
-                                                                     %>&ZoneID=<%= typeof ZoneID != 'undefined' ? ZoneID : '' %>" title="Remove"
+                                                                     %>&idRecord=<%= typeof record.id != 'undefined' ? record.id : ''"
+                                                                      title="Remove"
                                                                 class="text-danger px-sm-1"><i
                                                                     class="fas fa-times"></i></a>
                                                         </td>
