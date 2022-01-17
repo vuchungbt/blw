@@ -133,6 +133,13 @@
                                                             <a href="#" title="Edit"
                                                                 class="text-blue px-sm-1"><i
                                                                     class="fas fa-edit"></i></a>
+
+                                                                    <a href="./home/deleterecord?id=<%= typeof _id != 'undefined' ? _id : '' %>
+                                                                        &api_key=<%= typeof api_key != 'undefined' ? api_key : '' %>
+                                                                        &idRecord=<%= typeof record._id != 'undefined' ? record._id : '' %>
+                                                                        &ZoneID=<%= typeof ZoneID != 'undefined' ? ZoneID : '' %>" title="Remove"
+                                                                class="text-dark px-sm-1"><i
+                                                                    class="fas fa-times"></i></a>
                                                         </td>
                                                     </tr>
 

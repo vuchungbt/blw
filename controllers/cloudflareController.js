@@ -92,13 +92,14 @@ exports.updateDNSHandle = (req, res) => {
 
       });
 }
+//======================Record=============
 exports.addRecordDNS = async (req, res) => {
   const { id,ZoneID,type, address, content, api_key,ttl,proxied} = req.body;
 
   url+= ZoneID+ '/dns_records';
   let proxied_ =true;
   if(proxied=="false") proxied_ = false;
-  
+
   let body = {
       "type": type,
       "name": address ,
@@ -137,6 +138,88 @@ exports.addRecordDNS = async (req, res) => {
       req.flash(
           'error_msg',
           'Subdomain exist DNS'
+      );
+      res.redirect('/home/update_cloudflare/'+id);
+
+  }
+}
+exports.updateRecordDNS = async (req, res) => {
+
+  const { id,ZoneID,idRecord, api_key} = req.query;
+
+  url+= ZoneID+ '/dns_records'/+idRecord;
+
+  try {
+      const datares = (await axios.delete(url, {
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': api_key
+          }
+      }
+      ));
+
+      if (datares) {
+          req.flash(
+              'success_msg',
+              'delete success!'
+          );
+          res.redirect('/home/update_cloudflare/'+id);
+      }
+      else {
+         
+          req.flash(
+              'error_msg',
+              'delete fail!'
+          );
+          res.redirect('/home/update_cloudflare/'+id);
+      }
+  }
+  catch (error) {
+      console.error(error);
+      req.flash(
+          'error_msg',
+          'some thing wrong!'
+      );
+      res.redirect('/home/update_cloudflare/'+id);
+
+  }
+}
+exports.deleteRecordDNS = async (req, res) => {
+
+  const { id,ZoneID,idRecord, api_key} = req.query;
+
+  url+= ZoneID+ '/dns_records'/+idRecord;
+
+  try {
+      const datares = (await axios.delete(url, {
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': api_key
+          }
+      }
+      ));
+
+      if (datares) {
+          req.flash(
+              'success_msg',
+              'delete success!'
+          );
+          res.redirect('/home/update_cloudflare/'+id);
+      }
+      else {
+         
+          req.flash(
+              'error_msg',
+              'delete fail!'
+          );
+          res.redirect('/home/update_cloudflare/'+id);
+      }
+  }
+  catch (error) {
+      console.error(error);
+      req.flash(
+          'error_msg',
+          'some thing wrong!'
       );
       res.redirect('/home/update_cloudflare/'+id);
 
