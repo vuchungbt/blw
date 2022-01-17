@@ -50,8 +50,6 @@
                                                 <a href="#" class="text-blue px-sm-2"><i
                                                         class="fas fa-edit"></i></a>
                                                         -->
-                                                <a href="/home/removefile/<%= file %>" class="text-danger px-sm-2"><i
-                                                        class="fas fa-times"></i></a>
                                                 <a href="<%= files.host +'/'+ file %>" download class="text-info px-sm-2"><i    
                                                         class="fas fa-arrow-down"></i></a>
                                                 <a href="#" class="text-gray px-sm-3 copy" data-copydata="<%= files.host +'/file/'+ file %>" 
@@ -72,6 +70,24 @@
                 </div>
         </div>
         <%- include ('include/d_footer') %>
+        <script>
+            
+            $(document).ready(function () { 
+                $('[data-toggle="tooltip"]').tooltip();
+                $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+
+                $("#datatablesSimple").on('click', '.copy', function(){ 
+                    var data = $(this).data('copydata');
+                    
+                    navigator.clipboard.writeText(data);
+                    var elt= $(this);
+                    var title = "Copied";
+                    elt.tooltip('dispose');
+                    elt.attr('title', title);
+                    elt.tooltip('show');
+                })
+            })
+        </script>
 </body>
 
 </html>
