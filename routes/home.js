@@ -335,7 +335,7 @@ router.get('/update_cloudflare/:_id',ensureAuthenticated,async (req, res) => {
     });
     let url = 'https://api.cloudflare.com/client/v4/zones/'+rs.ZoneID+'/dns_records';
     try {
-        console.log('-------rs: ',rs);
+      
         const datares = ( await axios.get(url, {
             headers: {
             'Content-Type': 'application/json',

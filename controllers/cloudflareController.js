@@ -191,7 +191,7 @@ exports.deleteRecordDNS = async (req, res) => {
   const dns = await Cloudflare.findOne({_id:id});
   
   console.log('deleteRecordDNS > dns :: ',dns);
-  
+
   let ZoneID = dns.ZoneID;
   let api_key = dns.api_key;
   let email = dns.email;
@@ -223,8 +223,8 @@ exports.deleteRecordDNS = async (req, res) => {
           res.redirect('/home/update_cloudflare/'+id);
       }
   }
-  catch (error) {
-      console.error(error);
+  catch (err) {
+      console.log(err);
       req.flash(
           'error_msg',
           'some thing wrong!'
