@@ -158,7 +158,7 @@ router.get('/file/:_link', async(req, res) => {
             const fileSizeMb = (fileSizeKb/1024).toFixed(4);
             res.render('d_filedownload',{file_name:_link,size:fileSizeMb,ori_size:fileSizeKb, link:'https://'+req.headers.host+'/'+_link});
         } else if (fs.existsSync(path2)) {
-            const fileSizeKb = fs.statSync(path).size/1024;
+            const fileSizeKb = fs.statSync(path2).size/1024;
             const fileSizeMb = (fileSizeKb/1024).toFixed(4);
             res.render('d_filedownload',{file_name:_link,size:fileSizeMb,ori_size:fileSizeKb, link:'https://'+req.headers.host+'/'+_link});
         }
