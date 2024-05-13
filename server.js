@@ -21,7 +21,7 @@ let isDev = process.env.NODE_ENV !== "production";
 app.locals.env = process.env.NODE_ENV || config.get("env");
 
 //app.use(expressLayouts);
-app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(cookieParser());
 app.use(express.static("uploads"));
 app.use(express.static("uploadsFile"));
@@ -31,8 +31,8 @@ app.set("views", "./views"); // html client side from views folder
 
 mongo.connect();
 app.use(cors());
+app.use(bodyParser.urlencoded({ limit: '4GB',extended: true }));
 app.use(express.urlencoded({ limit: '4GB', extended: true }));
-
 app.use(express.json());
 
 app.use(
