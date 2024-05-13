@@ -19,11 +19,11 @@ router.get('/file', (req, res) => {
 });
 //------------ upload image ------------//
 router.get('/', (req, res) => {
-    res.render('updownload/upload_image');
+    res.render('updownload/upload_guest');
 });
 //------------ upload file ------------//
 router.get('/viewupload', (req, res) => {
-    res.render('updownload/upload_file');
+    res.render('updownload/upload_file_guest');
     
 });
 
@@ -81,7 +81,7 @@ router.get("/removefile/:_name", function(req, res) {
                 'error_msg',
                 'File Deleted success'
             );
-            res.redirect('/home/file');
+            res.redirect('/guest/file');
         }
 
       });

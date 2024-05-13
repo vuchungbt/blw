@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Upload File</title>
+    <%- include ('../include/header') %>
+
+    <style>
+        progress {
+        border: none;
+        width: 400px;
+        height: 60px;
+        background: crimson;
+        }
+
+        progress {
+        color: lightblue;
+        }
+
+        progress::-webkit-progress-value {
+        background: lightblue;
+        }
+
+        progress::-moz-progress-bar {
+        background: lightcolor;
+        }
+    </style>
+</head>
+
+<body class="masthead">
+    <div id="layoutAuthentication">
+        <div id="layoutAuthentication_content">
+            <main>
+                <%- include ('../include/nav') %>
+                    <div class="container p-5">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-7">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5 ">
+                                    <div class="card-header">
+                                        <h3 class="text-center font-weight-light my-4 text-white">Upload File</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <form action="/home/fileupload" method="POST" enctype="multipart/form-data"
+                                            id="fileupload">
+                                            <p class="text-info">Select file(max 50M):</p>
+                                            <p><a href="https://blwsmartware.net/home/file">List all file</a></p>
+                                            <input multiple type="file" name="file" />
+                                            <div class="mt-4 mb-0">
+                                                <div class="d-grid">
+                                                    <button class="btn btn-primary btn-block"
+                                                        >Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="textResultimg"></div>
+                                        <div class="progress">
+                                            <div class="bar">
+                                                <div class="percent text-danger d-flex justify-content-end">0%</div >
+                                            </div >
+                                        </div>
+                                        <div id="status"></div>
+                                        <div id="result" class="pt-3">
+                                            <ul class="list-group" id="resultgr">
+                                                <li class="list-group-item bg-dark text-white"><i class="fas fa-arrow-down"></i>  List file  </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </main>
+        </div>
+        <%- include ('../include/footer') %>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.2.js" integrity="sha256-4/zUCqiq0kqxhZIyp4G0Gk+AOtCJsY1TA00k5ClsZYE=" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#fileupload").submit(function (event) {
+                console.log('#fileupload clicked !');
+                event.preventDefault();
+
+                var bar = $('.bar');
+                var percent = $('.percent');
+                var status = $('#status');
+
+                var formData = new FormData(this);
+
+                $.ajax({
+                    xhr: function() {
+                        var xhr = new window.XMLHttpRequest();
+                        xhr.upload.addEventListener("progress", function(evt) {
+                            if (evt.lengthComputable) {
+                                var percentComplete = (evt.loaded / evt.total) * 100;
+                                console.log('percentComplete',percentComplete);
+                                var percentVal = percentComplete + '%';
+                                bar.addClass("bg-success");
+                                bar.width(percentVal);
+                                percent.html(percentVal);
+                            }
+                    }, false);
+                    return xhr;
+                    },
+                    url: "/home/fileupload",
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (data, textStatus, jqXHR) {
+                        console.log('#fileupload done !',data);
+                        $('#textResultimg').html('');
+                        data.file.forEach(f => {
+                            $("#resultgr").append('<li class="list-group-item">'+data.host+'/file/'+f.filename+'</li>');
+                        });
+                        
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        status.html('');
+                        $('#textResultimg').html('Upload failed!');
+                    },
+                    beforeSend: function() {
+                        status.empty();
+                        var percentVal = '0%';
+                        bar.width(percentVal);
+                        percent.html(percentVal);
+                    },
+                    complete: function(xhr) {
+                        status.html(xhr.responseJSON.msg);
+                }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
