@@ -31,12 +31,8 @@ app.set("views", "./views"); // html client side from views folder
 
 mongo.connect();
 app.use(cors());
+app.use(express.urlencoded({ limit: '4GB', extended: true }));
 
-app.use(
-  express.urlencoded({
-    extended: true,
-  })
-);
 app.use(express.json());
 
 app.use(
