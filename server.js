@@ -67,7 +67,9 @@ app.use(function(req, res, next) {
 const index = require("./routes/index");
 const auth = require("./routes/auth");
 const home = require("./routes/home");
+const guest = require("./routes/guest");
 app.use("/home", home);
+app.use("/guest", guest);
 app.use("/auth", auth);
 app.use("/", index);
 
