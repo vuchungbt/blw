@@ -48,9 +48,9 @@ router.post("/imgupload", function(req, res) {
 });
 
 router.post("/fileupload", function(req, res) {
-    
+    console.log('=============guest/fileupload=============\n');
     uploadFile(req, res, function(err) {
-        console.log('=============file=============\n',req.files);
+        console.log('=============fileupload=============\n',req.files);
         if (err) {
             console.log('Something went wrong');
             return res.status(400).json({
