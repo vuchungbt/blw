@@ -40,10 +40,10 @@
                                         <h3 class="text-center font-weight-light my-4 text-white">Upload File</h3>
                                     </div>
                                     <div class="card-body">
-                                        <form action="/home/fileupload" method="POST" enctype="multipart/form-data"
+                                        <form action="/guest/fileupload" method="POST" enctype="multipart/form-data"
                                             id="fileupload">
                                             <p class="text-info">Select file(max 50M):</p>
-                                            <p><a href="https://blwsmartware.net/home/file">List all file</a></p>
+                                            <p><a href="https://blwsmartware.net/guest/file">List all file</a></p>
                                             <input multiple type="file" name="file" />
                                             <div class="mt-4 mb-0">
                                                 <div class="d-grid">
@@ -107,7 +107,7 @@
                     }, false);
                     return xhr;
                     },
-                    url: "/home/fileupload",
+                    url: "/guest/fileupload",
                     type: "POST",
                     data: formData,
                     contentType: false,
