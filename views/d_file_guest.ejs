@@ -16,8 +16,8 @@
                             <%- include ('implement/messages') %>
                             <div class="row">
                                 <h4>List file in Upload folder</h4>
-                                <span><a class="text-dark" href="/home/img"><i class="fas fa-plus-circle"></i> Add photo</a></span></br>
-                                <span></span><a class="text-dark" href="/home/viewupload"><i class="fas fa-plus-circle"></i> Add file</a></span>
+                                <span><a class="text-dark" href="/guest/img"><i class="fas fa-plus-circle"></i> Add photo</a></span></br>
+                                <span></span><a class="text-dark" href="/guest/viewupload"><i class="fas fa-plus-circle"></i> Add file</a></span>
                                 <div class="row pt-2">
                                     <table id="datatablesSimple">
                                         <thead>
@@ -40,7 +40,7 @@
                                                     <a href="#" class="text-blue px-sm-2"><i
                                                             class="fas fa-edit"></i></a>
                                                             -->
-                                                    <a href="/home/removefile/<%= file %>" class="text-danger px-sm-2"><i
+                                                    <a href="/guest/removefile/<%= file %>" class="text-danger px-sm-2"><i
                                                             class="fas fa-times"></i></a>
                                                     <a href="<%= files.host +'/'+ file %>" download class="text-info px-sm-2"><i    
                                                             class="fas fa-arrow-down"></i></a>
