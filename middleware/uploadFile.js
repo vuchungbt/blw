@@ -11,14 +11,14 @@ var Storage = multer.diskStorage({
 });
 const uploadImage = multer({
     limits: {
-        fileSize: 15 * 1024 * 1024,
+        fileSize: 4000 * 1024 * 1024,
       },
     storage: Storage
 }).array("file",3);
 
 const uploadFileSingle = multer({
     limits: {
-        fileSize: 50 * 1024 * 1024,
+        fileSize: 4000 * 1024 * 1024,
       },
     storage: Storage
 }).array("file", 10);
